@@ -8,7 +8,7 @@
 
 // container
 .container {
-  @apply mx-auto max-w-[1320px] px-4;
+  @apply mx-auto max-w-[1320px];
 }
 
 // form style
@@ -154,7 +154,8 @@
 
 // content style
 .content {
-  @apply prose max-w-none;
+  @apply block;
+  @apply prose max-w-3xl;
   @apply prose-headings:mb-[.3em] prose-headings:mt-[.6em] prose-headings:text-dark prose-headings:dark:text-darkmode-dark;
   @apply prose-h1:text-h1-sm md:prose-h1:text-h1;
   @apply prose-h2:text-h2-sm md:prose-h2:text-h2;

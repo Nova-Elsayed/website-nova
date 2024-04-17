@@ -11,3 +11,11 @@ export type Button = {
   label: string;
   link: string;
 };
+
+export type Workshop = {
+  title: string;
+};
+
+export type Feature_2 = {
+  title: string;
+};
