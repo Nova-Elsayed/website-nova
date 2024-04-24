@@ -1,0 +1,25 @@
+---
+import { markdownify } from "@/lib/utils/textConverter";
+
+const { data } = Astro.props;
+---
+
+{console.log(data)}
+
+<li class="relative block w-64">
+  <a href={data.link}>
+    <div
+      class="relative p-4 overflow-hidden bg-white rounded-lg group h-80 custom-shadow"
+    >
+      <img
+        src={data.image}
+        alt=""
+        class="absolute top-0 left-0 w-full h-auto transition-opacity opacity-100 group-hover:opacity-25"
+      />
+      <h3
+        set:html={markdownify(data.title)}
+        class="absolute px-4 text-center transition-opacity opacity-40 group-hover:opacity-100 bottom-8"
+      />
+    </div>
+  </a>
+</li>

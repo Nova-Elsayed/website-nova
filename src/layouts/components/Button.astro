@@ -1,0 +1,21 @@
+---
+interface Props {
+  link?: string;
+  class?: string;
+  label: string;
+}
+
+let { link, class: className, label } = Astro.props;
+---
+
+{
+  link && (
+    <a
+      class={`${className} px-5 py-2 no-underline bg-white rounded-lg custom-shadow text-primary`}
+      href={link}
+      set:html={label}
+      target={link.startsWith("http") ? "_blank" : "_self"}
+      rel="noopener"
+    />
+  )
+}

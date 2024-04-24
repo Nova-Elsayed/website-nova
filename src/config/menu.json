@@ -5,7 +5,7 @@
       "url": "/"
     },
     {
-      "name": "About",
+      "name": "Über Mich",
       "url": "/about"
     },
     {
@@ -13,29 +13,29 @@
       "url": "/elements"
     },
     {
-      "name": "Pages",
+      "name": "Inhalte",
       "url": "",
       "hasChildren": true,
       "children": [
         {
-          "name": "Contact",
-          "url": "/contact"
+          "name": "Sexological Bodywork",
+          "url": "/sexological-bodywork"
         },
         {
-          "name": "Blog",
-          "url": "/blog"
+          "name": "Somatische Herangehensweise",
+          "url": "/somatic-approach"
         },
         {
-          "name": "Authors",
-          "url": "/authors"
+          "name": "Bodyworkshop On Demand",
+          "url": "/ws-bodyworkshop-custom"
         },
         {
-          "name": "Categories",
-          "url": "/categories"
+          "name": "Veranstaltungsorganisation",
+          "url": "/veranstaltungsorganisation"
         },
         {
-          "name": "Tags",
-          "url": "/tags"
+          "name": "Workshop Sexpress Yourself",
+          "url": "/ws-sexpress-yourself"
         },
         {
           "name": "404 Page",

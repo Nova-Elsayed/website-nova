@@ -2,19 +2,25 @@
   @apply bg-gradient-to-b from-[rgba(249,249,249,1)] from-[0.53%] to-white to-[83.28%] dark:from-darkmode-theme-light dark:to-darkmode-body;
 }
 
-.rounded-sm {
-  @apply rounded-[4px];
-}
-.rounded {
-  @apply rounded-[6px];
-}
-.rounded-lg {
-  @apply rounded-[12px];
-}
-.rounded-xl {
-  @apply rounded-[16px];
-}
+.custom-shadow {
+  box-shadow:
+    2px 2px 8px rgba(239, 68, 68, 0.8),
+    // red-500
+    -2px 2px 8px rgba(254, 226, 226, 0.8),
+    // red-100
+    -2px -2px 8px rgba(45, 212, 191, 0.8),
+    // teal-400
+    2px -2px 8px rgba(204, 251, 241, 0.8); // teal-100
 
-.shadow {
-  box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.05);
+  &:hover {
+    @apply transition-all;
+    box-shadow:
+      4px 4px 8px rgba(239, 68, 68, 0.8),
+      // red-500
+      -4px 4px 8px rgba(254, 226, 226, 0.8),
+      // red-100
+      -4px -4px 8px rgba(45, 212, 191, 0.8),
+      // teal-400
+      4px -4px 8px rgba(204, 251, 241, 0.8); // teal-100
+  }
 }

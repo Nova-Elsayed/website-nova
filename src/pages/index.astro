@@ -2,9 +2,10 @@
 import ImageMod from "@/components/ImageMod.astro";
 import Base from "@/layouts/Base.astro";
 import { markdownify } from "@/lib/utils/textConverter";
-import CallToAction from "@/partials/CallToAction.astro";
-import Testimonial from "@/partials/Testimonial.astro";
-import type { Button, Feature, Feature_2, Workshop } from "@/types";
+import GradientBtn from "@/components/Button.astro";
+import WorkshopCard from "@/components/WorkshopCard.astro";
+
+import type { Button, Feature, Workshop } from "@/types";
 import { getEntry } from "astro:content";
 import { FaCheck } from "react-icons/fa";
 
@@ -33,7 +34,7 @@ interface Homepage {
     service_2: {
       title: string;
       caption: string;
-      features: Feature_2[];
+      features: Feature[];
       cta: Button;
     };
   };
@@ -41,149 +42,99 @@ interface Homepage {
 }
 
 const homepage = await getEntry("homepage", "-index");
-const testimonial = await getEntry("sections", "testimonial");
-const call_to_action = await getEntry("sections", "call-to-action");
-const { banner, opener, features, services }: Homepage = homepage.data;
+const { banner, opener, services }: Homepage = homepage.data;
 ---
 
 <Base>
   <!-- Banner -->
-  <section class="section pt-14 bg-teal-800">
-    <div class="container">
-      <div class="row items-center">
-        <div class="md:col-6 text-left">
-          <h1
-            set:html={markdownify(banner.title)}
-            class="mb-4 text-8xl text-teal-400"
-          />
-          <h2
-            set:html={markdownify(banner.subtitle)}
-            class="text-6xl mb-10 text-teal-400"
-          />
-          <p
-            set:html={markdownify(banner.content)}
-            class="mb-8 text-4xl text-teal-100"
-          />
-
-          {
-            banner.cta_about.enable && (
-              <a
-                class="btn btn-primary me-4"
-                href={banner.cta_about.link}
-                target={
-                  banner.cta_about.link.startsWith("http") ? "_blank" : "_self"
-                }
-                rel="noopener"
-              >
-                {banner.cta_about.label}
-              </a>
-            )
-          }
-          {
-            banner.cta_contact.enable && (
-              <a
-                class="btn btn-primary"
-                href={banner.cta_contact.link}
-                target={
-                  banner.cta_contact.link.startsWith("http")
-                    ? "_blank"
-                    : "_self"
-                }
-                rel="noopener"
-              >
-                {banner.cta_contact.label}
-              </a>
-            )
-          }
-        </div>
+  <section class="pt-10 section">
+    <div class="">
+      <div class="grid items-center grid-cols-2 gap-8">
         {
           banner.image && (
-            <div class="md:col-6 flex justify-center">
+            <div class="flex justify-end">
               <ImageMod
                 src={banner.image}
                 alt="banner"
-                width={480}
-                height={480}
+                width={256}
+                height={256}
                 class="rounded-full"
                 format="webp"
               />
             </div>
           )
         }
+        <div class="text-left">
+          <h1 set:html={markdownify(banner.title)} class="mb-1 lg:text-4xl" />
+          <h2
+            set:html={markdownify(banner.subtitle)}
+            class="mb-4 lg:text-3xl"
+          />
+          <p set:html={markdownify(banner.content)} class="mb-6 lg:text-xl" />
+
+          {
+            banner.cta_about.enable && (
+              <GradientBtn
+                link={banner.cta_about.link}
+                label={banner.cta_about.label}
+                class="me-4"
+              />
+            )
+          }
+          {
+            banner.cta_contact.enable && (
+              <GradientBtn
+                link={banner.cta_contact.link}
+                label={banner.cta_contact.label}
+              />
+            )
+          }
+        </div>
       </div>
     </div>
   </section>
   <!-- /Banner -->
   <!-- Opener -->
-  <section class="pb-0 bg-red-900">
-    <div class="section-header mb-8 relative overflow-hidden">
-      {
-        opener.image && (
-          <div class="overflow-hidden relative w-full h-60 max-h-60">
-            <ImageMod
-              src={opener.image}
-              alt="opener"
-              width={1920}
-              height={1080}
-              class="absolute bottom-0 left-0"
-              format="webp"
-            />
-          </div>
-        )
-      }
-      <div
-        class="text-left px-24 py-16 bg-red-900 opacity-85 absolute top-0 left-0 right-0"
-      >
-        <h1
-          set:html={markdownify(opener.quote)}
-          class="mb-4 text-6xl text-red-500"
-        />
-        <h2
-          set:html={markdownify(opener.title)}
-          class="text-4xl mb-10 text-red-500"
-        />
-      </div>
+  <section class="section">
+    <div class="mb-8 text-center">
+      <h2 set:html={markdownify(opener.quote)} class="mb-1 lg:text-4xl" />
+      <h2 set:html={markdownify(opener.title)} class="lg:text-2xl" />
     </div>
     <div class="container">
-      <div class="row items-center justify-center">
+      <div class="items-center justify-center row">
         <content
           set:html={markdownify(opener.content)}
-          class="mb-8 text-left text-red-100 content text-base"
+          class="mb-8 text-base text-left content"
         />
       </div>
     </div>
   </section>
   <!-- /Opener -->
   <!-- Services -->
-  <section class="section pb-08">
+  <section class="section">
     <div class="container">
-      <div class="row items-center justify-center">
+      <div class="items-center justify-center row">
         <div class="text-center">
-          <h1
-            set:html={markdownify(services.title)}
-            class="mb-4 text-h3 lg:text-h1"
-          />
+          <h2 set:html={markdownify(services.title)} class="mb-4 lg:text-2xl" />
         </div>
       </div>
       <div>
         {
           services.service_1 && (
-            <div class="row items-center justify-center">
+            <div class="items-center justify-center mb-28 row">
               <div class="text-center">
-                <h1
+                <h3
                   set:html={markdownify(services.service_1.title)}
-                  class="mb-4 text-h3 lg:text-h1"
+                  class="mb-4 lg:text-4xl"
                 />
                 <p
                   set:html={markdownify(services.service_1.caption)}
-                  class="mb-8 text-lg"
+                  class="mb-16"
                 />
               </div>
-              <ul class="flex justify-between">
+              <ul class="flex justify-evenly">
                 {services.service_1.workshops.map((workshop: Workshop) => (
-                  <li class="mb-8">
-                    <h3 set:html={markdownify(workshop.title)} />
-                  </li>
+                  <WorkshopCard data={workshop} />
                 ))}
               </ul>
             </div>
@@ -191,38 +142,41 @@ const { banner, opener, features, services }: Homepage = homepage.data;
         }
         {
           services.service_2 && (
-            <div class="row items-center justify-center">
+            <div class="items-center justify-center row">
               <div class="text-center">
-                <h1
+                <h3
                   set:html={markdownify(services.service_2.title)}
-                  class="mb-4 text-h3 lg:text-h1"
+                  class="mb-4 lg:text-4xl"
                 />
                 <p
                   set:html={markdownify(services.service_2.caption)}
-                  class="mb-8 text-lg"
+                  class="mb-16"
                 />
               </div>
-              <ul class="flex justify-between">
-                {services.service_2.features.map((feature: Feature_2) => (
-                  <li class="mb-8">
-                    <h3 set:html={markdownify(feature.title)} />
+              <ul class="flex justify-between mb-12">
+                {services.service_2.features.map((feature: Feature) => (
+                  <li class="inline-block w-48 mb-8">
+                    <ImageMod
+                      src={feature.image}
+                      alt="feature"
+                      width={128}
+                      height={128}
+                      format="webp"
+                      class="mx-auto mb-4 rounded-full shadow"
+                    />
+                    <h4
+                      class="text-center"
+                      set:html={markdownify(feature.title)}
+                    />
                   </li>
                 ))}
               </ul>
               <div class="text-center">
                 {services.service_2.cta.enable && (
-                  <a
-                    class="btn btn-primary"
-                    href={services.service_2.cta.link}
-                    target={
-                      services.service_2.cta.link.startsWith("http")
-                        ? "_blank"
-                        : "_self"
-                    }
-                    rel="noopener"
-                  >
-                    {services.service_2.cta.label}
-                  </a>
+                  <GradientBtn
+                    link={services.service_2.cta.link}
+                    label="Erfahre mehr…"
+                  />
                 )}
               </div>
             </div>
