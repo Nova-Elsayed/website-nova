@@ -1,11 +1,12 @@
 ---
 title: "Über Mich"
 meta_title: "About"
+image: "/images/Ich_Hut.jpg"
 description: "Eine Kurzbeschreibung"
 draft: false
 ---
 
-# Nova El Sayed (she/her) ,
+# Nova El Sayed (she/her)
 
 ## Sexological Bodyworker & Artist
 

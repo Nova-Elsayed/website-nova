@@ -17,21 +17,21 @@ const { title, description, meta_title, image } = about.data;
 >
   <section class="section-sm">
     <div class="container">
-      <div class="row justify-center">
-        <div class="text-center md:col-10 lg:col-7">
+      <div class="justify-center row">
+        <div class="md:col-10 lg:col-7">
           {
             image && (
               <ImageMod
-                class="mx-auto mb-6 rounded-lg"
+                class="mx-auto mb-6 rounded-full"
                 src={image}
-                width={200}
-                height={200}
+                width={240}
+                height={240}
                 alt={title}
                 format="webp"
               />
             )
           }
-          <h2 set:html={markdownify(title)} class="h3 mb-6" />
+          <h2 set:html={markdownify(title)} class="mb-6 text-center h3" />
           <div class="content">
             <Content />
           </div>

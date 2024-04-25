@@ -1,7 +1,7 @@
 {
   "main": [
     {
-      "name": "Home",
+      "name": "Start",
       "url": "/"
     },
     {
@@ -23,11 +23,11 @@
         },
         {
           "name": "Somatische Herangehensweise",
-          "url": "/somatic-approach"
+          "url": "/somantic-approach"
         },
         {
-          "name": "Bodyworkshop On Demand",
-          "url": "/ws-bodyworkshop-custom"
+          "name": "Kunst- und Gestaltungstherapie",
+          "url": "/kunst-und-gestaltungstherapie"
         },
         {
           "name": "Veranstaltungsorganisation",
@@ -36,6 +36,14 @@
         {
           "name": "Workshop Sexpress Yourself",
           "url": "/ws-sexpress-yourself"
+        },
+        {
+          "name": "Workshop Presence Is Sexy",
+          "url": "/ws-presence-is-sexy"
+        },
+        {
+          "name": "Bodyworkshop On Demand",
+          "url": "/ws-bodyworkshop-custom"
         },
         {
           "name": "404 Page",

@@ -122,14 +122,14 @@ const { banner, opener, services }: Homepage = homepage.data;
         {
           services.service_1 && (
             <div class="items-center justify-center mb-28 row">
-              <div class="text-center">
+              <div class="w-2/3 m-auto text-center">
                 <h3
                   set:html={markdownify(services.service_1.title)}
                   class="mb-4 lg:text-4xl"
                 />
                 <p
                   set:html={markdownify(services.service_1.caption)}
-                  class="mb-16"
+                  class="mb-16 "
                 />
               </div>
               <ul class="flex justify-evenly">
@@ -143,7 +143,7 @@ const { banner, opener, services }: Homepage = homepage.data;
         {
           services.service_2 && (
             <div class="items-center justify-center row">
-              <div class="text-center">
+              <div class="w-2/3 m-auto text-center">
                 <h3
                   set:html={markdownify(services.service_2.title)}
                   class="mb-4 lg:text-4xl"
