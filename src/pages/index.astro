@@ -9,6 +9,23 @@ import type { Button, Feature, Workshop } from "@/types";
 import { getEntry } from "astro:content";
 import { FaCheck } from "react-icons/fa";
 
+import { contentfulClient } from "../lib/contentful";
+import type { WorkshopFormat } from "../lib/contentful";
+
+const entries = await contentfulClient.getEntries<WorkshopFormat>({
+  content_type: "workshopFormat",
+});
+
+const workshops = entries.items.map((item) => {
+  const { title, date, description, slug } = item.fields;
+  return {
+    title,
+    slug,
+    description,
+    date: new Date(date).toLocaleDateString(),
+  };
+});
+
 interface Homepage {
   banner: {
     title: string;
@@ -46,6 +63,21 @@ const { banner, opener, services }: Homepage = homepage.data;
 ---
 
 <Base>
+  <!-- test -->
+  <ul>
+    {
+      workshops.map((workshop) => (
+        <li>
+          <a href={`/workshops/${workshop.slug}/`}>
+            <h2>{workshop.title}</h2>
+          </a>
+          <time>{workshop.date}</time>
+          <p>{workshop.description}</p>
+        </li>
+      ))
+    }
+  </ul>
+  <!-- /test -->
   <!-- Banner -->
   <section class="pt-10 section">
     <div class="">
