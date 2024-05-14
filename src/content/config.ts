@@ -1,5 +1,17 @@
 import { defineCollection, z } from "astro:content";
 
+// Workshop collection schema
+const workshopCollection = defineCollection({
+  schema: z.object({
+    title: z.string(),
+    slug: z.string(),
+    description: z.string().optional(),
+    thumbnail: z.object(),
+    date: z.date(),
+    draft: z.boolean().optional(),
+  }),
+});
+
 // Post collection schema
 const blogCollection = defineCollection({
   schema: z.object({
@@ -54,4 +66,5 @@ export const collections = {
   blog: blogCollection,
   authors: authorsCollection,
   pages: pagesCollection,
+  workshops: workshopCollection,
 };

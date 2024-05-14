@@ -1,0 +1,26 @@
+---
+import { contentfulClient } from "../../lib/contentful";
+import type { WorkshopFormat } from "../../lib/contentful";
+import Workshop from "../../layouts/Workshop.astro";
+import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
+
+export async function getStaticPaths() {
+  const entries = await contentfulClient.getEntries<WorkshopFormat>({
+    content_type: "workshopFormat",
+  });
+
+  const pages = entries.items.map((item) => ({
+    params: { slug: item.fields.slug },
+    props: {
+      title: item.fields.title,
+      content: documentToHtmlString(item.fields.content),
+      date: new Date(item.fields.date).toLocaleDateString(),
+    },
+  }));
+  return pages;
+}
+
+const { content, title, date } = Astro.props;
+---
+
+<Workshop content={content} title={title} date={date} />

@@ -6,6 +6,7 @@ export interface WorkshopFormat {
     title: EntryFieldTypes.Text;
     content: EntryFieldTypes.RichText;
     date: EntryFieldTypes.Date;
+    thumbnail: EntryFieldTypes.Text;
     description: EntryFieldTypes.Text;
     slug: EntryFieldTypes.Text;
   };

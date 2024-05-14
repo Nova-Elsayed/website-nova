@@ -1,0 +1,15 @@
+---
+import Base from "./Base.astro";
+
+export interface Props {
+  title?: string;
+  date?: string;
+  content?: string;
+}
+
+const { title, date, content } = Astro.props;
+---
+
+<Base title={title} meta_title={title}>
+  <article set:html={content} />
+</Base>

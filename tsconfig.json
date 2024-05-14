@@ -5,6 +5,7 @@
     "target": "es6",
     "allowJs": true,
     "strict": true,
+    "strictNullChecks": true,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "jsx": "react",

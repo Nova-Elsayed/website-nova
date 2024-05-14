@@ -7,12 +7,12 @@ const { data } = Astro.props;
 {console.log(data)}
 
 <li class="relative block w-64">
-  <a href={data.link}>
+  <a href={`/workshops/${data.slug}/`}>
     <div
       class="relative p-4 overflow-hidden bg-white rounded-lg group h-80 custom-shadow"
     >
       <img
-        src={data.image}
+        src={data.thumbnail.fields.file.url}
         alt=""
         class="absolute top-0 left-0 w-full h-auto transition-opacity opacity-100 group-hover:opacity-25"
       />

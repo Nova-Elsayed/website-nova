@@ -29,16 +29,6 @@ services:
     caption:
       "Die Körperarbeit bietet einen wirkungsvollen Weg dich zu erfühlen, dich auszudrücken und Wünschenswertes zu verstetigen. Sie hilft auch, unbewusste Haltungen, fehlgeleitete Triebkräfte, verdrängte Gefühle und Erinnerungen dem Bewusstsein wieder zugänglich zu machen und die darin enthaltenen Werkzeuge als Lösungen aufzuzeigen, frei zu setzen und zu integrieren. \
       Diese Workshops kreieren wir gemeinsam als einen geschützten Raum, in dem ich dich herzlich willkommen heiße."
-    workshops:
-      - title: "Sexpress Yourself"
-        image: "/images/workshops/sexpress_yourself.png"
-        link: "/ws-sexpress-yourself"
-      - title: "Presence is sexy"
-        image: "/images/workshops/presence_is_sexy.png"
-        link: "/ws-presence-is-sexy"
-      - title: "Custom Workshop"
-        image: "/images/workshops/bodywork_customized.png"
-        link: "/ws-bodyworkshop-custom"
   service_2:
     title: "Koordination von Veranstaltungen"
     caption: "In der Berliner “Healingszene” bewegt sich ein florierendes Spektrum an wachsenden “Achtsamkeitsangeboten” mit ihren passionierten und fähigen Akteur_innen. Überzeugt von der Heilungskraft dieser Arbeit, unterstütze ich mit meiner langjährigen Expertise im Veranstaltungsmanagement und in der Projektkoordination, zusätzlich andere InitiatorInnen und die erfolgreiche Umsetzung weiterer “Consciousness-Events”, wie Seminare und Retreats. In den einzelnen 4 Phasen einer Veranstaltung, unterbreite ich in gemeinsamer Absprache, mit euren Wünschen und Vorstellungen, folgende Angebotspakete. Natürlich sind einzelne Elemente daraus sowie Verzahnungen unausweichlich. Lass` uns über die konkreten Bedarfe und eine stimmige Angebotserstellung persönlich sprechen."
