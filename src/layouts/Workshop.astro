@@ -1,15 +1,33 @@
 ---
 import Base from "./Base.astro";
+import ImageMod from "./components/ImageMod.astro";
 
 export interface Props {
   title?: string;
   date?: string;
+  slug?: string;
+  image?: object;
   content?: string;
 }
 
-const { title, date, content } = Astro.props;
+const { title, date, content, slug, image } = Astro.props;
 ---
 
 <Base title={title} meta_title={title}>
-  <article set:html={content} />
+  <section class="pt-10 section">
+    <div class="grid grid-cols-2 gap-8">
+      <img src={image.fields.file.url} alt="" />
+      <!-- <ImageMod
+        src={image.fields.file.url}
+        alt={title}
+        width={256}
+        height={256}
+        format="jpg"
+      /> -->
+      <div>
+        <h1 set:html={title} class="mb-1 lg:text-4xl" />
+        <article set:html={content.replace(/\n/g, `</br>`)} />
+      </div>
+    </div>
+  </section>
 </Base>

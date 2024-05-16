@@ -13,6 +13,8 @@ export async function getStaticPaths() {
     params: { slug: item.fields.slug },
     props: {
       title: item.fields.title,
+      slug: item.fields.slug,
+      image: item.fields.image,
       content: documentToHtmlString(item.fields.content),
       date: new Date(item.fields.date).toLocaleDateString(),
     },
@@ -20,7 +22,13 @@ export async function getStaticPaths() {
   return pages;
 }
 
-const { content, title, date } = Astro.props;
+const { content, title, date, slug, image } = Astro.props;
 ---
 
-<Workshop content={content} title={title} date={date} />
+<Workshop
+  content={content}
+  title={title}
+  date={date}
+  slug={slug}
+  image={image || {}}
+/>

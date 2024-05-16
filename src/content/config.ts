@@ -1,4 +1,5 @@
 import { defineCollection, z } from "astro:content";
+import { title } from "process";
 
 // Workshop collection schema
 const workshopCollection = defineCollection({
@@ -6,7 +7,11 @@ const workshopCollection = defineCollection({
     title: z.string(),
     slug: z.string(),
     description: z.string().optional(),
-    thumbnail: z.object(),
+    image: z.object({
+      url: z.string(),
+      title: z.string(),
+      description: z.string(),
+    }),
     date: z.date(),
     draft: z.boolean().optional(),
   }),

@@ -17,11 +17,12 @@ const entries = await contentfulClient.getEntries<WorkshopFormat>({
 });
 
 const workshops = entries.items.map((item) => {
-  const { title, date, description, slug, thumbnail } = item.fields;
+  // console.log(item);
+  const { title, date, description, slug, image } = item.fields;
   return {
     title,
     slug,
-    thumbnail,
+    image,
     description,
     date: new Date(date).toLocaleDateString(),
   };
