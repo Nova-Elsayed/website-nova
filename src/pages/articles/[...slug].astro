@@ -1,12 +1,12 @@
 ---
 import { contentfulClient } from "../../lib/contentful";
-import type { WorkshopFormat } from "../../lib/contentful";
-import Workshop from "../../layouts/Workshop.astro";
+import type { Article } from "../../lib/contentful";
+import ArticleLayout from "../../layouts/Article.astro";
 import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
 
 export async function getStaticPaths() {
-  const entries = await contentfulClient.getEntries<WorkshopFormat>({
-    content_type: "workshopFormat",
+  const entries = await contentfulClient.getEntries<Article>({
+    content_type: "article",
   });
 
   const pages = entries.items.map((item) => ({
@@ -24,4 +24,4 @@ export async function getStaticPaths() {
 const { content, title, slug, image } = Astro.props;
 ---
 
-<Workshop content={content} title={title} slug={slug} image={image} />
+<ArticleLayout content={content} title={title} slug={slug} image={image} />

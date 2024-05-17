@@ -18,13 +18,12 @@ const entries = await contentfulClient.getEntries<WorkshopFormat>({
 
 const workshops = entries.items.map((item) => {
   // console.log(item);
-  const { title, date, description, slug, image } = item.fields;
+  const { title, description, slug, image } = item.fields;
   return {
     title,
     slug,
     image,
     description,
-    date: new Date(date).toLocaleDateString(),
   };
 });
 
@@ -151,7 +150,7 @@ const { banner, opener, services }: Homepage = homepage.data;
                 />
               </div>
 
-              <ul class="flex justify-evenly">
+              <ul class="">
                 {workshops.map((workshop) => (
                   <WorkshopCard data={workshop} />
                 ))}

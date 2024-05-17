@@ -13,12 +13,10 @@ const { title, content, slug, image } = Astro.props;
 
 <Base title={title} meta_title={title}>
   <section class="pt-10 section">
-    <div class="grid grid-cols-2 gap-8">
+    <div>
       {image && <img src={image.fields.file.url} alt="" />}
-      <div>
-        <h1 set:html={title} class="mb-1 lg:text-4xl" />
-        <article set:html={content.replace(/\n/g, `</br>`)} />
-      </div>
+      <h1 set:html={title} class="mb-1 lg:text-4xl" />
+      <article set:html={content.replace(/\n/g, `</br>`)} />
     </div>
   </section>
 </Base>

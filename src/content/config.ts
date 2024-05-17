@@ -11,6 +11,11 @@ const workshopCollection = defineCollection({
       url: z.string(),
       title: z.string(),
       description: z.string(),
+      fields: z.object({
+        file: z.object({
+          url: z.string(),
+        }),
+      }),
     }),
     date: z.date(),
     draft: z.boolean().optional(),

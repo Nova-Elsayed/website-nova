@@ -1,11 +1,20 @@
 import contentful, { type EntryFieldTypes } from "contentful";
 
+export interface Article {
+  contentTypeId: "Article";
+  fields: {
+    title: EntryFieldTypes.Text;
+    content: EntryFieldTypes.RichText;
+    image: EntryFieldTypes.Object;
+    description: EntryFieldTypes.Text;
+    slug: EntryFieldTypes.Text;
+  };
+}
 export interface WorkshopFormat {
   contentTypeId: "workshopFormat";
   fields: {
     title: EntryFieldTypes.Text;
     content: EntryFieldTypes.RichText;
-    date: EntryFieldTypes.Date;
     image: EntryFieldTypes.Object;
     description: EntryFieldTypes.Text;
     slug: EntryFieldTypes.Text;
