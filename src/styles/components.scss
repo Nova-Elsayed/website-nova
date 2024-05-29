@@ -1,3 +1,12 @@
+// workshops-list
+
+ul.workshops-list > li.workshop:nth-child(even) div.flex {
+  @apply flex-row-reverse;
+}
+
+ul.workshops-list > li.workshop:nth-child(even) div.text-container {
+  @apply text-right;
+}
 // section style
 .section {
   @apply py-32 xl:py-28 xl:px-16;
