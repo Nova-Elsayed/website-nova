@@ -1,0 +1,38 @@
+---
+import { contentfulClient } from "@/lib/contentful";
+import type { Page } from "@/lib/contentful";
+import Base from "@/layouts/Base.astro";
+import RichTextContainer from "@/components/RichTextContainer.astro";
+
+export async function getStaticPaths() {
+  const entries = await contentfulClient.getEntries<Page>({
+    content_type: "pages",
+  });
+
+  const pages = entries.items.map((item) => ({
+    params: { slug: item.fields.slug },
+    props: {
+      title: item.fields.title,
+      format: item.fields.format,
+      slug: item.fields.slug,
+      image: item.fields.image,
+      description: item.fields.description,
+      content: item.fields.content,
+    },
+  }));
+  return pages;
+}
+
+const { title, format, slug, image, description, content } = Astro.props;
+---
+
+<Base title={title} meta_title={title}>
+  <section class="pt-10 section">
+    <div>
+      {image && <img src={image.fields.file.url} alt="" />}
+      <h1 set:html={title} class="mb-1 lg:text-4xl" />
+      <RichTextContainer content={content} />
+      <!-- <article set:html={content.replace(/\n/g, `</br>`)} /> -->
+    </div>
+  </section>
+</Base>

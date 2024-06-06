@@ -10,13 +10,13 @@ import { getEntry } from "astro:content";
 import { FaCheck } from "react-icons/fa";
 
 import { contentfulClient } from "../lib/contentful";
-import type { WorkshopFormat } from "../lib/contentful";
+import type { WorkshopFormat, Event } from "../lib/contentful";
 
-const entries = await contentfulClient.getEntries<WorkshopFormat>({
+const workshopEntries = await contentfulClient.getEntries<WorkshopFormat>({
   content_type: "workshopFormat",
 });
 
-const workshops = entries.items.map((item) => {
+const workshops = workshopEntries.items.map((item) => {
   // console.log(item);
   const { title, description, slug, image } = item.fields;
   return {
@@ -26,6 +26,19 @@ const workshops = entries.items.map((item) => {
     description,
   };
 });
+
+const eventEntries = await contentfulClient.getEntries<Event>({
+  content_type: "event",
+});
+const events = eventEntries.items
+  .map((item) => {
+    const { format, dateStart } = item.fields;
+    return {
+      format,
+      dateStart,
+    };
+  })
+  .filter((item) => Date.parse(item.dateStart) > Date.now());
 
 interface Homepage {
   banner: {
@@ -138,24 +151,37 @@ const { banner, opener, services }: Homepage = homepage.data;
       <div>
         {
           services.service_1 && (
-            <div class="items-center justify-center mb-28 row">
-              <div class="w-2/3 m-auto text-center">
-                <h3
-                  set:html={markdownify(services.service_1.title)}
-                  class="mb-4 lg:text-4xl"
-                />
-                <p
-                  set:html={markdownify(services.service_1.caption)}
-                  class="mb-16 "
-                />
-              </div>
+            <>
+              <div class="items-center justify-center mb-28 row">
+                <div class="w-2/3 m-auto text-center">
+                  <h3
+                    set:html={markdownify(services.service_1.title)}
+                    class="mb-4 lg:text-4xl"
+                  />
+                  <p
+                    set:html={markdownify(services.service_1.caption)}
+                    class="mb-16 "
+                  />
+                </div>
 
-              <ul class="workshops-list">
-                {workshops.map((workshop) => (
-                  <WorkshopCard data={workshop} />
-                ))}
-              </ul>
-            </div>
+                <ul class="workshops-list">
+                  {workshops.map((workshop) => (
+                    <WorkshopCard data={workshop} />
+                  ))}
+                </ul>
+              </div>
+              <!--
+              <div>
+                {events &&
+                  events.map((event) => (
+                    <div>
+                      <h3>{event.format}</h3>
+                      <p>{event.dateStart}</p>
+                    </div>
+                  ))}
+              </div>
+               -->
+            </>
           )
         }
         {

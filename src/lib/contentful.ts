@@ -1,23 +1,50 @@
 import contentful, { type EntryFieldTypes } from "contentful";
 
-export interface Article {
-  contentTypeId: "Article";
+export interface Page {
+  contentTypeId: "pages";
   fields: {
     title: EntryFieldTypes.Text;
-    content: EntryFieldTypes.RichText;
-    image: EntryFieldTypes.Object;
-    description: EntryFieldTypes.Text;
+    format: EntryFieldTypes.Text;
     slug: EntryFieldTypes.Text;
+    image?: EntryFieldTypes.Object;
+    description?: EntryFieldTypes.Text;
+    content: EntryFieldTypes.RichText;
+  };
+}
+export interface Article {
+  contentTypeId: "article";
+  fields: {
+    title: EntryFieldTypes.Text;
+    slug: EntryFieldTypes.Text;
+    featured: EntryFieldTypes.Boolean;
+    image?: EntryFieldTypes.Object;
+    description: EntryFieldTypes.Text;
+    content: EntryFieldTypes.RichText;
+  };
+}
+
+export interface Event {
+  contentTypeId: "event";
+  fields: {
+    format: EntryFieldTypes.Text;
+    title?: EntryFieldTypes.Text;
+    dateStart: EntryFieldTypes.Date;
+    dateEnd?: EntryFieldTypes.Date;
+    location?: EntryFieldTypes.Text;
+    parentEventTitle?: EntryFieldTypes.Text;
+    parentEventURL?: EntryFieldTypes.Text;
+    content?: EntryFieldTypes.RichText;
   };
 }
 export interface WorkshopFormat {
   contentTypeId: "workshopFormat";
   fields: {
     title: EntryFieldTypes.Text;
-    content: EntryFieldTypes.RichText;
+    format: EntryFieldTypes.Text;
+    slug: EntryFieldTypes.Text;
     image: EntryFieldTypes.Object;
     description: EntryFieldTypes.Text;
-    slug: EntryFieldTypes.Text;
+    content: EntryFieldTypes.RichText;
   };
 }
 
