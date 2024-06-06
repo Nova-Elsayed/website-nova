@@ -18,16 +18,24 @@
       "hasChildren": true,
       "children": [
         {
-          "name": "Sexological Bodywork",
-          "url": "/sexological-bodywork"
+          "name": "Typografie",
+          "url": "/typografie"
         },
         {
-          "name": "Somatische Herangehensweise",
-          "url": "/somantic-approach"
+          "name": "Traumorientierte Haltung",
+          "url": "/articles/traumorientierte-haltung"
         },
         {
-          "name": "Kunst- und Gestaltungstherapie",
-          "url": "/kunst-und-gestaltungstherapie"
+          "name": "Was ist Sexological Bodywork?",
+          "url": "/articles/was-ist-sexological-bodywork"
+        },
+        {
+          "name": "Was ist eine somatische Herangehensweise?",
+          "url": "/articles/was-ist-eine-somatische-herangehensweise"
+        },
+        {
+          "name": "Was versteht man unter Kunst- und Gestaltungstherapie?",
+          "url": "/articles/kunst-und-gestaltungstherapie"
         },
         {
           "name": "Veranstaltungsorganisation",
