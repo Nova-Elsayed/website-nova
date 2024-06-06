@@ -4,35 +4,33 @@ import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
 import { slugify } from "@/lib/utils/textConverter";
 
 interface Props {
-  content: array;
+  content: any;
 }
 
 const options = {
   renderNode: {
     [BLOCKS.HEADING_1]: (node, next) => {
-      `<h1 id="${slugify(node.content)}">${next(node.content)}</h1>`;
+      return `<h1 id="${slugify(next(node.content))}">${next(node.content)}</h1>`;
     },
     [BLOCKS.HEADING_2]: (node, next) => {
-      `<h2 id="${slugify(node.content)}">${next(node.content)}</h2>`;
+      return `<h2 id="${slugify(next(node.content))}">${next(node.content)}</h2>`;
     },
     [BLOCKS.HEADING_3]: (node, next) => {
-      `<h3 id="${slugify(node.content)}">${next(node.content)}</h3>`;
+      return `<h3 id="${slugify(next(node.content))}">${next(node.content)}</h3>`;
     },
     [BLOCKS.HEADING_4]: (node, next) => {
-      `<h4 id="${slugify(node.content)}">${next(node.content)}</h4>`;
+      return `<h4 id="${slugify(next(node.content))}">${next(node.content)}</h4>`;
     },
     [BLOCKS.HEADING_5]: (node, next) => {
-      `<h5 id="${slugify(node.content)}">${next(node.content)}</h5>`;
+      return `<h5 id="${slugify(next(node.content))}">${next(node.content)}</h5>`;
     },
     [BLOCKS.HEADING_6]: (node, next) => {
-      `<h6 id="${slugify(node.content)}">${next(node.content)}</h6>`;
+      return `<h6 id="${slugify(next(node.content))}">${next(node.content)}</h6>`;
     },
   },
 };
 
-// options dont work yet
-
-const renderedHTML = documentToHtmlString(Astro.props.content);
+const renderedHTML = documentToHtmlString(Astro.props.content, options);
 ---
 
-<article set:html={renderedHTML} class="rich-text-container" />
+<article set:html={renderedHTML} class="mx-auto prose rich-text-container" />
