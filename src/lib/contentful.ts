@@ -48,6 +48,36 @@ export interface WorkshopFormat {
   };
 }
 
+export interface LandingPage {
+  contentTypeId: "index";
+  entryId: "1aRfABlgG4hmSE78soNUP3";
+  fields: {
+    title: EntryFieldTypes.Text;
+    headerHeadline: EntryFieldTypes.Text;
+    headerSubHeadline: EntryFieldTypes.Text;
+    headerTagline: EntryFieldTypes.Text;
+    headerLink01Label: EntryFieldTypes.Text;
+    headerLink01URL: EntryFieldTypes.Text;
+    headerLink02Label: EntryFieldTypes.Text;
+    headerLink02URL: EntryFieldTypes.Text;
+    introHeadline: EntryFieldTypes.Text;
+    introSubHeadline: EntryFieldTypes.Text;
+    introText: EntryFieldTypes.RichText;
+    workshopsHeadline: EntryFieldTypes.Text;
+    workshopsText: EntryFieldTypes.RichText;
+    supportHeadline: EntryFieldTypes.Text;
+    supportText: EntryFieldTypes.RichText;
+    supportLink01Label: EntryFieldTypes.Text;
+    supportLink01URL: EntryFieldTypes.Text;
+    supportLink02Label: EntryFieldTypes.Text;
+    supportLink02URL: EntryFieldTypes.Text;
+    supportLink03Label: EntryFieldTypes.Text;
+    supportLink03URL: EntryFieldTypes.Text;
+    supportLink04Label: EntryFieldTypes.Text;
+    supportLink04URL: EntryFieldTypes.Text;
+  };
+}
+
 export const contentfulClient = contentful.createClient({
   space: import.meta.env.CONTENTFUL_SPACE_ID,
   accessToken: import.meta.env.DEV

@@ -10,14 +10,19 @@ import { getEntry } from "astro:content";
 import { FaCheck } from "react-icons/fa";
 
 import { contentfulClient } from "../lib/contentful";
-import type { WorkshopFormat, Event } from "../lib/contentful";
+import type { LandingPage, WorkshopFormat, Event } from "../lib/contentful";
+import console from "console";
+
+const landingPageData = await contentfulClient.getEntry<LandingPage>(
+  "1aRfABlgG4hmSE78soNUP3",
+);
+const landingPage = landingPageData.fields;
 
 const workshopEntries = await contentfulClient.getEntries<WorkshopFormat>({
   content_type: "workshopFormat",
 });
 
 const workshops = workshopEntries.items.map((item) => {
-  // console.log(item);
   const { title, description, slug, image } = item.fields;
   return {
     title,
@@ -170,7 +175,7 @@ const { banner, opener, services }: Homepage = homepage.data;
                   ))}
                 </ul>
               </div>
-              <!--
+
               <div>
                 {events &&
                   events.map((event) => (
@@ -180,7 +185,6 @@ const { banner, opener, services }: Homepage = homepage.data;
                     </div>
                   ))}
               </div>
-               -->
             </>
           )
         }
