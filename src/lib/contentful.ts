@@ -54,6 +54,7 @@ export interface LandingPage {
   fields: {
     title: EntryFieldTypes.Text;
     headerHeadline: EntryFieldTypes.Text;
+    headerImage: EntryFieldTypes.Object;
     headerSubHeadline: EntryFieldTypes.Text;
     headerTagline: EntryFieldTypes.Text;
     headerLink01Label: EntryFieldTypes.Text;

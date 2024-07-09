@@ -5,6 +5,7 @@ import { slugify } from "@/lib/utils/textConverter";
 
 interface Props {
   content: any;
+  class?: string;
 }
 
 const options = {
@@ -27,10 +28,16 @@ const options = {
     [BLOCKS.HEADING_6]: (node, next) => {
       return `<h6 id="${slugify(next(node.content))}">${next(node.content)}</h6>`;
     },
+    // [BLOCKS.PARAGRAPH]: (node, next) => {
+    //   return `<p>${next(node.content).replace(/\n/g, `</br>`)}</p>`;
+    // }
   },
 };
 
 const renderedHTML = documentToHtmlString(Astro.props.content, options);
 ---
 
-<article set:html={renderedHTML} class="mx-auto prose rich-text-container" />
+<article
+  set:html={renderedHTML}
+  class={`mx-auto prose rich-text-container ${Astro.props.class || ""}`}
+/>

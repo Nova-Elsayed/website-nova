@@ -12,6 +12,7 @@ import { FaCheck } from "react-icons/fa";
 import { contentfulClient } from "../lib/contentful";
 import type { LandingPage, WorkshopFormat, Event } from "../lib/contentful";
 import console from "console";
+import RichTextContainer from "@/components/RichTextContainer.astro";
 
 const landingPageData = await contentfulClient.getEntry<LandingPage>(
   "1aRfABlgG4hmSE78soNUP3",
@@ -81,55 +82,88 @@ const { banner, opener, services }: Homepage = homepage.data;
 ---
 
 <Base>
-  <!-- Banner -->
-  <section class="pt-10 section">
-    <div class="">
-      <div class="grid items-center grid-cols-2 gap-8">
-        {
-          banner.image && (
-            <div class="flex justify-end">
-              <ImageMod
-                src={banner.image}
-                alt="banner"
-                width={256}
-                height={256}
-                class="rounded-full"
-                format="webp"
-              />
-            </div>
-          )
-        }
-        <div class="text-left">
-          <h1 set:html={markdownify(banner.title)} class="mb-1 lg:text-4xl" />
-          <h2
-            set:html={markdownify(banner.subtitle)}
-            class="mb-4 lg:text-3xl"
-          />
-          <p set:html={markdownify(banner.content)} class="mb-6 lg:text-xl" />
-
-          {
-            banner.cta_about.enable && (
-              <GradientBtn
-                link={banner.cta_about.link}
-                label={banner.cta_about.label}
-                class="me-4"
-              />
-            )
-          }
-          {
-            banner.cta_contact.enable && (
-              <GradientBtn
-                link={banner.cta_contact.link}
-                label={banner.cta_contact.label}
-              />
-            )
-          }
-        </div>
+  <!-- HEADER -->
+  <section class="relative w-screen h-screen overflow-hidden">
+    <img
+      class="absolute top-0 z-0 object-cover w-full h-full start-0"
+      src={landingPage.headerImage.fields.file.url}
+      alt=""
+    />
+  </section>
+  <div class="absolute top-0 z-10 grid h-full grid-cols-2 gap-4 start-0">
+    <div class="flex flex-col justify-center col-end-3">
+      <div class="mb-8">
+        <h1
+          class="mb-2 text-3xl text-white drop-shadow-2xl"
+          set:html={landingPage.headerHeadline}
+        />
+        <h1
+          class="text-2xl text-red-500 drop-shadow-2xl"
+          set:html={landingPage.headerSubHeadline}
+        />
+      </div>
+      <div>
+        <a
+          class="py-3 text-teal-400 transition-colors border border-teal-400 rounded px-7 hover:border-teal-200 hover:text-teal-200 me-4"
+          href={landingPage.headerLink01URL}
+          set:html={landingPage.headerLink01Label}
+        />
+        <a
+          class="py-3 text-teal-400 transition-colors border border-teal-400 rounded px-7 hover:border-teal-200 hover:text-teal-200"
+          href={landingPage.headerLink02URL}
+          set:html={landingPage.headerLink02Label}
+        />
       </div>
     </div>
+  </div>
+  <!-- /HEADER -->
+  <!-- INTRO -->
+  <section class="w-screen py-16 text-center">
+    <h2 class="mb-2 text-2xl" set:html={landingPage.introHeadline} />
+    <h2 class="mb-8 text-xl" set:html={landingPage.introSubHeadline} />
+    <RichTextContainer class="text-left" content={landingPage.introText} />
   </section>
-  <!-- /Banner -->
-  <!-- Opener -->
+  <!-- / INTRO -->
+  <!-- WORKSHOPS -->
+  <section class="w-screen py-16 text-center">
+    <h2 class="mb-8 text-xl" set:html={landingPage.workshopsHeadline} />
+    <RichTextContainer class="text-left" content={landingPage.workshopsText} />
+    <!-- / WORKSHOPS -->
+    <!-- SUPPORT -->
+    <section class="w-screen py-16 text-center">
+      <h2 class="mb-8 text-xl" set:html={landingPage.supportHeadline} />
+      <div class="grid grid-cols-4 gap-4 mx-auto max-w-prose">
+        <RichTextContainer
+          class="col-span-3 text-left"
+          content={landingPage.supportText}
+        />
+        <div>
+          <a
+            class="block w-full mx-auto mb-4 text-xl text-center text-teal-400 transition-colors font-secondary hover:text-teal-200"
+            href={landingPage.supportLink01URL}
+            set:html={landingPage.supportLink01Label}
+          />
+          <a
+            class="block w-full mx-auto mb-4 text-xl text-center text-teal-400 transition-colors font-secondary hover:text-teal-200"
+            href={landingPage.supportLink02URL}
+            set:html={landingPage.supportLink02Label}
+          />
+          <a
+            class="block w-full mx-auto mb-4 text-xl text-center text-teal-400 transition-colors font-secondary hover:text-teal-200"
+            href={landingPage.supportLink03URL}
+            set:html={landingPage.supportLink03Label}
+          />
+          <a
+            class="block w-full mx-auto mb-4 text-xl text-center text-teal-400 transition-colors font-secondary hover:text-teal-200"
+            href={landingPage.supportLink04URL}
+            set:html={landingPage.supportLink04Label}
+          />
+        </div>
+      </div>
+    </section>
+    <!-- / SUPPORT -->
+
+    <!-- Opener
   <section class="section">
     <div class="mb-8 text-center">
       <h2 set:html={markdownify(opener.quote)} class="mb-1 lg:text-4xl" />
@@ -144,8 +178,8 @@ const { banner, opener, services }: Homepage = homepage.data;
       </div>
     </div>
   </section>
-  <!-- /Opener -->
-  <!-- Services -->
+ /Opener -->
+    <!-- Services
   <section class="section">
     <div class="container">
       <div class="items-center justify-center row">
@@ -174,7 +208,7 @@ const { banner, opener, services }: Homepage = homepage.data;
                     <WorkshopCard data={workshop} />
                   ))}
                 </ul>
-              </div>
+                </div>
 
               <div>
                 {events &&
@@ -182,10 +216,10 @@ const { banner, opener, services }: Homepage = homepage.data;
                     <div>
                       <h3>{event.format}</h3>
                       <p>{event.dateStart}</p>
-                    </div>
-                  ))}
-              </div>
-            </>
+                      </div>
+                      ))}
+                      </div>
+                      </>
           )
         }
         {
@@ -224,7 +258,7 @@ const { banner, opener, services }: Homepage = homepage.data;
                   <GradientBtn
                     link={services.service_2.cta.link}
                     label="Erfahre mehr…"
-                  />
+                    />
                 )}
               </div>
             </div>
@@ -233,5 +267,6 @@ const { banner, opener, services }: Homepage = homepage.data;
       </div>
     </div>
   </section>
-  <!-- /Services -->
+   /Services -->
+  </section>
 </Base>
