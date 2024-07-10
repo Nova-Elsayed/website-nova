@@ -1,19 +1,26 @@
 ---
-import { plainify } from "@/lib/utils/textConverter";
+import { slugify } from "@/lib/utils/textConverter";
+import { locationToAddress } from "@/lib/utils/locationParser";
+import { simpleGermanDate } from "@/lib/utils/dateParser";
 
-const { title, slug, image, description } = Astro.props.data;
+const { title, location, headline, parentTitle, dateStart } = Astro.props.data;
+const slug = slugify(title);
+
+const address = await locationToAddress(location);
+const readableDate = simpleGermanDate(dateStart);
 ---
 
-<li class="workshop">
-  <a href={`/workshops/${slug}/`}>
-    <div class="relative flex justify-around w-full mb-8 overflow-hidden">
-      <div class="flex justify-end w-1/2 p-4 img-container">
-        <img src={image.fields.file.url} alt="" class="m-0 h-80" />
-      </div>
-      <div class="w-1/2 p-4 text-container">
-        <h3 set:html={plainify(title)} class="" />
-        <p set:html={plainify(description)} class="" />
-      </div>
-    </div>
+<li class="w-1/3 p-4">
+  <a
+    class="block transition-all group hover:scale-110"
+    href={`/workshops/${slug}/`}
+  >
+    <h3
+      set:html={headline}
+      class="text-xl text-red-500 group-transition-colors group-hover:text-red-300"
+    />
+    {readableDate && <p set:html={readableDate} />}
+    {parentTitle && <p class="mt-2 font-secondary" set:html={parentTitle} />}
+    {address && <p set:html={address.city || address.village} />}
   </a>
 </li>

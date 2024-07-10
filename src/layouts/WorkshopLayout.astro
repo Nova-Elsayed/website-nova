@@ -2,22 +2,20 @@
 import Base from "./Base.astro";
 
 export interface Props {
-  title?: string;
-  slug?: string;
-  image?: { fields: { file: { url: string } } };
-  content: string;
+  title: string;
+  slug: string;
+  description: string;
 }
 
-const { title, content, slug, image } = Astro.props;
+const { title, description, slug } = Astro.props;
 ---
 
 <Base title={title} meta_title={title}>
   <section class="pt-10 section">
     <div class="grid grid-cols-2 gap-8">
-      {image && <img src={image.fields.file.url} alt="" />}
       <div>
         <h1 set:html={title} class="mb-1 lg:text-4xl" />
-        <article set:html={content.replace(/\n/g, `</br>`)} />
+        <article set:html={description.replace(/\n/g, `</br>`)} />
       </div>
     </div>
   </section>

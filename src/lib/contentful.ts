@@ -23,28 +23,17 @@ export interface Article {
   };
 }
 
-export interface Event {
-  contentTypeId: "event";
-  fields: {
-    format: EntryFieldTypes.Text;
-    title?: EntryFieldTypes.Text;
-    dateStart: EntryFieldTypes.Date;
-    dateEnd?: EntryFieldTypes.Date;
-    location?: EntryFieldTypes.Text;
-    parentEventTitle?: EntryFieldTypes.Text;
-    parentEventURL?: EntryFieldTypes.Text;
-    content?: EntryFieldTypes.RichText;
-  };
-}
-export interface WorkshopFormat {
-  contentTypeId: "workshopFormat";
+export interface Workshop {
+  contentTypeId: "workshop";
   fields: {
     title: EntryFieldTypes.Text;
-    format: EntryFieldTypes.Text;
-    slug: EntryFieldTypes.Text;
-    image: EntryFieldTypes.Object;
-    description: EntryFieldTypes.Text;
-    content: EntryFieldTypes.RichText;
+    headline: EntryFieldTypes.Text;
+    description?: EntryFieldTypes.RichText;
+    location?: EntryFieldTypes.Text;
+    dateStart: EntryFieldTypes.Date;
+    dateEnd?: EntryFieldTypes.Date;
+    parentTitle?: EntryFieldTypes.Text;
+    parentURL?: EntryFieldTypes.Text;
   };
 }
 

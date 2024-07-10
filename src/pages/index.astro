@@ -1,17 +1,8 @@
 ---
-import ImageMod from "@/components/ImageMod.astro";
 import Base from "@/layouts/Base.astro";
-import { markdownify } from "@/lib/utils/textConverter";
-import GradientBtn from "@/components/Button.astro";
-import WorkshopCard from "@/components/WorkshopCard.astro";
-
-import type { Button, Feature, Workshop } from "@/types";
-import { getEntry } from "astro:content";
-import { FaCheck } from "react-icons/fa";
-
 import { contentfulClient } from "../lib/contentful";
-import type { LandingPage, WorkshopFormat, Event } from "../lib/contentful";
-import console from "console";
+import type { LandingPage, Workshop } from "../lib/contentful";
+import WorkshopCard from "@/components/WorkshopCard.astro";
 import RichTextContainer from "@/components/RichTextContainer.astro";
 
 const landingPageData = await contentfulClient.getEntry<LandingPage>(
@@ -19,103 +10,70 @@ const landingPageData = await contentfulClient.getEntry<LandingPage>(
 );
 const landingPage = landingPageData.fields;
 
-const workshopEntries = await contentfulClient.getEntries<WorkshopFormat>({
-  content_type: "workshopFormat",
+const workshopEntries = await contentfulClient.getEntries<Workshop>({
+  content_type: "workshop",
 });
-
-const workshops = workshopEntries.items.map((item) => {
-  const { title, description, slug, image } = item.fields;
-  return {
-    title,
-    slug,
-    image,
-    description,
-  };
-});
-
-const eventEntries = await contentfulClient.getEntries<Event>({
-  content_type: "event",
-});
-const events = eventEntries.items
+const workshops = workshopEntries.items
   .map((item) => {
-    const { format, dateStart } = item.fields;
-    return {
-      format,
-      dateStart,
-    };
+    return item.fields;
   })
-  .filter((item) => Date.parse(item.dateStart) > Date.now());
+  .sort((a, b) => {
+    // Turn your strings into dates, and then subtract them
+    // to get a value that is either negative, positive, or zero.
+    return Date.parse(b.dateStart) - Date.parse(a.dateStart);
+  });
 
-interface Homepage {
-  banner: {
-    title: string;
-    subtitle: string;
-    content: string;
-    image: string;
-    cta_about: Button;
-    cta_contact: Button;
-  };
-  opener: {
-    quote: string;
-    title: string;
-    image: string;
-    content: string;
-  };
-  services: {
-    title: string;
-    service_1: {
-      title: string;
-      caption: string;
-    };
-    service_2: {
-      title: string;
-      caption: string;
-      features: Feature[];
-      cta: Button;
-    };
-  };
-  features: Feature[];
-}
+const upcomingWorkshops = workshops
+  .filter((item) => Date.parse(item.dateStart) >= Date.now())
+  .reverse();
 
-const homepage = await getEntry("homepage", "-index");
-const { banner, opener, services }: Homepage = homepage.data;
+const recentWorkshops = workshops.filter(
+  (item) => Date.parse(item.dateStart) < Date.now(),
+);
+
+// console.log(workshops);
 ---
 
 <Base>
   <!-- HEADER -->
   <section class="relative w-screen h-screen overflow-hidden">
-    <img
-      class="absolute top-0 z-0 object-cover w-full h-full start-0"
-      src={landingPage.headerImage.fields.file.url}
-      alt=""
-    />
-  </section>
-  <div class="absolute top-0 z-10 grid h-full grid-cols-2 gap-4 start-0">
-    <div class="flex flex-col justify-center col-end-3">
-      <div class="mb-8">
-        <h1
-          class="mb-2 text-3xl text-white drop-shadow-2xl"
-          set:html={landingPage.headerHeadline}
+    {
+      landingPage.headerImage?.fields.file.url && (
+        <img
+          class="absolute top-0 z-0 object-cover w-full h-full start-0"
+          src={landingPage.headerImage.fields.file.url}
+          alt=""
         />
-        <h1
-          class="text-2xl text-red-500 drop-shadow-2xl"
-          set:html={landingPage.headerSubHeadline}
-        />
-      </div>
-      <div>
-        <a
-          class="py-3 text-teal-400 transition-colors border border-teal-400 rounded px-7 hover:border-teal-200 hover:text-teal-200 me-4"
-          href={landingPage.headerLink01URL}
-          set:html={landingPage.headerLink01Label}
-        />
-        <a
-          class="py-3 text-teal-400 transition-colors border border-teal-400 rounded px-7 hover:border-teal-200 hover:text-teal-200"
-          href={landingPage.headerLink02URL}
-          set:html={landingPage.headerLink02Label}
-        />
+      )
+    }
+
+    <div class="absolute top-0 z-10 grid h-full grid-cols-2 gap-4 start-0">
+      <div class="flex flex-col justify-center col-end-3">
+        <div class="mb-8">
+          <h1
+            class="mb-2 text-3xl text-white drop-shadow-2xl"
+            set:html={landingPage.headerHeadline}
+          />
+          <h1
+            class="text-2xl text-red-500 drop-shadow-2xl"
+            set:html={landingPage.headerSubHeadline}
+          />
+        </div>
+        <div class="flex">
+          <a
+            class="block py-3 text-teal-400 transition-all border border-teal-400 rounded hover:scale-110 px-7 hover:border-teal-200 hover:text-teal-200 me-4"
+            href={landingPage.headerLink01URL}
+            set:html={landingPage.headerLink01Label}
+          />
+          <a
+            class="block py-3 text-teal-400 transition-all border border-teal-400 rounded hover:scale-110 px-7 hover:border-teal-200 hover:text-teal-200"
+            href={landingPage.headerLink02URL}
+            set:html={landingPage.headerLink02Label}
+          />
+        </div>
       </div>
     </div>
-  </div>
+  </section>
   <!-- /HEADER -->
   <!-- INTRO -->
   <section class="w-screen py-16 text-center">
@@ -128,145 +86,68 @@ const { banner, opener, services }: Homepage = homepage.data;
   <section class="w-screen py-16 text-center">
     <h2 class="mb-8 text-xl" set:html={landingPage.workshopsHeadline} />
     <RichTextContainer class="text-left" content={landingPage.workshopsText} />
-    <!-- / WORKSHOPS -->
-    <!-- SUPPORT -->
-    <section class="w-screen py-16 text-center">
-      <h2 class="mb-8 text-xl" set:html={landingPage.supportHeadline} />
-      <div class="grid grid-cols-4 gap-4 mx-auto max-w-prose">
-        <RichTextContainer
-          class="col-span-3 text-left"
-          content={landingPage.supportText}
-        />
-        <div>
-          <a
-            class="block w-full mx-auto mb-4 text-xl text-center text-teal-400 transition-colors font-secondary hover:text-teal-200"
-            href={landingPage.supportLink01URL}
-            set:html={landingPage.supportLink01Label}
-          />
-          <a
-            class="block w-full mx-auto mb-4 text-xl text-center text-teal-400 transition-colors font-secondary hover:text-teal-200"
-            href={landingPage.supportLink02URL}
-            set:html={landingPage.supportLink02Label}
-          />
-          <a
-            class="block w-full mx-auto mb-4 text-xl text-center text-teal-400 transition-colors font-secondary hover:text-teal-200"
-            href={landingPage.supportLink03URL}
-            set:html={landingPage.supportLink03Label}
-          />
-          <a
-            class="block w-full mx-auto mb-4 text-xl text-center text-teal-400 transition-colors font-secondary hover:text-teal-200"
-            href={landingPage.supportLink04URL}
-            set:html={landingPage.supportLink04Label}
-          />
-        </div>
-      </div>
-    </section>
-    <!-- / SUPPORT -->
 
-    <!-- Opener
-  <section class="section">
-    <div class="mb-8 text-center">
-      <h2 set:html={markdownify(opener.quote)} class="mb-1 lg:text-4xl" />
-      <h2 set:html={markdownify(opener.title)} class="lg:text-2xl" />
-    </div>
-    <div class="container">
-      <div class="items-center justify-center row">
-        <content
-          set:html={markdownify(opener.content)}
-          class="mb-8 text-base text-left content"
-        />
-      </div>
-    </div>
+    {
+      workshops && upcomingWorkshops && (
+        <section class="my-8">
+          <h2 class="mb-4 text-lg">Meine kommenden Workshops</h2>
+          <ul class="flex w-full px-8 my-8 justify-evenly">
+            {upcomingWorkshops.map((workshop) => (
+              <WorkshopCard data={workshop} />
+            ))}
+          </ul>
+        </section>
+      )
+    }
+    {
+      workshops && recentWorkshops && (
+        <section class="my-8 opacity-60">
+          <h2 class="mb-4 text-lg">Vergangene Workshops</h2>
+          <ul class="flex w-full px-8 my-8 justify-evenly">
+            {recentWorkshops.map((workshop) => (
+              <WorkshopCard data={workshop} />
+            ))}
+          </ul>
+        </section>
+      )
+    }
   </section>
- /Opener -->
-    <!-- Services
-  <section class="section">
-    <div class="container">
-      <div class="items-center justify-center row">
-        <div class="text-center">
-          <h2 set:html={markdownify(services.title)} class="mb-4 lg:text-2xl" />
-        </div>
-      </div>
+
+  <!-- / WORKSHOPS -->
+  <!-- SUPPORT -->
+  <section class="w-screen py-16 text-center">
+    <h2 class="mb-8 text-xl" set:html={landingPage.supportHeadline} />
+    <div class="grid grid-cols-3 gap-4 mx-auto max-w-prose">
       <div>
-        {
-          services.service_1 && (
-            <>
-              <div class="items-center justify-center mb-28 row">
-                <div class="w-2/3 m-auto text-center">
-                  <h3
-                    set:html={markdownify(services.service_1.title)}
-                    class="mb-4 lg:text-4xl"
-                  />
-                  <p
-                    set:html={markdownify(services.service_1.caption)}
-                    class="mb-16 "
-                  />
-                </div>
-
-                <ul class="workshops-list">
-                  {workshops.map((workshop) => (
-                    <WorkshopCard data={workshop} />
-                  ))}
-                </ul>
-                </div>
-
-              <div>
-                {events &&
-                  events.map((event) => (
-                    <div>
-                      <h3>{event.format}</h3>
-                      <p>{event.dateStart}</p>
-                      </div>
-                      ))}
-                      </div>
-                      </>
-          )
-        }
-        {
-          services.service_2 && (
-            <div class="items-center justify-center row">
-              <div class="w-2/3 m-auto text-center">
-                <h3
-                  set:html={markdownify(services.service_2.title)}
-                  class="mb-4 lg:text-4xl"
-                />
-                <p
-                  set:html={markdownify(services.service_2.caption)}
-                  class="mb-16"
-                />
-              </div>
-              <ul class="flex justify-between mb-12">
-                {services.service_2.features.map((feature: Feature) => (
-                  <li class="inline-block w-48 mb-8">
-                    <ImageMod
-                      src={feature.image}
-                      alt="feature"
-                      width={128}
-                      height={128}
-                      format="webp"
-                      class="mx-auto mb-4 rounded-full shadow"
-                    />
-                    <h4
-                      class="text-center"
-                      set:html={markdownify(feature.title)}
-                    />
-                  </li>
-                ))}
-              </ul>
-              <div class="text-center">
-                {services.service_2.cta.enable && (
-                  <GradientBtn
-                    link={services.service_2.cta.link}
-                    label="Erfahre mehr…"
-                    />
-                )}
-              </div>
-            </div>
-          )
-        }
+        <a
+          class="block w-full py-3 mx-auto text-xl text-center text-teal-400 transition-all hover:scale-110 font-secondary hover:text-teal-200"
+          href={landingPage.supportLink01URL}
+          set:html={landingPage.supportLink01Label}
+        />
+        <div class="w-0 h-8 mx-auto my-0 border border-teal-400"></div>
+        <a
+          class="block w-full py-3 mx-auto text-xl text-center text-teal-400 transition-all hover:scale-110 font-secondary hover:text-teal-200"
+          href={landingPage.supportLink02URL}
+          set:html={landingPage.supportLink02Label}
+        />
+        <div class="w-0 h-8 mx-auto my-0 border border-teal-400"></div>
+        <a
+          class="block w-full py-3 mx-auto text-xl text-center text-teal-400 transition-all hover:scale-110 font-secondary hover:text-teal-200"
+          href={landingPage.supportLink03URL}
+          set:html={landingPage.supportLink03Label}
+        />
+        <div class="w-0 h-8 mx-auto my-0 border border-teal-400"></div>
+        <a
+          class="block w-full py-3 mx-auto text-xl text-center text-teal-400 transition-all hover:scale-110 font-secondary hover:text-teal-200"
+          href={landingPage.supportLink04URL}
+          set:html={landingPage.supportLink04Label}
+        />
       </div>
+      <RichTextContainer
+        class="col-span-2 text-left"
+        content={landingPage.supportText}
+      />
     </div>
   </section>
-   /Services -->
-  </section>
+  <!-- / SUPPORT -->
 </Base>

@@ -1,27 +1,47 @@
 ---
 import { contentfulClient } from "../../lib/contentful";
-import type { WorkshopFormat } from "../../lib/contentful";
-import Workshop from "../../layouts/Workshop.astro";
+import type { Workshop } from "../../lib/contentful";
+import WorkshopLayout from "../../layouts/WorkshopLayout.astro";
 import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
+import { slugify } from "@/lib/utils/textConverter";
 
 export async function getStaticPaths() {
-  const entries = await contentfulClient.getEntries<WorkshopFormat>({
-    content_type: "workshopFormat",
+  const entries = await contentfulClient.getEntries<Workshop>({
+    content_type: "workshop",
   });
 
   const pages = entries.items.map((item) => ({
-    params: { slug: item.fields.slug },
+    params: { slug: slugify(item.fields.title) },
     props: {
+      slug: slugify(item.fields.title),
       title: item.fields.title,
-      slug: item.fields.slug,
-      image: item.fields.image,
-      content: documentToHtmlString(item.fields.content),
+      headline: item.fields.headline,
+      description: item.fields.description,
+      location: item.fields.location,
+      dateStart: item.fields.dateStart,
+      dateEnd: item.fields.dateEnd,
+      parentTitle: item.fields.parentTitle,
+      parentURL: item.fields.parentURL,
     },
   }));
   return pages;
 }
 
-const { content, title, slug, image } = Astro.props;
+const {
+  slug,
+  title,
+  headline,
+  description,
+  location,
+  dateStart,
+  dateEnd,
+  parentTitle,
+  parentURL,
+} = Astro.props;
 ---
 
-<Workshop content={content} title={title} slug={slug} image={image} />
+<WorkshopLayout
+  description={description ? documentToHtmlString(description) : ""}
+  title={title}
+  slug={slug}
+/>
