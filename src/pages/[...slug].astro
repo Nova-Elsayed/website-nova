@@ -33,7 +33,6 @@ const { title, format, slug, image, description, content } = Astro.props;
       {image && <img src={image.fields.file.url} alt="" />}
       <h1 set:html={title} class="mb-1 lg:text-4xl" />
       <RichTextContainer content={content} />
-      <!-- <article set:html={content.replace(/\n/g, `</br>`)} /> -->
     </div>
   </section>
 </Base>

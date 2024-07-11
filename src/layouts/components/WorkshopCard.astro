@@ -19,8 +19,8 @@ const readableDate = simpleGermanDate(dateStart);
       set:html={headline}
       class="text-xl text-red-500 group-transition-colors group-hover:text-red-300"
     />
-    {readableDate && <p set:html={readableDate} />}
     {parentTitle && <p class="mt-2 font-secondary" set:html={parentTitle} />}
     {address && <p set:html={address.city || address.village} />}
+    {readableDate && <p set:html={readableDate} />}
   </a>
 </li>
