@@ -7,7 +7,7 @@
   "packageManager": "yarn@1.22.19",
   "scripts": {
     "dev": "yarn astro dev",
-    "build": "yarn generate-json && astro build",
+    "build": "astro build",
     "preview": "astro preview",
     "format": "prettier -w ./src",
     "generate-json": "node scripts/jsonGenerator.js",
@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@astrojs/mdx": "^2.1.1",
+    "@astrojs/netlify": "^5.4.0",
     "@astrojs/react": "^3.0.9",
     "@astrojs/rss": "^4.0.4",
     "@astrojs/sitemap": "^3.0.5",
