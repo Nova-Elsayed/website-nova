@@ -4,6 +4,7 @@ import type { Page } from "@/lib/contentful";
 import Base from "@/layouts/Base.astro";
 import RichTextContainer from "@/components/RichTextContainer.astro";
 
+export const prerender = true;
 export async function getStaticPaths() {
   const entries = await contentfulClient.getEntries<Page>({
     content_type: "pages",

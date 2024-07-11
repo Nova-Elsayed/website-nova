@@ -1,0 +1,36 @@
+---
+title: "Über Mich"
+meta_title: "About"
+image: "/images/Ich_Hut.jpg"
+description: "Eine Kurzbeschreibung"
+draft: false
+---
+
+# Nova El Sayed (she/her)
+
+## Sexological Bodyworker & Artist
+
+„Es kann keinen Frieden auf der Erde geben, solange in der Liebe krieg ist!“ (Dieter Duhm, Psychologe, Friedensforscher und Buchautor)
+
+Dieses Zitat welches mir vor einigen Jahren auf Reisen begegnete, verweilt seither als wegweisende Herzensstimme in meinen Gedanken. Es ist eine tiefsitzende Antwort, mein höheres Ziel und wichtigster Antrieb.
+
+Ich fühle und handle aus dem Verständnis heraus, dass der Zustand von Intimität die Basis einer weitreichenden und tiefgreifenden, inneren und äußeren Friedensarbeit ist. Ein holistischer Ansatz, der mich motiviert, geschützte Räume zu erschaffen, in denen Intimität und Heilungsprozesse möglich sind.
+
+Intimität hat für mich die Qualität von wahrhaftigem Berührtsein und ist damit der Nährboden von (Selbst-)Liebe. Der Weg führt von der Transparenz von Empfindungen über die Vertrauensbildung und Verbundenheit, hin zur Offenbarung.
+
+Mich zieht es in den Bann diese besondere Qualität ganz differenziert aus all´ihren spannenden Perspektiven wahrzunehmen- und mit ihr gezielt aus kognitiver, spiritueller, körperlicher und emotionaler Sicht, lernend zu spielen.
+
+Wenn sie dann wahrhaftig, nackt und getragen im Raum steht, durchfährt mich ein spezielles, ganzkörperliches Prickeln. Unmittelbar fließt die Hingabe zum Leben selbst, durch mich hindurch. Heute erkenne und genieße ich dieses Prickeln als spürbaren, tiefgreifenden Shift in meinem Nervensystem.
+In diesem Zustand von Nicht-Wissen und tiefer Verwundbarkeit, bin ich neu geboren.
+
+Mit zweifacher Mutterschaft, einem experimentierfreudigen Leben in Berlin und vielzähligen, praktischen Erfahrungen, Trainings zum Facilitator und Schulungen innerhalb der körperpositiven "(Trauma-)Healing-Szene”, bin ich aktuell geradewegs auf dem Weg zur zertifizierten Sexological Bodyworkerin am Institut für Somatisches Lernen, Sexualität und Körperarbeit (ISB Berlin).
+
+Ich vertiefe mein Wissen stetig und begrüße Neugierde und Perspektivenwechsel und erfreue mich an Potenzialentfaltung. Welch´ großes Wachstumspotenzial entfaltete sich als ich begann, mich als sexuelles Wesen zu erkennen, meine sexuellen) Bedürfnisse, Leidenschaften und Grenzen zu verstehen und mich im neuen Bewusstsein von Frau-sein zu leben. So ist es mir sehr wichtig diese wertvollen Methoden weiterzugeben, welche mich lehr(t)en, zu sehen und mich zu verstehen- und ja, die mich auch erkennen ließen, dass unsere größten Geschenke in unseren tiefsten Wunden liegen.
+Seit meiner Jugend begleiten mich passioniert- beruflich wie privat, Farben und Gestaltung. Ich hege zu Farb- und Applikationstechniken und Kreativmethoden eine langjährige Liebe. Als ich vor einem Jahr zu zeichnen begann, offenbarte sich mir die therapeutische Wirkung des künstlerischen Ausdrucks.
+
+In meinen Angeboten verzahnen sich meine vielseitigen Kenntnisse aus meiner Ausbildung zur Schauwerbegestalterin und aus meinem Kommunikationsstudium; zudem aus Führungspositionen in der Projektarbeit in der Kreativ- und Veranstaltungsbranche sowie aus der Arbeit als Projekt- und Workshopleiterin in der Umweltbildung an Berliner Schulen.
+
+Die Realisierung von meinem Herzensbusiness, nun mein Wissen und meine Erfahrungen auf diese besondere, synergetische und sinnliche Weise in die Welt zu geben, ist mir eine Ehre und eine große Freude.
+Heute stehe ich hier, kann MICH als entzückendes, weibliches Wesen spüren und richte diesen Herzensruf an die Welt:
+
+„Let‘s love loud & be part of the sensual revolution!“

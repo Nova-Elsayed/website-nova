@@ -1,7 +1,7 @@
 {
   "site": {
     "title": "Nova El Sayed",
-    "base_url": "https://astroplate.netlify.app",
+    "base_url": "https://novaelsayed.netlify.app",
     "base_path": "/",
     "trailing_slash": false,
     "favicon": "/images/favicon.png",
@@ -24,7 +24,7 @@
 
   "params": {
     "contact_form_action": "#",
-    "copyright": "Designed And Developed by [Zeon Studio](https://zeon.studio)"
+    "copyright": "Designed And Developed with ❤️ by [Peter Sekan](https://petersekan.de)"
   },
 
   "navigation_button": {
@@ -40,8 +40,8 @@
   },
 
   "metadata": {
-    "meta_author": "zeon.studio",
-    "meta_image": "/images/og-image.png",
-    "meta_description": "astro and tailwind boilerplate"
+    "meta_author": "Nova El Sayed",
+    "meta_image": "/images/Logo_Nova.png",
+    "meta_description": "Somatische Bildung & Sexologische Forschungsreise"
   }
 }

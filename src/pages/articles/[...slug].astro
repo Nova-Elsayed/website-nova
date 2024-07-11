@@ -4,6 +4,8 @@ import type { Article } from "../../lib/contentful";
 import ArticleLayout from "../../layouts/Article.astro";
 import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
 
+export const prerender = true;
+
 export async function getStaticPaths() {
   const entries = await contentfulClient.getEntries<Article>({
     content_type: "article",

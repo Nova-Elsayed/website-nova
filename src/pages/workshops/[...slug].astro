@@ -5,6 +5,8 @@ import WorkshopLayout from "../../layouts/WorkshopLayout.astro";
 import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
 import { slugify } from "@/lib/utils/textConverter";
 
+export const prerender = true;
+
 export async function getStaticPaths() {
   const entries = await contentfulClient.getEntries<Workshop>({
     content_type: "workshop",

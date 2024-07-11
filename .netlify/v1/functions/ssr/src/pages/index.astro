@@ -1,0 +1,153 @@
+---
+import Base from "@/layouts/Base.astro";
+import { contentfulClient } from "../lib/contentful";
+import type { LandingPage, Workshop } from "../lib/contentful";
+import WorkshopCard from "@/components/WorkshopCard.astro";
+import RichTextContainer from "@/components/RichTextContainer.astro";
+
+const landingPageData = await contentfulClient.getEntry<LandingPage>(
+  "1aRfABlgG4hmSE78soNUP3",
+);
+const landingPage = landingPageData.fields;
+
+const workshopEntries = await contentfulClient.getEntries<Workshop>({
+  content_type: "workshop",
+});
+const workshops = workshopEntries.items
+  .map((item) => {
+    return item.fields;
+  })
+  .sort((a, b) => {
+    // Turn your strings into dates, and then subtract them
+    // to get a value that is either negative, positive, or zero.
+    return Date.parse(b.dateStart) - Date.parse(a.dateStart);
+  });
+
+const upcomingWorkshops = workshops
+  .filter((item) => Date.parse(item.dateStart) >= Date.now())
+  .reverse();
+
+const recentWorkshops = workshops.filter(
+  (item) => Date.parse(item.dateStart) < Date.now(),
+);
+
+// console.log(workshops);
+---
+
+<Base>
+  <!-- HEADER -->
+  <section class="relative w-screen h-screen overflow-hidden">
+    {
+      landingPage.headerImage?.fields.file.url && (
+        <img
+          class="absolute top-0 z-0 object-cover w-full h-full start-0"
+          src={landingPage.headerImage.fields.file.url}
+          alt=""
+        />
+      )
+    }
+
+    <div class="absolute top-0 z-10 grid h-full grid-cols-2 gap-4 start-0">
+      <div class="flex flex-col justify-center col-end-3">
+        <div class="mb-8">
+          <h1
+            class="mb-2 text-3xl text-white drop-shadow-2xl"
+            set:html={landingPage.headerHeadline}
+          />
+          <h1
+            class="text-2xl text-red-500 drop-shadow-2xl"
+            set:html={landingPage.headerSubHeadline}
+          />
+        </div>
+        <div class="flex">
+          <a
+            class="block py-3 text-teal-400 transition-all border border-teal-400 rounded hover:scale-110 px-7 hover:border-teal-200 hover:text-teal-200 me-4"
+            href={landingPage.headerLink01URL}
+            set:html={landingPage.headerLink01Label}
+          />
+          <a
+            class="block py-3 text-teal-400 transition-all border border-teal-400 rounded hover:scale-110 px-7 hover:border-teal-200 hover:text-teal-200"
+            href={landingPage.headerLink02URL}
+            set:html={landingPage.headerLink02Label}
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- /HEADER -->
+  <!-- INTRO -->
+  <section class="w-screen py-16 text-center">
+    <h2 class="mb-2 text-2xl" set:html={landingPage.introHeadline} />
+    <h2 class="mb-8 text-xl" set:html={landingPage.introSubHeadline} />
+    <RichTextContainer class="text-left" content={landingPage.introText} />
+  </section>
+  <!-- / INTRO -->
+  <!-- WORKSHOPS -->
+  <section class="w-screen py-16 text-center">
+    <h2 class="mb-8 text-xl" set:html={landingPage.workshopsHeadline} />
+    <RichTextContainer class="text-left" content={landingPage.workshopsText} />
+
+    {
+      workshops && upcomingWorkshops && (
+        <section class="my-8">
+          <h2 class="mb-4 text-lg">Meine kommenden Workshops</h2>
+          <ul class="flex w-full px-8 my-8 justify-evenly">
+            {upcomingWorkshops.map((workshop) => (
+              <WorkshopCard data={workshop} />
+            ))}
+          </ul>
+        </section>
+      )
+    }
+    {
+      workshops && recentWorkshops && (
+        <section class="my-8 opacity-60">
+          <h2 class="mb-4 text-lg">Vergangene Workshops</h2>
+          <ul class="flex w-full px-8 my-8 justify-evenly">
+            {recentWorkshops.map((workshop) => (
+              <WorkshopCard data={workshop} />
+            ))}
+          </ul>
+        </section>
+      )
+    }
+  </section>
+
+  <!-- / WORKSHOPS -->
+  <!-- SUPPORT -->
+  <section class="w-screen py-16 text-center">
+    <h2 class="mb-8 text-xl" set:html={landingPage.supportHeadline} />
+    <div class="grid grid-cols-3 gap-4 mx-auto max-w-prose">
+      <div>
+        <a
+          class="block w-full py-3 mx-auto text-xl text-center text-teal-400 transition-all hover:scale-110 font-secondary hover:text-teal-200"
+          href={landingPage.supportLink01URL}
+          set:html={landingPage.supportLink01Label}
+        />
+        <div class="w-0 h-8 mx-auto my-0 border border-teal-400"></div>
+        <a
+          class="block w-full py-3 mx-auto text-xl text-center text-teal-400 transition-all hover:scale-110 font-secondary hover:text-teal-200"
+          href={landingPage.supportLink02URL}
+          set:html={landingPage.supportLink02Label}
+        />
+        <div class="w-0 h-8 mx-auto my-0 border border-teal-400"></div>
+        <a
+          class="block w-full py-3 mx-auto text-xl text-center text-teal-400 transition-all hover:scale-110 font-secondary hover:text-teal-200"
+          href={landingPage.supportLink03URL}
+          set:html={landingPage.supportLink03Label}
+        />
+        <div class="w-0 h-8 mx-auto my-0 border border-teal-400"></div>
+        <a
+          class="block w-full py-3 mx-auto text-xl text-center text-teal-400 transition-all hover:scale-110 font-secondary hover:text-teal-200"
+          href={landingPage.supportLink04URL}
+          set:html={landingPage.supportLink04Label}
+        />
+      </div>
+      <RichTextContainer
+        class="col-span-2 text-left"
+        content={landingPage.supportText}
+      />
+    </div>
+  </section>
+  <!-- / SUPPORT -->
+</Base>
