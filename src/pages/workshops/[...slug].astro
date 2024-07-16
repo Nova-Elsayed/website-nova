@@ -1,9 +1,10 @@
 ---
-import { contentfulClient } from "../../lib/contentful";
-import type { Workshop } from "../../lib/contentful";
-import WorkshopLayout from "../../layouts/WorkshopLayout.astro";
-import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
+import type { Workshop } from "@/lib/contentful";
+import { contentfulClient } from "@/lib/contentful";
 import { slugify } from "@/lib/utils/textConverter";
+import { simpleGermanDate } from "@/lib/utils/dateParser";
+import Base from "@/layouts/Base.astro";
+import RichTextContainer from "@/components/RichTextContainer.astro";
 
 export const prerender = true;
 
@@ -40,10 +41,21 @@ const {
   parentTitle,
   parentURL,
 } = Astro.props;
+
+const readableDate = simpleGermanDate(dateStart);
 ---
 
-<WorkshopLayout
-  description={description ? documentToHtmlString(description) : ""}
-  title={title}
-  slug={slug}
-/>
+<Base title={headline} meta_title={headline}>
+  <header class="w-screen py-16 mt-12 text-center">
+    <p
+      set:html="— Workshop —"
+      class="mb-8 tracking-wide text-md font-secondary"
+    />
+    <h1 set:html={headline} class="mb-4 text-2xl" />
+    <h2 set:html={parentTitle} class="mb-2 text-xl" />
+    <p set:html={readableDate} class="text-md" />
+  </header>
+  <section class="w-screen">
+    <RichTextContainer class="mb-16 text-left" content={description} />
+  </section>
+</Base>

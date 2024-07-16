@@ -1,14 +1,34 @@
 ---
 import Base from "@/layouts/Base.astro";
 import { contentfulClient } from "../lib/contentful";
-import type { LandingPage, Workshop } from "../lib/contentful";
+import type { LandingPage, Workshop, Article } from "../lib/contentful";
 import WorkshopCard from "@/components/WorkshopCard.astro";
+import ArticleCard from "@/components/ArticleCard.astro";
 import RichTextContainer from "@/components/RichTextContainer.astro";
 
 const landingPageData = await contentfulClient.getEntry<LandingPage>(
   "1aRfABlgG4hmSE78soNUP3",
 );
 const landingPage = landingPageData.fields;
+
+const articlesEntries = await contentfulClient.getEntries<Article>({
+  content_type: "article",
+});
+const featuredArticles = articlesEntries.items
+  .map((item) => {
+    console.log(item.fields);
+
+    const newItem = item.fields; // newItem
+    newItem.publishedAt = item.sys.updatedAt;
+
+    return newItem;
+  })
+  .sort((a, b) => {
+    // Turn your strings into dates, and then subtract them
+    // to get a value that is either negative, positive, or zero.
+    return Date.parse(b.publishedAt) - Date.parse(a.publishedAt);
+  })
+  .filter((item) => item.isFeatured);
 
 const workshopEntries = await contentfulClient.getEntries<Workshop>({
   content_type: "workshop",
@@ -30,8 +50,6 @@ const upcomingWorkshops = workshops
 const recentWorkshops = workshops.filter(
   (item) => Date.parse(item.dateStart) < Date.now(),
 );
-
-// console.log(workshops);
 ---
 
 <Base>
@@ -51,22 +69,22 @@ const recentWorkshops = workshops.filter(
       <div class="flex flex-col justify-center col-end-3">
         <div class="mb-8">
           <h1
-            class="mb-2 text-3xl text-white drop-shadow-2xl"
+            class="mb-2 text-3xl text-white text-shadow"
             set:html={landingPage.headerHeadline}
           />
           <h1
-            class="text-2xl text-red-500 drop-shadow-2xl"
+            class="text-2xl text-red-500 text-shadow"
             set:html={landingPage.headerSubHeadline}
           />
         </div>
         <div class="flex">
           <a
-            class="block py-3 text-teal-400 transition-all border border-teal-400 rounded hover:scale-110 px-7 hover:border-teal-200 hover:text-teal-200 me-4"
+            class="block py-3 text-teal-400 transition-all border border-teal-500 rounded text-shadow hover:scale-110 px-7 hover:border-teal-300 hover:text-teal-300 me-4"
             href={landingPage.headerLink01URL}
             set:html={landingPage.headerLink01Label}
           />
           <a
-            class="block py-3 text-teal-400 transition-all border border-teal-400 rounded hover:scale-110 px-7 hover:border-teal-200 hover:text-teal-200"
+            class="block py-3 text-teal-400 transition-all border border-teal-500 rounded text-shadow hover:scale-110 px-7 hover:border-teal-300 hover:text-teal-300"
             href={landingPage.headerLink02URL}
             set:html={landingPage.headerLink02Label}
           />
@@ -90,7 +108,10 @@ const recentWorkshops = workshops.filter(
     {
       workshops && upcomingWorkshops && (
         <section class="my-8">
-          <h2 class="mb-4 text-lg">Meine kommenden Workshops</h2>
+          <h2
+            set:html={landingPage.workshopsUpcomingHeadline}
+            class="mb-4 text-lg"
+          />
           <ul class="flex w-full px-8 my-8 justify-evenly">
             {upcomingWorkshops.map((workshop) => (
               <WorkshopCard data={workshop} />
@@ -102,7 +123,10 @@ const recentWorkshops = workshops.filter(
     {
       workshops && recentWorkshops && (
         <section class="my-8 opacity-60">
-          <h2 class="mb-4 text-lg">Vergangene Workshops</h2>
+          <h2
+            set:html={landingPage.workshopsRecentHeadline}
+            class="mb-4 text-lg"
+          />
           <ul class="flex w-full px-8 my-8 justify-evenly">
             {recentWorkshops.map((workshop) => (
               <WorkshopCard data={workshop} />
@@ -117,28 +141,32 @@ const recentWorkshops = workshops.filter(
   <!-- SUPPORT -->
   <section class="w-screen py-16 text-center">
     <h2 class="mb-8 text-xl" set:html={landingPage.supportHeadline} />
-    <div class="grid grid-cols-3 gap-4 mx-auto max-w-prose">
+    <div class="grid grid-cols-3 gap-4 mx-auto mb-4 max-w-prose">
+      <RichTextContainer
+        class="col-span-3 text-left"
+        content={landingPage.supportIntroText}
+      />
       <div>
         <a
-          class="block w-full py-3 mx-auto text-xl text-center text-teal-400 transition-all hover:scale-110 font-secondary hover:text-teal-200"
+          class="block w-full py-3 mx-auto text-xl text-center text-teal-400 transition-all hover:scale-110 font-secondary hover:text-teal-300"
           href={landingPage.supportLink01URL}
           set:html={landingPage.supportLink01Label}
         />
-        <div class="w-0 h-8 mx-auto my-0 border border-teal-400"></div>
+        <div class="w-0 h-8 mx-auto my-0 border border-gray-300"></div>
         <a
-          class="block w-full py-3 mx-auto text-xl text-center text-teal-400 transition-all hover:scale-110 font-secondary hover:text-teal-200"
+          class="block w-full py-3 mx-auto text-xl text-center text-teal-400 transition-all hover:scale-110 font-secondary hover:text-teal-300"
           href={landingPage.supportLink02URL}
           set:html={landingPage.supportLink02Label}
         />
-        <div class="w-0 h-8 mx-auto my-0 border border-teal-400"></div>
+        <div class="w-0 h-8 mx-auto my-0 border border-gray-300"></div>
         <a
-          class="block w-full py-3 mx-auto text-xl text-center text-teal-400 transition-all hover:scale-110 font-secondary hover:text-teal-200"
+          class="block w-full py-3 mx-auto text-xl text-center text-teal-400 transition-all hover:scale-110 font-secondary hover:text-teal-300"
           href={landingPage.supportLink03URL}
           set:html={landingPage.supportLink03Label}
         />
-        <div class="w-0 h-8 mx-auto my-0 border border-teal-400"></div>
+        <div class="w-0 h-8 mx-auto my-0 border border-gray-300"></div>
         <a
-          class="block w-full py-3 mx-auto text-xl text-center text-teal-400 transition-all hover:scale-110 font-secondary hover:text-teal-200"
+          class="block w-full py-3 mx-auto text-xl text-center text-teal-400 transition-all hover:scale-110 font-secondary hover:text-teal-300"
           href={landingPage.supportLink04URL}
           set:html={landingPage.supportLink04Label}
         />
@@ -150,4 +178,31 @@ const recentWorkshops = workshops.filter(
     </div>
   </section>
   <!-- / SUPPORT -->
+  <!-- ARTICLES -->
+  {
+    featuredArticles && (
+      <section class="w-screen py-16 text-center">
+        <h2 class="mb-8 text-xl" set:html={landingPage.articlesHeadline} />
+        <RichTextContainer
+          class="mb-16 text-left"
+          content={landingPage.articlesIntroText}
+        />
+
+        <ul class="my-8 article-list">
+          {featuredArticles.map((article) => (
+            <ArticleCard data={article} />
+          ))}
+        </ul>
+
+        <div class="w-full link-bar">
+          <a
+            class="inline-block py-3 text-teal-400 transition-all border border-teal-400 rounded hover:scale-110 px-7 hover:border-teal-300 hover:text-teal-300"
+            href={landingPage.articlesLinkURL}
+            set:html={landingPage.articlesLinkLabel}
+          />
+        </div>
+      </section>
+    )
+  }
+  <!-- / ARTICLES -->
 </Base>

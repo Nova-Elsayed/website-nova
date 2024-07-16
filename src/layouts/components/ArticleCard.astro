@@ -1,0 +1,25 @@
+---
+import { simpleGermanDate } from "@/lib/utils/dateParser";
+
+const { title, slug, description, publishedAt } = Astro.props.data;
+
+const readableDate = simpleGermanDate(publishedAt);
+---
+
+<li>
+  <a
+    class="block transition-all group hover:scale-110"
+    href={`/articles/${slug}/`}
+  >
+    <h3
+      set:html={title}
+      class="text-xl text-red-500 group-hover:text-red-300"
+    />
+    {
+      description && (
+        <blockquote class="mb-8 text-left" set:html={description} />
+      )
+    }
+    {readableDate && <p set:html={readableDate} />}
+  </a>
+</li>

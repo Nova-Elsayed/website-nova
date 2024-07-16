@@ -1,6 +1,6 @@
 ---
-import { contentfulClient } from "@/lib/contentful";
 import type { Page } from "@/lib/contentful";
+import { contentfulClient } from "@/lib/contentful";
 import Base from "@/layouts/Base.astro";
 import RichTextContainer from "@/components/RichTextContainer.astro";
 
@@ -28,11 +28,18 @@ const { title, format, slug, image, description, content } = Astro.props;
 ---
 
 <Base title={title} meta_title={title}>
-  <section class="pt-10 section">
-    <div>
-      {image && <img src={image.fields.file.url} alt="" />}
-      <h1 set:html={title} class="mb-1 lg:text-4xl" />
-      <RichTextContainer content={content} />
-    </div>
+  <header class="w-screen py-16 mt-12 text-center">
+    <h1 set:html={title} class="mb-8 text-2xl" />
+    {
+      description && (
+        <blockquote
+          class="mx-auto mb-8 text-lg italic leading-relaxed tracking-wide md:w-2/3"
+          set:html={description}
+        />
+      )
+    }
+  </header>
+  <section class="w-screen">
+    <RichTextContainer class="mb-16 text-left" content={content} />
   </section>
 </Base>

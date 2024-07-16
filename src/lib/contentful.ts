@@ -16,10 +16,11 @@ export interface Article {
   fields: {
     title: EntryFieldTypes.Text;
     slug: EntryFieldTypes.Text;
-    featured: EntryFieldTypes.Boolean;
+    isFeatured: EntryFieldTypes.Boolean;
     image?: EntryFieldTypes.Object;
     description: EntryFieldTypes.Text;
     content: EntryFieldTypes.RichText;
+    publishedAt: EntryFieldTypes.Date;
   };
 }
 
@@ -55,7 +56,10 @@ export interface LandingPage {
     introText: EntryFieldTypes.RichText;
     workshopsHeadline: EntryFieldTypes.Text;
     workshopsText: EntryFieldTypes.RichText;
+    workshopsUpcomingHeadline: EntryFieldTypes.Text;
+    workshopsRecentHeadline: EntryFieldTypes.Text;
     supportHeadline: EntryFieldTypes.Text;
+    supportIntroText: EntryFieldTypes.RichText;
     supportText: EntryFieldTypes.RichText;
     supportLink01Label: EntryFieldTypes.Text;
     supportLink01URL: EntryFieldTypes.Text;
@@ -65,6 +69,10 @@ export interface LandingPage {
     supportLink03URL: EntryFieldTypes.Text;
     supportLink04Label: EntryFieldTypes.Text;
     supportLink04URL: EntryFieldTypes.Text;
+    articlesHeadline: EntryFieldTypes.Text;
+    articlesIntroText: EntryFieldTypes.RichText;
+    articlesLinkLabel: EntryFieldTypes.Text;
+    articlesLinkURL: EntryFieldTypes.Text;
   };
 }
 

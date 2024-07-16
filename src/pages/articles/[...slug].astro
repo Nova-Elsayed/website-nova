@@ -1,8 +1,8 @@
 ---
-import { contentfulClient } from "../../lib/contentful";
-import type { Article } from "../../lib/contentful";
-import ArticleLayout from "../../layouts/ArticleLayout.astro";
-import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
+import type { Article } from "@/lib/contentful";
+import { contentfulClient } from "@/lib/contentful";
+import Base from "@/layouts/Base.astro";
+import RichTextContainer from "@/components/RichTextContainer.astro";
 
 export const prerender = true;
 
@@ -11,19 +11,44 @@ export async function getStaticPaths() {
     content_type: "article",
   });
 
-  const pages = entries.items.map((item) => ({
+  const articles = entries.items.map((item) => ({
     params: { slug: item.fields.slug },
     props: {
       title: item.fields.title,
       slug: item.fields.slug,
+      isFeatured: item.fields.isFeatured,
       image: item.fields.image,
-      content: documentToHtmlString(item.fields.content),
+      description: item.fields.description,
+      content: item.fields.content,
+      publishedAt: item.sys.updatedAt,
     },
   }));
-  return pages;
+
+  console.log(articles);
+  return articles;
 }
 
-const { content, title, slug, image } = Astro.props;
+const { title, slug, isFeatured, image, description, content, publishedAt } =
+  Astro.props;
 ---
 
-<ArticleLayout content={content} title={title} slug={slug} image={image} />
+<Base title={title} meta_title={title}>
+  <header class="w-screen py-16 mt-12 text-center">
+    <p
+      set:html={`— ${isFeatured ? "Lesenswerter " : ""}Artikel —`}
+      class="mb-8 tracking-wide text-md font-secondary"
+    />
+    <h1 set:html={title} class="mb-8 text-2xl" />
+    {
+      description && (
+        <blockquote
+          class="mx-auto mb-8 text-lg italic leading-relaxed tracking-wide md:w-2/3"
+          set:html={description}
+        />
+      )
+    }
+  </header>
+  <section class="w-screen">
+    <RichTextContainer class="mb-16 text-left" content={content} />
+  </section>
+</Base>
