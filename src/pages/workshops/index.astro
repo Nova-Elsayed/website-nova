@@ -1,0 +1,54 @@
+---
+import Base from "@/layouts/Base.astro";
+import { contentfulClient } from "@/lib/contentful";
+import type { Page, Workshop } from "@/lib/contentful";
+import WorkshopCard from "@/components/WorkshopCard.astro";
+import RichTextContainer from "@/components/RichTextContainer.astro";
+
+export const prerender = true;
+
+const pageData = await contentfulClient.getEntry<Page>(
+  "2BOI94KBfNnnUXkZCIq9rN",
+);
+const page = pageData.fields;
+
+const workshopEntries = await contentfulClient.getEntries<Workshop>({
+  content_type: "workshop",
+});
+
+const workshops = workshopEntries.items
+  .map((item) => {
+    return item.fields;
+  })
+  .sort((a, b) => {
+    // Turn your strings into dates, and then subtract them
+    // to get a value that is either negative, positive, or zero.
+    return Date.parse(b.dateStart) - Date.parse(a.dateStart);
+  });
+---
+
+<Base title={page.title} meta_title={page.title}>
+  <header class="w-screen py-16 mt-12 text-center">
+    <p
+      set:html="— Workshops —"
+      class="mb-8 tracking-wide text-md font-secondary"
+    />
+    <h1 set:html={page.title} class="mb-8 text-2xl" />
+    {
+      page.description && (
+        <blockquote
+          class="mx-auto mb-8 text-lg italic leading-relaxed tracking-wide md:w-2/3"
+          set:html={page.description}
+        />
+      )
+    }
+  </header>
+  <section class="w-screen mb-16">
+    <RichTextContainer class="" content={page.content} />
+  </section>
+  <section class="w-screen mb-16">
+    <ul class="flex w-full px-8 my-8 justify-evenly">
+      {workshops.map((workshop) => <WorkshopCard data={workshop} />)}
+    </ul>
+  </section></Base
+>

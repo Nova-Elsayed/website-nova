@@ -4,7 +4,6 @@ export interface Page {
   contentTypeId: "pages";
   fields: {
     title: EntryFieldTypes.Text;
-    format: EntryFieldTypes.Text;
     slug: EntryFieldTypes.Text;
     image?: EntryFieldTypes.Object;
     description?: EntryFieldTypes.Text;

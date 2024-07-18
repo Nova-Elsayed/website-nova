@@ -1,10 +1,12 @@
 ---
 import Base from "@/layouts/Base.astro";
-import { contentfulClient } from "../lib/contentful";
-import type { LandingPage, Workshop, Article } from "../lib/contentful";
+import { contentfulClient } from "@/lib/contentful";
+import type { LandingPage, Workshop, Article } from "@/lib/contentful";
 import WorkshopCard from "@/components/WorkshopCard.astro";
 import ArticleCard from "@/components/ArticleCard.astro";
 import RichTextContainer from "@/components/RichTextContainer.astro";
+
+export const prerender = true;
 
 const landingPageData = await contentfulClient.getEntry<LandingPage>(
   "1aRfABlgG4hmSE78soNUP3",
@@ -52,7 +54,10 @@ const recentWorkshops = workshops.filter(
 );
 ---
 
-<Base>
+<Base
+  title={landingPage.headerHeadline}
+  meta_title={landingPage.headerHeadline}
+>
   <!-- HEADER -->
   <section class="relative w-screen h-screen overflow-hidden">
     {
