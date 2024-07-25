@@ -1,0 +1,10 @@
+---
+import type { Article } from "@/lib/contentful";
+import ArticleCard from "./ArticleCard.astro";
+
+const articles = Astro.props.articles;
+---
+
+<ul class="my-8 article-list">
+  {articles.map((article: Article) => <ArticleCard data={article} />)}
+</ul>

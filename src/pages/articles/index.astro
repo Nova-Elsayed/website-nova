@@ -2,7 +2,7 @@
 import Base from "@/layouts/Base.astro";
 import { contentfulClient } from "@/lib/contentful";
 import type { Page, Article } from "@/lib/contentful";
-import ArticleCard from "@/components/ArticleCard.astro";
+import ArticlesList from "@/partials/ArticlesList/index.astro";
 import RichTextContainer from "@/components/RichTextContainer.astro";
 
 export const prerender = true;
@@ -50,8 +50,6 @@ const articles = articlesEntries.items
   </section>
 
   <section class="w-screen mb-16">
-    <ul class="my-8 article-list">
-      {articles.map((article) => <ArticleCard data={article} />)}
-    </ul>
+    <ArticlesList articles={articles} />
   </section>
 </Base>

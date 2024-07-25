@@ -1,0 +1,9 @@
+---
+import type { Workshop } from "@/lib/contentful";
+import WorkshopCard from "./WorkshopCard.astro";
+const workshops = Astro.props.workshops;
+---
+
+<ul class="flex w-full px-8 my-8 justify-evenly">
+  {workshops.map((workshop: Workshop) => <WorkshopCard data={workshop} />)}
+</ul>

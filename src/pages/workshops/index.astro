@@ -2,7 +2,9 @@
 import Base from "@/layouts/Base.astro";
 import { contentfulClient } from "@/lib/contentful";
 import type { Page, Workshop } from "@/lib/contentful";
-import WorkshopCard from "@/components/WorkshopCard.astro";
+
+import WorkshopsList from "@/partials/WorkshopsList/index.astro";
+import ArticlesList from "@/partials/ArticlesList/index.astro";
 import RichTextContainer from "@/components/RichTextContainer.astro";
 
 export const prerender = true;
@@ -46,9 +48,8 @@ const workshops = workshopEntries.items
   <section class="w-screen mb-16">
     <RichTextContainer class="" content={page.content} />
   </section>
+
   <section class="w-screen mb-16">
-    <ul class="flex w-full px-8 my-8 justify-evenly">
-      {workshops.map((workshop) => <WorkshopCard data={workshop} />)}
-    </ul>
-  </section></Base
->
+    <WorkshopsList workshops={workshops} />
+  </section>
+</Base>

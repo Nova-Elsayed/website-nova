@@ -9,55 +9,25 @@
       "url": "/about"
     },
     {
-      "name": "Elements",
-      "url": "/elements"
+      "name": "Artikel",
+      "url": "/articles"
     },
     {
-      "name": "Inhalte",
-      "url": "",
-      "hasChildren": true,
-      "children": [
-        {
-          "name": "Typografie",
-          "url": "/typografie"
-        },
-        {
-          "name": "Traumorientierte Haltung",
-          "url": "/articles/traumorientierte-haltung"
-        },
-        {
-          "name": "Was ist Sexological Bodywork?",
-          "url": "/articles/was-ist-sexological-bodywork"
-        },
-        {
-          "name": "Was ist eine somatische Herangehensweise?",
-          "url": "/articles/was-ist-eine-somatische-herangehensweise"
-        },
-        {
-          "name": "Was versteht man unter Kunst- und Gestaltungstherapie?",
-          "url": "/articles/kunst-und-gestaltungstherapie"
-        },
-        {
-          "name": "Veranstaltungsorganisation",
-          "url": "/veranstaltungsorganisation"
-        },
-        {
-          "name": "Workshop Sexpress Yourself",
-          "url": "/workshops/sexpress-yourself"
-        },
-        {
-          "name": "Workshop Presence Is Sexy",
-          "url": "/workshops/presence-is-sexy"
-        },
-        {
-          "name": "Bodyworkshop On Demand",
-          "url": "/workshops/bodyworkshop-custom"
-        },
-        {
-          "name": "404 Page",
-          "url": "/404"
-        }
-      ]
+      "name": "Workshops",
+      "url": "/workshops"
+    },
+    {
+      "name": "Support für Veranstaltungen",
+      "url": "/veranstaltungssupport"
+    },
+
+    {
+      "name": "Typografie",
+      "url": "/typografie"
+    },
+    {
+      "name": "404 Page",
+      "url": "/404"
     }
   ],
   "footer": [

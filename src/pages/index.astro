@@ -2,8 +2,8 @@
 import Base from "@/layouts/Base.astro";
 import { contentfulClient } from "@/lib/contentful";
 import type { LandingPage, Workshop, Article } from "@/lib/contentful";
-import WorkshopCard from "@/components/WorkshopCard.astro";
-import ArticleCard from "@/components/ArticleCard.astro";
+import WorkshopsList from "@/partials/WorkshopsList/index.astro";
+import ArticlesList from "@/partials/ArticlesList/index.astro";
 import RichTextContainer from "@/components/RichTextContainer.astro";
 
 export const prerender = true;
@@ -117,11 +117,7 @@ const recentWorkshops = workshops.filter(
             set:html={landingPage.workshopsUpcomingHeadline}
             class="mb-4 text-lg"
           />
-          <ul class="flex w-full px-8 my-8 justify-evenly">
-            {upcomingWorkshops.map((workshop) => (
-              <WorkshopCard data={workshop} />
-            ))}
-          </ul>
+          <WorkshopsList workshops={upcomingWorkshops} />
         </section>
       )
     }
@@ -132,11 +128,7 @@ const recentWorkshops = workshops.filter(
             set:html={landingPage.workshopsRecentHeadline}
             class="mb-4 text-lg"
           />
-          <ul class="flex w-full px-8 my-8 justify-evenly">
-            {recentWorkshops.map((workshop) => (
-              <WorkshopCard data={workshop} />
-            ))}
-          </ul>
+          <WorkshopsList workshops={recentWorkshops} />
         </section>
       )
     }
@@ -193,11 +185,7 @@ const recentWorkshops = workshops.filter(
           content={landingPage.articlesIntroText}
         />
 
-        <ul class="my-8 article-list">
-          {featuredArticles.map((article) => (
-            <ArticleCard data={article} />
-          ))}
-        </ul>
+        <ArticlesList articles={featuredArticles} />
 
         <div class="w-full link-bar">
           <a
