@@ -5,28 +5,12 @@ import { slugify } from "@/lib/utils/textConverter";
 import { simpleGermanDate } from "@/lib/utils/dateParser";
 import Base from "@/layouts/Base.astro";
 import RichTextContainer from "@/components/RichTextContainer.astro";
+import { getWorkshops } from "@/lib/API";
 
 export const prerender = true;
 
 export async function getStaticPaths() {
-  const entries = await contentfulClient.getEntries<Workshop>({
-    content_type: "workshop",
-  });
-
-  const pages = entries.items.map((item) => ({
-    params: { slug: slugify(item.fields.title) },
-    props: {
-      slug: slugify(item.fields.title),
-      title: item.fields.title,
-      headline: item.fields.headline,
-      description: item.fields.description,
-      location: item.fields.location,
-      dateStart: item.fields.dateStart,
-      dateEnd: item.fields.dateEnd,
-      parentTitle: item.fields.parentTitle,
-      parentURL: item.fields.parentURL,
-    },
-  }));
+  const pages = await getWorkshops();
   return pages;
 }
 

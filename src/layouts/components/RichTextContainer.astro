@@ -8,6 +8,8 @@ interface Props {
   class?: string;
 }
 
+const { content, class: classList } = Astro.props;
+
 const options = {
   renderNode: {
     [BLOCKS.HEADING_1]: (node, next) => {
@@ -34,10 +36,10 @@ const options = {
   },
 };
 
-const renderedHTML = documentToHtmlString(Astro.props.content, options);
+const renderedHTML = documentToHtmlString(content, options);
 ---
 
-<article
+<div
   set:html={renderedHTML}
-  class={`mx-auto prose rich-text-container ${Astro.props.class || ""}`}
+  class={`mx-auto prose rich-text-container ${classList || ""}`}
 />

@@ -1,7 +1,7 @@
 ---
 import { simpleGermanDate } from "@/lib/utils/dateParser";
 
-const { title, slug, description, publishedAt } = Astro.props.data;
+const { title, slug, description, publishedAt } = Astro.props.data.props;
 
 const readableDate = simpleGermanDate(publishedAt);
 ---

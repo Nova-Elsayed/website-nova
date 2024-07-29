@@ -1,32 +1,20 @@
 ---
+import { getSinglePage, getArticles } from "@/lib/API";
 import Base from "@/layouts/Base.astro";
-import { contentfulClient } from "@/lib/contentful";
-import type { Page, Article } from "@/lib/contentful";
 import ArticlesList from "@/partials/ArticlesList/index.astro";
 import RichTextContainer from "@/components/RichTextContainer.astro";
 
 export const prerender = true;
 
-const pageData = await contentfulClient.getEntry<Page>(
-  "5yi8iu0vA6h6axYuSJoXHg",
-);
-const page = pageData.fields;
+const page = await getSinglePage("5yi8iu0vA6h6axYuSJoXHg");
 
-const articlesEntries = await contentfulClient.getEntries<Article>({
-  content_type: "article",
+const articles = await getArticles();
+
+articles.sort((a, b) => {
+  // Turn your strings into dates, and then subtract them
+  // to get a value that is either negative, positive, or zero.
+  return Date.parse(b.publishedAt) - Date.parse(a.publishedAt);
 });
-const articles = articlesEntries.items
-  .map((item) => {
-    const newItem = item.fields; // newItem
-    newItem.publishedAt = item.sys.updatedAt;
-
-    return newItem;
-  })
-  .sort((a, b) => {
-    // Turn your strings into dates, and then subtract them
-    // to get a value that is either negative, positive, or zero.
-    return Date.parse(b.publishedAt) - Date.parse(a.publishedAt);
-  });
 ---
 
 <Base title={page.title} meta_title={page.title}>

@@ -1,32 +1,21 @@
 ---
 import Base from "@/layouts/Base.astro";
-import { contentfulClient } from "@/lib/contentful";
-import type { Page, Workshop } from "@/lib/contentful";
+import { getSinglePage, getWorkshops } from "@/lib/API";
 
 import WorkshopsList from "@/partials/WorkshopsList/index.astro";
-import ArticlesList from "@/partials/ArticlesList/index.astro";
 import RichTextContainer from "@/components/RichTextContainer.astro";
 
 export const prerender = true;
 
-const pageData = await contentfulClient.getEntry<Page>(
-  "2BOI94KBfNnnUXkZCIq9rN",
-);
-const page = pageData.fields;
+const page = await getSinglePage("2BOI94KBfNnnUXkZCIq9rN");
 
-const workshopEntries = await contentfulClient.getEntries<Workshop>({
-  content_type: "workshop",
+const workshops = await getWorkshops();
+
+workshops.sort((a, b) => {
+  // Turn your strings into dates, and then subtract them
+  // to get a value that is either negative, positive, or zero.
+  return Date.parse(b.props.dateStart) - Date.parse(a.props.dateStart);
 });
-
-const workshops = workshopEntries.items
-  .map((item) => {
-    return item.fields;
-  })
-  .sort((a, b) => {
-    // Turn your strings into dates, and then subtract them
-    // to get a value that is either negative, positive, or zero.
-    return Date.parse(b.dateStart) - Date.parse(a.dateStart);
-  });
 ---
 
 <Base title={page.title} meta_title={page.title}>
