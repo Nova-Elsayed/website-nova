@@ -1,6 +1,11 @@
 ---
 import Base from "@/layouts/Base.astro";
-import { getLandingPage, getWorkshops, getArticles } from "@/lib/API";
+import {
+  getLandingPage,
+  getWorkshops,
+  getArticles,
+  getWorkshopsTicketTailor,
+} from "@/lib/API";
 import WorkshopsList from "@/partials/WorkshopsList/index.astro";
 import ArticlesList from "@/partials/ArticlesList/index.astro";
 import RichTextContainer from "@/components/RichTextContainer.astro";
@@ -10,6 +15,8 @@ export const prerender = true;
 const page = await getLandingPage();
 
 const articles = await getArticles();
+
+// const ticketTailor = await getWorkshopsTicketTailor();
 
 const featuredArticles = articles
   .sort((a, b) => {
@@ -43,7 +50,7 @@ const recentWorkshops = workshops.filter(
     {
       page.headerImage?.fields.file.url && (
         <img
-          class="absolute top-0 z-0 object-cover w-full h-full start-0"
+          class="absolute top-0 z-0 object-cover w-auto h-full start-0"
           src={page.headerImage.fields.file.url}
           alt=""
         />
@@ -54,22 +61,19 @@ const recentWorkshops = workshops.filter(
       <div class="flex flex-col justify-center col-end-3">
         <div class="mb-8">
           <h1
-            class="mb-2 text-3xl text-white text-shadow"
+            class="mb-2 text-4xl text-stone-600"
             set:html={page.headerHeadline}
           />
-          <h1
-            class="text-2xl text-red-500 text-shadow"
-            set:html={page.headerSubHeadline}
-          />
+          <h1 class="text-2xl text-red-400" set:html={page.headerSubHeadline} />
         </div>
         <div class="flex">
           <a
-            class="block py-3 text-teal-400 transition-all border border-teal-500 rounded text-shadow hover:scale-110 px-7 hover:border-teal-300 hover:text-teal-300 me-4"
+            class="block py-3 transition-all border rounded text-stone-600 border-stone-800 hover:scale-110 px-7 hover:border-stone-500 hover:text-stone-500 me-4"
             href={page.headerLink01URL}
             set:html={page.headerLink01Label}
           />
           <a
-            class="block py-3 text-teal-400 transition-all border border-teal-500 rounded text-shadow hover:scale-110 px-7 hover:border-teal-300 hover:text-teal-300"
+            class="block py-3 transition-all border rounded text-stone-600 border-stone-800 hover:scale-110 px-7 hover:border-stone-500 hover:text-stone-500"
             href={page.headerLink02URL}
             set:html={page.headerLink02Label}
           />

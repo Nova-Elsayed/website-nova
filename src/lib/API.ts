@@ -3,6 +3,7 @@ import type { Page, Article, Workshop, LandingPage } from "@/lib/contentful";
 import { slugify } from "@/lib/utils/textConverter";
 import { locationToAddress } from "@/lib/utils/locationParser";
 import { simpleGermanDate } from "@/lib/utils/dateParser";
+import axios from "axios";
 
 export const getSinglePage = async (id: string) => {
   const page = await contentfulClient.getEntry<Page>(id);
@@ -54,6 +55,25 @@ export const getWorkshops = async () => {
   });
 
   return workshops;
+};
+
+export const getWorkshopsTicketTailor = async () => {
+  const baseURL = "https://api.tickettailor.com/v1/";
+  const apiKey = import.meta.env.TICKETTAILOR_API_KEY;
+  const headers = {
+    Authorization: `Bearer ${apiKey}`,
+    "Content-Type": "application/json",
+  };
+
+  try {
+    const response = await axios.get(`${baseURL}events`, {
+      headers: headers,
+    });
+
+    console.log(response.data);
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const getLandingPage = async () => {
