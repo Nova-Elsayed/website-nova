@@ -1,5 +1,6 @@
 ---
 import { simpleGermanDate } from "@/lib/utils/dateParser";
+import RichTextContainer from "@/components/RichTextContainer.astro";
 
 const { title, slug, description, publishedAt } = Astro.props.data.props;
 
@@ -17,7 +18,9 @@ const readableDate = simpleGermanDate(publishedAt);
     />
     {
       description && (
-        <blockquote class="mb-8 text-left" set:html={description} />
+        <div class="mx-auto prose rich-text-container">
+          <blockquote class="mb-8 text-left" set:html={description} />
+        </div>
       )
     }
     {readableDate && <p set:html={readableDate} />}
