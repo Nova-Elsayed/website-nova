@@ -7,8 +7,6 @@ export const prerender = true;
 
 export async function getStaticPaths() {
   const articles = await getArticles();
-
-  console.log(articles);
   return articles;
 }
 
