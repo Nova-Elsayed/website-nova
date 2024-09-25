@@ -10,6 +10,7 @@ import WorkshopsList from "@/partials/WorkshopsList/index.astro";
 import ArticlesList from "@/partials/ArticlesList/index.astro";
 import RichTextContainer from "@/components/RichTextContainer.astro";
 import SectionHeader from "@/partials/SectionHeader.astro";
+import Button from "@/components/Button.astro";
 
 export const prerender = true;
 
@@ -71,16 +72,12 @@ const recentWorkshops = workshops.filter(
           />
         </div>
         <div class="flex">
-          <a
-            class="block py-3 transition-all border rounded text-stone-600 border-stone-800 hover:scale-110 px-7 hover:border-stone-500 hover:text-stone-500 me-4"
+          <Button
+            className="me-4"
+            label={page.headerLink01Label}
             href={page.headerLink01URL}
-            set:html={page.headerLink01Label}
           />
-          <a
-            class="block py-3 transition-all border rounded text-stone-600 border-stone-800 hover:scale-110 px-7 hover:border-stone-500 hover:text-stone-500"
-            href={page.headerLink02URL}
-            set:html={page.headerLink02Label}
-          />
+          <Button label={page.headerLink02Label} href={page.headerLink02URL} />
         </div>
       </div>
     </div>
@@ -172,11 +169,7 @@ const recentWorkshops = workshops.filter(
         <ArticlesList articles={featuredArticles} />
 
         <div class="w-full link-bar">
-          <a
-            class="inline-block py-3 transition-all border rounded text-stone-600 border-stone-800 hover:scale-110 px-7 hover:border-stone-500 hover:text-stone-500"
-            href={page.articlesLinkURL}
-            set:html={page.articlesLinkLabel}
-          />
+          <Button label={page.articlesLinkLabel} link={page.articlesLinkURL} />
         </div>
       </section>
     )
