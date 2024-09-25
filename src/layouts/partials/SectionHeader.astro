@@ -1,0 +1,8 @@
+---
+const { title, subtitle } = Astro.props;
+---
+
+<>
+  <h2 class="mb-2 text-3xl" set:html={title} />
+  {subtitle && <h2 class="mb-8 text-2xl" set:html={subtitle} />}
+</>

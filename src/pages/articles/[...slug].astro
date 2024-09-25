@@ -22,11 +22,11 @@ const { title, slug, isFeatured, image, description, content, publishedAt } =
       set:html={`— ${isFeatured ? "Lesenswerter " : ""}Artikel —`}
       class="mb-8 tracking-wide text-md font-secondary"
     />
-    <h1 set:html={title} class="mb-8 text-2xl" />
+    <h1 set:html={title} class="mb-8 text-3xl font-bold" />
     {
       description && (
         <blockquote
-          class="mx-auto mb-8 text-lg italic leading-relaxed tracking-wide md:w-2/3"
+          class="mx-auto mb-8 text-lg italic leading-relaxed tracking-wide md:w-2/3 font-secondary"
           set:html={description}
         />
       )
