@@ -21,7 +21,10 @@ const readableDate = simpleGermanDate(publishedAt);
       description && (
         <div class="mx-auto prose rich-text-container">
           <blockquote class="text-left" set:html={description} />
-          <p class="text-center text-small text-stone-500">— &#10086; —</p>
+          <p class="text-sm italic text-center transition-opacity opacity-0 text-stone-500 group-hover:opacity-100">
+            weiterlesen…
+          </p>
+          <p class="text-sm text-center text-stone-500">— &#10086; —</p>
         </div>
       )
     }

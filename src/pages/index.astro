@@ -168,8 +168,12 @@ const recentWorkshops = workshops.filter(
 
         <ArticlesList articles={featuredArticles} />
 
-        <div class="w-full link-bar">
-          <Button label={page.articlesLinkLabel} link={page.articlesLinkURL} />
+        <div class="flex w-full link-bar">
+          <Button
+            label={page.articlesLinkLabel}
+            link={page.articlesLinkURL}
+            className="mx-auto"
+          />
         </div>
       </section>
     )
