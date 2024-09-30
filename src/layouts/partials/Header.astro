@@ -3,117 +3,86 @@ import Logo from "@/components/Logo.astro";
 import config from "@/config/config.json";
 import menu from "@/config/menu.json";
 
-export interface ChildNavigationLink {
-  name: string;
-  url: string;
-}
-
 export interface NavigationLink {
   name: string;
   url: string;
-  hasChildren?: boolean;
-  children?: ChildNavigationLink[];
 }
 
 const { main }: { main: NavigationLink[] } = menu;
-const { navigation_button, settings } = config;
+
+const navLinkClassList =
+  "text-stone-100 bg-stone-600 hover:bg-red-400 hover:text-stone-100 italic font-normal hover:scale-110 hover:z-10";
+const activeNavLinkClassList = "active font-bold text-red-400 ";
 const { pathname } = Astro.url;
+
+let scrollUp = true;
+let lastScroll = 0;
 ---
 
-<header class={`header z-30 ${settings.sticky_header && "fixed top-0"}`}>
-  <nav class="container navbar">
-    <!-- logo -->
-    <div class="order-0">
-      <Logo />
-    </div>
-    <!-- navbar toggler -->
-    <input id="nav-toggle" type="checkbox" class="hidden" />
-    <label
-      for="nav-toggle"
-      class="flex items-center order-3 cursor-pointer lg:hidden lg:order-1"
+<>
+  <ne-header
+    data-scrollUp={scrollUp}
+    data-lastScroll={lastScroll}
+    class="fixed top-0 z-50 transition-all duration-300"
+  >
+    <nav
+      class="flex items-center w-screen px-16 py-2 bg-stone-600 font-secondary"
     >
-      <svg id="show-button" class="block h-6 fill-current" viewBox="0 0 20 20">
-        <title>Menu Open</title>
-        <path d="M0 3h20v2H0V3z m0 6h20v2H0V9z m0 6h20v2H0V0z"></path>
-      </svg>
-      <svg id="hide-button" class="hidden h-6 fill-current" viewBox="0 0 20 20">
-        <title>Menu Close</title>
-        <polygon
-          points="11 9 22 9 22 11 11 11 11 22 9 22 9 11 -2 11 -2 9 9 9 9 -2 11 -2"
-          transform="rotate(45 10 10)"></polygon>
-      </svg>
-    </label>
-    <!-- /navbar toggler -->
-    <ul
-      id="nav-menu "
-      class="order-3 hidden w-full pb-6 navbar-nav lg:order-1 lg:flex lg:w-auto lg:space-x-2 lg:pb-0 xl:space-x-8"
-    >
-      {
-        main.map((menu) => (
-          <>
-            {menu.hasChildren ? (
-              <li class="relative nav-item nav-dropdown group ">
-                <span
-                  class={`nav-link inline-flex items-center ${
-                    menu.children?.map(({ url }) => url).includes(pathname) ||
-                    menu.children
-                      ?.map(({ url }) => `${url}/`)
-                      .includes(pathname)
-                      ? "active"
-                      : ""
-                  }`}
-                >
-                  {menu.name}
-                  <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20">
-                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                  </svg>
-                </span>
-                <ul class="hidden nav-dropdown-list group-hover:block lg:invisible lg:absolute lg:block lg:opacity-0 lg:group-hover:visible lg:group-hover:opacity-100">
-                  {menu.children?.map((child) => (
-                    <li class="nav-dropdown-item">
-                      <a
-                        href={child.url}
-                        aria-label={child.name}
-                        class={`nav-dropdown-link block ${
-                          (pathname === `${child.url}/` ||
-                            pathname === child.url) &&
-                          "active"
-                        }`}
-                      >
-                        {child.name}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </li>
-            ) : (
-              <li class="nav-item">
+      <!-- logo -->
+      <div class="order-0 me-8">
+        <Logo />
+      </div>
+
+      <ul id="nav-menu " class="flex order-1 h-full">
+        {
+          main.map((navLink) => (
+            <>
+              <li class="">
                 <a
-                  href={menu.url}
-                  class={`nav-link block ${
-                    (pathname === `${menu.url}/` || pathname === menu.url) &&
-                    "active"
+                  href={navLink.url}
+                  class={`nav-link rounded block me-2  px-6 py-2 transition-all ${
+                    pathname === `${navLink.url}/` || pathname === navLink.url
+                      ? activeNavLinkClassList
+                      : navLinkClassList
                   }`}
                 >
-                  {menu.name}
+                  {navLink.name}
                 </a>
               </li>
-            )}
-          </>
-        ))
+            </>
+          ))
+        }
+      </ul>
+    </nav>
+  </ne-header>
+
+  <script>
+    class Header extends HTMLElement {
+      connectedCallback() {
+        let lastScroll = this.dataset.lastScroll;
+        let scrollUp = this.dataset.scrollUp;
+
+        window.addEventListener("scroll", () => {
+          if (lastScroll < window.scrollY) {
+            console.log("scrolling down");
+            scrollUp = false;
+
+            this.classList.add("-top-8", "opacity-0");
+            this.classList.remove("top-0", "opacity-100");
+          } else {
+            console.log("scrolling up");
+            scrollUp = true;
+            this.classList.add("top-0", "opacity-100");
+            this.classList.remove("-top-8", "opacity-0");
+          }
+          lastScroll = window.scrollY;
+          console.log(scrollUp);
+
+          this.dataset.lastScroll = lastScroll;
+          this.dataset.scrollUp = scrollUp;
+        });
       }
-      {
-        navigation_button.enable && (
-          <li class="inline-block mt-4 lg:hidden">
-            <a
-              class="btn btn-outline-primary btn-sm"
-              href={navigation_button.link}
-            >
-              {navigation_button.label}
-            </a>
-          </li>
-        )
-      }
-    </ul>
-  </nav>
-</header>
+    }
+    customElements.define("ne-header", Header);
+  </script>
+</>

@@ -61,7 +61,7 @@ export const getWorkshopsTicketTailor = async () => {
   const baseURL = "https://api.tickettailor.com/v1/";
   const apiKey = import.meta.env.TICKETTAILOR_API_KEY;
   const headers = {
-    Authorization: `Bearer ${apiKey}`,
+    Authorization: `Basic ${apiKey}`,
     "Content-Type": "application/json",
   };
 
