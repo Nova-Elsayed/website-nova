@@ -1,0 +1,82 @@
+---
+import menu from "@/config/menu.json";
+
+export interface NavigationLink {
+  name: string;
+  url: string;
+}
+
+const { main }: { main: NavigationLink[] } = menu;
+
+const navLinkClassList =
+  "text-stone-100 bg-stone-600 hover:bg-red-400 hover:text-stone-100 italic font-normal hover:scale-110 hover:z-10";
+const activeNavLinkClassList = "font-bold text-red-400 ";
+const { pathname } = Astro.url;
+---
+
+<>
+  <nav id="nav-small" class="md:hidden">
+    <ul
+      id="nav-menu"
+      class="fixed bottom-0 left-0 z-50 flex flex-col items-center order-1 w-screen h-0 transition-all duration-500 opacity-0 justify-evenly bg-stone-600"
+    >
+      {
+        main.map((navLink) => (
+          <>
+            <li class="">
+              <a
+                href={navLink.url}
+                class={`nav-link rounded block me-2  px-6 py-2 transition-all ${
+                  pathname === `${navLink.url}/` || pathname === navLink.url
+                    ? activeNavLinkClassList
+                    : navLinkClassList
+                }`}
+              >
+                {navLink.name}
+              </a>
+            </li>
+          </>
+        ))
+      }
+    </ul>
+  </nav>
+  <button
+    id="menu-btn"
+    class="fixed z-50 p-4 text-xl bg-red-400 rounded-full md:hidden bottom-4 right-4 text-stone-100"
+  >
+    <div class="block btn-layer-01">&#8942;</div>
+    <div class="hidden btn-layer-02">&#xD7;</div>
+  </button>
+
+  <script>
+    // behaviour of the navigation on smaller screens
+
+    let showMenu = false;
+    const menuButton = document.getElementById("menu-btn");
+    const menu = document.getElementById("nav-menu");
+
+    const btnLayer01 = document.querySelector(".btn-layer-01");
+    const btnLayer02 = document.querySelector(".btn-layer-02");
+
+    console.log("loaded");
+
+    const toggleMenu = () => {
+      showMenu = !showMenu;
+      console.log(showMenu);
+
+      if (showMenu) {
+        btnLayer01.classList.replace("block", "hidden");
+        btnLayer02.classList.replace("hidden", "block");
+        menu.classList.replace("opacity-0", "opacity-100");
+        menu.classList.replace("h-0", "h-screen");
+      } else {
+        btnLayer01.classList.replace("hidden", "block");
+        btnLayer02.classList.replace("block", "hidden");
+        menu.classList.replace("opacity-100", "opacity-0");
+        menu.classList.replace("h-screen", "h-0");
+      }
+    };
+
+    menuButton.addEventListener("click", toggleMenu);
+  </script>
+</>

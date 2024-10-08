@@ -1,0 +1,68 @@
+---
+import Logo from "@/components/Logo.astro";
+import menu from "@/config/menu.json";
+
+export interface NavigationLink {
+  name: string;
+  url: string;
+}
+
+const { main }: { main: NavigationLink[] } = menu;
+
+const navLinkClassList =
+  "text-stone-100 bg-stone-600 hover:bg-red-400 hover:text-stone-100 italic font-normal hover:scale-110 hover:z-10";
+const activeNavLinkClassList = "font-bold text-red-400 ";
+
+const { pathname } = Astro.url;
+---
+
+<>
+  <nav
+    id="nav-large"
+    class="fixed top-0 z-50 items-center hidden w-screen px-16 py-2 transition-all duration-500 opacity-100 md:flex bg-stone-600 font-secondary"
+  >
+    <div class="order-0 me-8">
+      <Logo />
+    </div>
+    <ul id="nav-menu " class="flex order-1 h-full">
+      {
+        main.map((navLink) => (
+          <>
+            <li class="">
+              <a
+                href={navLink.url}
+                class={`nav-link rounded block me-2  px-6 py-2 transition-all ${
+                  pathname === `${navLink.url}/` || pathname === navLink.url
+                    ? activeNavLinkClassList
+                    : navLinkClassList
+                }`}
+              >
+                {navLink.name}
+              </a>
+            </li>
+          </>
+        ))
+      }
+    </ul>
+  </nav>
+
+  <script>
+    // behaviour of the navigation on larger screens
+
+    let lastScroll = 0;
+    const navLarge = document.getElementById("nav-large");
+
+    window.addEventListener("scroll", () => {
+      if (lastScroll < window.scrollY) {
+        navLarge.classList.replace("opacity-100", "opacity-0");
+        navLarge.classList.replace("top-0", "-top-20");
+      } else {
+        navLarge.classList.replace("-top-20", "top-0");
+        navLarge.classList.replace("opacity-0", "opacity-100");
+      }
+      lastScroll = window.scrollY;
+
+      lastScroll = lastScroll;
+    });
+  </script>
+</>
