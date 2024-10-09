@@ -14,7 +14,7 @@ const activeNavLinkClassList = "font-bold text-red-400 ";
 const { pathname } = Astro.url;
 ---
 
-<>
+<nav-small>
   <nav id="nav-small" class="md:hidden">
     <ul
       id="nav-menu"
@@ -47,36 +47,42 @@ const { pathname } = Astro.url;
     <div class="block btn-layer-01">&#8942;</div>
     <div class="hidden btn-layer-02">&#xD7;</div>
   </button>
+</nav-small>
 
-  <script>
-    // behaviour of the navigation on smaller screens
+<script>
+  // behaviour of the navigation on smaller screens
 
-    let showMenu = false;
-    const menuButton = document.getElementById("menu-btn");
-    const menu = document.getElementById("nav-menu");
+  class NavSmall extends HTMLElement {
+    connectedCallback() {
+      let showMenu = false;
+      const menuButton = document.getElementById("menu-btn");
+      const menu = document.getElementById("nav-menu");
 
-    const btnLayer01 = document.querySelector(".btn-layer-01");
-    const btnLayer02 = document.querySelector(".btn-layer-02");
+      const btnLayer01 = document.querySelector(".btn-layer-01");
+      const btnLayer02 = document.querySelector(".btn-layer-02");
 
-    console.log("loaded");
+      console.log("loaded");
 
-    const toggleMenu = () => {
-      showMenu = !showMenu;
-      console.log(showMenu);
+      const toggleMenu = () => {
+        showMenu = !showMenu;
+        console.log(showMenu);
 
-      if (showMenu) {
-        btnLayer01.classList.replace("block", "hidden");
-        btnLayer02.classList.replace("hidden", "block");
-        menu.classList.replace("opacity-0", "opacity-100");
-        menu.classList.replace("h-0", "h-screen");
-      } else {
-        btnLayer01.classList.replace("hidden", "block");
-        btnLayer02.classList.replace("block", "hidden");
-        menu.classList.replace("opacity-100", "opacity-0");
-        menu.classList.replace("h-screen", "h-0");
-      }
-    };
+        if (showMenu) {
+          btnLayer01.classList.replace("block", "hidden");
+          btnLayer02.classList.replace("hidden", "block");
+          menu.classList.replace("opacity-0", "opacity-100");
+          menu.classList.replace("h-0", "h-screen");
+        } else {
+          btnLayer01.classList.replace("hidden", "block");
+          btnLayer02.classList.replace("block", "hidden");
+          menu.classList.replace("opacity-100", "opacity-0");
+          menu.classList.replace("h-screen", "h-0");
+        }
+      };
 
-    menuButton.addEventListener("click", toggleMenu);
-  </script>
-</>
+      menuButton.addEventListener("click", toggleMenu);
+    }
+  }
+
+  customElements.define("nav-small", NavSmall);
+</script>

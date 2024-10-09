@@ -1,0 +1,24 @@
+---
+
+---
+
+<test-button>
+  <button class="fixed top-0 left-0 z-50 test-button">Test Button</button>
+</test-button>
+
+<script>
+  class TestButton extends HTMLElement {
+    connectedCallback() {
+      const buttons: NodeListOf<HTMLButtonElement> =
+        document.querySelectorAll("button.test-button");
+
+      buttons.forEach((button) => {
+        button.addEventListener("click", () => {
+          console.log("clicked");
+        });
+      });
+    }
+  }
+
+  customElements.define("test-button", TestButton);
+</script>

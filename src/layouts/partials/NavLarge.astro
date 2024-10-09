@@ -16,7 +16,7 @@ const activeNavLinkClassList = "font-bold text-red-400 ";
 const { pathname } = Astro.url;
 ---
 
-<>
+<nav-large>
   <nav
     id="nav-large"
     class="fixed top-0 z-50 items-center hidden w-screen px-16 py-2 transition-all duration-500 opacity-100 md:flex bg-stone-600 font-secondary"
@@ -45,24 +45,29 @@ const { pathname } = Astro.url;
       }
     </ul>
   </nav>
+</nav-large>
 
-  <script>
-    // behaviour of the navigation on larger screens
+<script>
+  // behaviour of the navigation on larger screens
+  class NavLarge extends HTMLElement {
+    connectedCallback() {
+      let lastScroll = 0;
+      const navLarge = document.getElementById("nav-large");
 
-    let lastScroll = 0;
-    const navLarge = document.getElementById("nav-large");
+      window.addEventListener("scroll", () => {
+        if (lastScroll < window.scrollY) {
+          navLarge.classList.replace("opacity-100", "opacity-0");
+          navLarge.classList.replace("top-0", "-top-20");
+        } else {
+          navLarge.classList.replace("-top-20", "top-0");
+          navLarge.classList.replace("opacity-0", "opacity-100");
+        }
+        lastScroll = window.scrollY;
 
-    window.addEventListener("scroll", () => {
-      if (lastScroll < window.scrollY) {
-        navLarge.classList.replace("opacity-100", "opacity-0");
-        navLarge.classList.replace("top-0", "-top-20");
-      } else {
-        navLarge.classList.replace("-top-20", "top-0");
-        navLarge.classList.replace("opacity-0", "opacity-100");
-      }
-      lastScroll = window.scrollY;
+        lastScroll = lastScroll;
+      });
+    }
+  }
 
-      lastScroll = lastScroll;
-    });
-  </script>
-</>
+  customElements.define("nav-large", NavLarge);
+</script>
