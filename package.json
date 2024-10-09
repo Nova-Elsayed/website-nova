@@ -40,7 +40,6 @@
     "react-lite-youtube-embed": "^2.4.0",
     "remark-collapse": "^0.1.2",
     "remark-toc": "^9.0.0",
-    "swiper": "^11.0.5",
     "yarn": "^1.22.22"
   },
   "devDependencies": {

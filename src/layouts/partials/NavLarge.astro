@@ -52,7 +52,7 @@ const { pathname } = Astro.url;
   class NavLarge extends HTMLElement {
     connectedCallback() {
       let lastScroll = 0;
-      const navLarge = document.getElementById("nav-large");
+      const navLarge: HTMLElement = document.getElementById("nav-large");
 
       window.addEventListener("scroll", () => {
         if (lastScroll < window.scrollY) {
