@@ -10,25 +10,35 @@ export const getSinglePage = async (id: string) => {
   return page.fields;
 };
 
-export const getArticles = async () => {
+export const getArticles = async (onlyFeatured?: boolean) => {
   const articlesEntries = await contentfulClient.getEntries<Article>({
     content_type: "article",
   });
 
-  const articles = articlesEntries.items.map((item) => ({
-    params: { slug: item.fields.slug },
-    props: {
-      title: item.fields.title,
-      slug: item.fields.slug,
-      isFeatured: item.fields.isFeatured,
-      image: item.fields.image,
-      description: item.fields.description,
-      content: item.fields.content,
-      publishedAt: item.sys.updatedAt,
-    },
-  }));
+  const articles = articlesEntries.items
+    .map((item) => ({
+      params: { slug: item.fields.slug },
+      props: {
+        title: item.fields.title,
+        slug: item.fields.slug,
+        isFeatured: item.fields.isFeatured,
+        image: item.fields.image,
+        description: item.fields.description,
+        content: item.fields.content,
+        publishedAt: item.sys.updatedAt,
+      },
+    }))
+    .sort((a, b) => {
+      // Turn your strings into dates, and then subtract them
+      // to get a value that is either negative, positive, or zero.
+      return Date.parse(b.props.publishedAt) - Date.parse(a.props.publishedAt);
+    });
 
-  return articles;
+  if (onlyFeatured) {
+    return articles.filter((item) => item.props.isFeatured);
+  } else {
+    return articles;
+  }
 };
 
 export const getWorkshops = async () => {

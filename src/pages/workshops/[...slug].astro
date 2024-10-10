@@ -6,6 +6,7 @@ import { simpleGermanDate } from "@/lib/utils/dateParser";
 import Base from "@/layouts/Base.astro";
 import RichTextContainer from "@/components/RichTextContainer.astro";
 import { getWorkshops } from "@/lib/API";
+import Section from "@/partials/Section.astro";
 
 export const prerender = true;
 
@@ -30,7 +31,7 @@ const readableDate = simpleGermanDate(dateStart);
 ---
 
 <Base title={headline} meta_title={headline}>
-  <header class="w-screen py-16 mt-12 text-center">
+  <header class="w-screen px-4 py-16 mt-12 text-center">
     <p
       set:html="— Workshop —"
       class="mb-8 tracking-wide text-md font-secondary"
@@ -39,7 +40,7 @@ const readableDate = simpleGermanDate(dateStart);
     <h2 set:html={parentTitle} class="mb-2 text-xl" />
     <p set:html={readableDate} class="text-md" />
   </header>
-  <section class="w-screen">
+  <Section>
     <RichTextContainer class="mb-16 text-left" content={description} />
-  </section>
+  </Section>
 </Base>

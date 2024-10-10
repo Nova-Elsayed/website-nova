@@ -2,6 +2,7 @@
 import { getArticles } from "@/lib/API";
 import Base from "@/layouts/Base.astro";
 import RichTextContainer from "@/components/RichTextContainer.astro";
+import Section from "@/partials/Section.astro";
 
 export const prerender = true;
 
@@ -15,7 +16,7 @@ const { title, slug, isFeatured, image, description, content, publishedAt } =
 ---
 
 <Base title={title} meta_title={title}>
-  <header class="w-screen py-16 mt-12 text-center">
+  <header class="w-screen px-4 py-16 mt-12 text-center">
     <p
       set:html={`— ${isFeatured ? "Lesenswerter " : ""}Artikel —`}
       class="mb-8 tracking-wide text-md font-secondary"
@@ -24,13 +25,13 @@ const { title, slug, isFeatured, image, description, content, publishedAt } =
     {
       description && (
         <blockquote
-          class="mx-auto mb-8 text-lg italic leading-relaxed tracking-wide md:w-2/3 font-secondary"
+          class="mx-auto text-lg italic leading-relaxed tracking-wide md:w-2/3 font-secondary"
           set:html={description}
         />
       )
     }
   </header>
-  <section class="w-screen">
+  <Section>
     <RichTextContainer class="mb-16 text-left" content={content} />
-  </section>
+  </Section>
 </Base>

@@ -3,6 +3,7 @@ import type { Page } from "@/lib/contentful";
 import { contentfulClient } from "@/lib/contentful";
 import Base from "@/layouts/Base.astro";
 import RichTextContainer from "@/components/RichTextContainer.astro";
+import Section from "@/partials/Section.astro";
 
 export const prerender = true;
 
@@ -28,7 +29,7 @@ const { title, slug, image, description, content } = Astro.props;
 ---
 
 <Base title={title} meta_title={title}>
-  <header class="w-screen py-16 mt-12 text-center">
+  <header class="w-screen px-4 py-16 mt-12 text-center">
     <h1 set:html={title} class="mb-8 text-2xl" />
     {
       description && (
@@ -39,7 +40,7 @@ const { title, slug, image, description, content } = Astro.props;
       )
     }
   </header>
-  <section class="w-screen">
+  <Section>
     <RichTextContainer class="mb-16 text-left" content={content} />
-  </section>
+  </Section>
 </Base>

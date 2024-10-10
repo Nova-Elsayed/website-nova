@@ -1,8 +1,11 @@
 ---
 import type { Article } from "@/lib/contentful";
+import { getArticles } from "@/lib/API";
 import ArticleCard from "./ArticleCard.astro";
 
-const articles = Astro.props.articles;
+const onlyFeatured: boolean = Astro.props.onlyFeatured || false;
+
+const articles = await getArticles(onlyFeatured);
 ---
 
 <ul class="my-8 article-list">
