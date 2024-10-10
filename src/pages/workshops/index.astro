@@ -1,5 +1,7 @@
 ---
 import Base from "@/layouts/Base.astro";
+import Section from "@/partials/Section.astro";
+
 import { getSinglePage, getWorkshops } from "@/lib/API";
 
 import WorkshopsList from "@/partials/WorkshopsList/index.astro";
@@ -19,7 +21,7 @@ workshops.sort((a, b) => {
 ---
 
 <Base title={page.title} meta_title={page.title}>
-  <header class="w-screen py-16 mt-12 text-center">
+  <header class="w-screen px-8 py-16 mt-12 text-center">
     <p
       set:html="— Workshops —"
       class="mb-8 tracking-wide text-md font-secondary"
@@ -34,11 +36,11 @@ workshops.sort((a, b) => {
       )
     }
   </header>
-  <section class="w-screen mb-16">
+  <Section>
     <RichTextContainer class="" content={page.content} />
-  </section>
+  </Section>
 
-  <section class="w-screen mb-16">
+  <Section>
     <WorkshopsList workshops={workshops} />
-  </section>
+  </Section>
 </Base>

@@ -5,7 +5,7 @@ import { locationToAddress } from "@/lib/utils/locationParser";
 const workshops = Astro.props.workshops;
 ---
 
-<ul class="flex w-full px-8 my-8 justify-evenly">
+<ul class="flex flex-wrap w-full my-8 justify-evenly">
   {
     workshops.map((workshop: Workshop) => {
       return (

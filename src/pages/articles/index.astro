@@ -1,6 +1,7 @@
 ---
 import { getSinglePage, getArticles } from "@/lib/API";
 import Base from "@/layouts/Base.astro";
+import Section from "@/partials/Section.astro";
 import ArticlesList from "@/partials/ArticlesList/index.astro";
 import RichTextContainer from "@/components/RichTextContainer.astro";
 
@@ -18,7 +19,7 @@ articles.sort((a, b) => {
 ---
 
 <Base title={page.title} meta_title={page.title}>
-  <header class="w-screen py-16 mt-12 text-center">
+  <header class="w-screen px-8 py-16 mt-12 text-center">
     <p
       set:html="— Artikel —"
       class="mb-8 tracking-wide text-md font-secondary"
@@ -33,11 +34,11 @@ articles.sort((a, b) => {
       )
     }
   </header>
-  <section class="w-screen py-16 mb-16 text-center">
+  <Section>
     <RichTextContainer class="" content={page.content} />
-  </section>
+  </Section>
 
-  <section class="w-screen py-16 mb-16 text-center">
+  <Section>
     <ArticlesList articles={articles} />
-  </section>
+  </Section>
 </Base>
