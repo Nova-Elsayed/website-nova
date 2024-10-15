@@ -1,7 +1,4 @@
-import contentful from "contentful";
-import type { EntryFieldTypes } from "contentful"; // Typen separat importieren
-
-const { createClient } = contentful;
+import contentful, { type EntryFieldTypes } from "contentful";
 
 export interface Page {
   contentTypeId: "pages";
@@ -78,7 +75,7 @@ export interface LandingPage {
   };
 }
 
-export const contentfulClient = createClient({
+export const contentfulClient = contentful.createClient({
   space: import.meta.env.CONTENTFUL_SPACE_ID,
   accessToken: import.meta.env.DEV
     ? import.meta.env.CONTENTFUL_PREVIEW_TOKEN
