@@ -69,7 +69,7 @@ export const getWorkshops = async () => {
 
 export const getWorkshopsTicketTailor = async () => {
   const baseURL = "https://api.tickettailor.com/v1/";
-  const apiKey = import.meta.env.TICKETTAILOR_API_KEY;
+  const apiKey = btoa(import.meta.env.TICKETTAILOR_API_KEY);
   const headers = {
     Authorization: `Basic ${apiKey}`,
     "Content-Type": "application/json",
@@ -80,7 +80,7 @@ export const getWorkshopsTicketTailor = async () => {
       headers: headers,
     });
 
-    console.log(response.data);
+    return response.data;
   } catch (error) {
     console.log(error);
   }

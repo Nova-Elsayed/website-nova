@@ -16,10 +16,10 @@ export const prerender = true;
 
 const page = await getLandingPage();
 
-// const ticketTailor = await getWorkshopsTicketTailor();
+const ticketTailor = await getWorkshopsTicketTailor();
+// console.log("ticketTailor: ", ticketTailor.data);
 
 const workshops = await getWorkshops();
-// console.log(workshops);
 
 workshops.sort((a, b) => {
   // Turn your strings into dates, and then subtract them
@@ -86,9 +86,11 @@ const recentWorkshops = workshops.filter(
     </Section>
     <!-- / INTRO -->
     <!-- WORKSHOPS -->
+
     <Section>
       <SectionHeader title={page.workshopsHeadline} />
       <RichTextContainer class="text-left" content={page.workshopsText} />
+      {ticketTailor && <div class="w-8 h-8 bg-red-500" />}
 
       {
         upcomingWorkshops.length > 0 && (
