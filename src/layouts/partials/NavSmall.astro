@@ -1,5 +1,6 @@
 ---
 import menu from "@/config/menu.json";
+import Icon from "@/helpers/DynamicIcon";
 
 export interface NavigationLink {
   name: string;
@@ -44,8 +45,12 @@ const { pathname } = Astro.url;
     id="menu-btn"
     class="fixed z-50 p-4 text-xl bg-red-400 rounded-full md:hidden bottom-4 right-4 text-stone-100"
   >
-    <div class="block btn-layer-01">&#8942;</div>
-    <div class="hidden btn-layer-02">&#xD7;</div>
+    <div class="block btn-layer-01">
+      <Icon icon="IoEllipsisVertical" />
+    </div>
+    <div class="hidden btn-layer-02">
+      <Icon icon="IoClose" />
+    </div>
   </button>
 </nav-small>
 

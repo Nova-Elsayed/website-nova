@@ -21,10 +21,13 @@ const { pathname } = Astro.url;
     id="nav-large"
     class="fixed top-0 z-50 items-center hidden w-screen px-16 py-2 transition-all duration-500 opacity-100 md:flex bg-stone-600 font-secondary"
   >
-    <div class="order-0 me-8">
-      <Logo />
-    </div>
-    <ul id="nav-menu " class="flex order-1 h-full">
+    <ul id="nav-menu " class="flex items-center order-1 h-full">
+      <li class="block order-0 me-8">
+        <!-- <Logo /> -->
+        <a href="/">
+          <img class="w-16 h-16" src="/images/Logo_Nova.png" alt="logo" />
+        </a>
+      </li>
       {
         main.map((navLink) => (
           <>

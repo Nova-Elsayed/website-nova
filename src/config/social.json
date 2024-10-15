@@ -1,13 +1,13 @@
 {
   "main": [
     {
-      "name": "instagram",
-      "icon": "FaInstagram",
+      "name": "Instagram",
+      "icon": "IoLogoInstagram",
       "link": "https://instagram.com/"
     },
     {
-      "name": "linkedin",
-      "icon": "FaLinkedin",
+      "name": "LinkedIn",
+      "icon": "IoLogoLinkedin",
       "link": "https://www.linkedin.com/"
     }
   ]
