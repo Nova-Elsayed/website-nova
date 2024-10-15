@@ -1,4 +1,5 @@
-import contentful, { type EntryFieldTypes } from "contentful";
+import contentful from "contentful";
+import { type EntryFieldTypes } from "contentful";
 
 export interface Page {
   contentTypeId: "pages";
