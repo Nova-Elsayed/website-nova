@@ -2,6 +2,7 @@ import contentful from "contentful";
 import { type EntryFieldTypes } from "contentful";
 
 const { createClient } = contentful;
+
 export interface Page {
   contentTypeId: "pages";
   fields: {

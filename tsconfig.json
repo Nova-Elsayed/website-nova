@@ -1,6 +1,7 @@
 {
   "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
+    "esModuleInterop": true,
     "baseUrl": ".",
     "target": "es6",
     "allowJs": true,
@@ -11,7 +12,7 @@
     "jsx": "react",
     "isolatedModules": true,
     "incremental": true,
-    "allowSyntheticDefaultImports": true,
+    "allowSyntheticDefaultImports": false,
     "paths": {
       "@/components/*": ["./src/layouts/components/*"],
       "@/shortcodes/*": ["./src/layouts/shortcodes/*"],
