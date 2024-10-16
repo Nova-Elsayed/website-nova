@@ -1,6 +1,6 @@
 [build]
 publish = "dist"
-command = "CI=npm run build"
+command = "CI=astro build"
 
 [build.environment]
 NODE_VERSION = "20"
