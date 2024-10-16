@@ -14,7 +14,6 @@
     "remove-darkmode": "node scripts/removeDarkmode.js && yarn format"
   },
   "dependencies": {
-
     "@astrojs/mdx": "2.1.1",
     "@astrojs/netlify": "5.4.0",
     "@astrojs/react": "3.0.9",
@@ -41,6 +40,7 @@
     "react-lite-youtube-embed": "2.4.0",
     "remark-collapse": "0.1.2",
     "remark-toc": "9.0.0",
+    "shiki": "1.22.0",
     "yarn": "1.22.22"
   },
   "devDependencies": {
