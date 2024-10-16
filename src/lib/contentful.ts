@@ -1,7 +1,7 @@
-import pkg from "contentful";
+import contentful from "contentful";
 import { type EntryFieldTypes } from "contentful";
 
-const { createClient } = pkg;
+const { createClient } = contentful;
 export interface Page {
   contentTypeId: "pages";
   fields: {
