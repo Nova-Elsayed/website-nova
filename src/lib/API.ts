@@ -10,8 +10,6 @@ export const getSinglePage = async (id: string) => {
   return page.fields;
 };
 
-// just a comment
-
 export const getArticles = async (onlyFeatured?: boolean) => {
   const articlesEntries = await contentfulClient.getEntries<Article>({
     content_type: "article",
