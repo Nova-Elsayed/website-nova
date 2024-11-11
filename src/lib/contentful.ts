@@ -60,6 +60,10 @@ export interface LandingPage {
     workshopsText: EntryFieldTypes.RichText;
     workshopsUpcomingHeadline: EntryFieldTypes.Text;
     workshopsRecentHeadline: EntryFieldTypes.Text;
+    sessionsHeadline: EntryFieldTypes.Text;
+    sessionsIntroText: EntryFieldTypes.RichText;
+    sessionsLinkLabel: EntryFieldTypes.Text;
+    sessionsLinkURL: EntryFieldTypes.Text;
     supportHeadline: EntryFieldTypes.Text;
     supportIntroText: EntryFieldTypes.RichText;
     supportText: EntryFieldTypes.RichText;

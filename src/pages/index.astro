@@ -116,6 +116,21 @@ const recentWorkshops = workshops.filter(
     </Section>
     <!-- / WORKSHOPS -->
 
+    <!-- SESSIONS -->
+    <Section>
+      <SectionHeader title={page.sessionsHeadline} />
+      <RichTextContainer class="text-left" content={page.sessionsText} />
+      <div class="flex w-full link-bar">
+        <Button
+          label={page.sessionsLinkLabel ? page.sessionsLinkLabel : "Mehr …"}
+          href={page.sessionsLinkURL}
+          className="mx-auto"
+        />
+      </div>
+    </Section>
+
+    <!-- / SESSIONS -->
+
     <!-- SUPPORT -->
     <Section>
       <SectionHeader title={page.supportHeadline} />
