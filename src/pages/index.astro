@@ -85,6 +85,13 @@ const recentWorkshops = workshops.filter(
         subtitle={page.introSubHeadline}
       />
       <RichTextContainer class="text-left" content={page.introText} />
+      <div class="flex w-full link-bar mt-8">
+        <Button
+          label={page.introLinkLabel ? page.introLinkLabel : "Erfahre mehr …"}
+          href={page.introLinkURL}
+          className="mx-auto"
+        />
+      </div>
     </Section>
     <!-- / INTRO -->
     <!-- WORKSHOPS -->
@@ -105,17 +112,8 @@ const recentWorkshops = workshops.filter(
           </section>
         )
       }
-      <!-- Might be used in the future
-       {
-        recentWorkshops.length > 0 && (
-          <section class="my-8 opacity-60">
-            <h2 set:html={page.workshopsRecentHeadline} class="mb-4 text-lg" />
-            <WorkshopsList workshops={recentWorkshops} />
-          </section>
-        )
-      } -->
 
-      <div class="flex w-full link-bar">
+      <div class="flex w-full link-bar mt-8">
         <Button
           label="Erfahre mehr …"
           href="/workshops/"
@@ -126,10 +124,11 @@ const recentWorkshops = workshops.filter(
     <!-- / WORKSHOPS -->
 
     <!-- SESSIONS -->
+
     <Section>
       <SectionHeader title={page.sessionsHeadline} />
       <RichTextContainer class="text-left" content={page.sessionsText} />
-      <div class="flex w-full link-bar">
+      <div class="flex w-full link-bar mt-8">
         <Button
           label={page.sessionsLinkLabel ? page.sessionsLinkLabel : "Erfahre mehr …"}
           href={page.sessionsLinkURL}
@@ -187,7 +186,7 @@ const recentWorkshops = workshops.filter(
 
       <ArticlesList onlyFeatured={true} />
 
-      <div class="flex w-full link-bar">
+      <div class="flex w-full link-bar mt-8">
         <Button
           label={page.articlesLinkLabel}
           href={page.articlesLinkURL}

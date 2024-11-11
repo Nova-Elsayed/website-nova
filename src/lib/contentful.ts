@@ -56,6 +56,8 @@ export interface LandingPage {
     introHeadline: EntryFieldTypes.Text;
     introSubHeadline: EntryFieldTypes.Text;
     introText: EntryFieldTypes.RichText;
+    introLinkLabel: EntryFieldTypes.Text;
+    introLinkURL: EntryFieldTypes.Text;
     workshopsHeadline: EntryFieldTypes.Text;
     workshopsText: EntryFieldTypes.RichText;
     workshopsUpcomingHeadline: EntryFieldTypes.Text;
