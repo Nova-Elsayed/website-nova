@@ -7,7 +7,7 @@
   "packageManager": "yarn@1.22.19",
   "scripts": {
     "dev": "yarn astro dev",
-    "build": "astro build",
+    "build": "mkdir dist && astro build",
     "preview": "astro preview",
     "format": "prettier -w ./src",
     "generate-json": "node scripts/jsonGenerator.js",
