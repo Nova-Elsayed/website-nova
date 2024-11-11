@@ -105,14 +105,23 @@ const recentWorkshops = workshops.filter(
           </section>
         )
       }
-      {
+      <!-- Might be used in the future
+       {
         recentWorkshops.length > 0 && (
           <section class="my-8 opacity-60">
             <h2 set:html={page.workshopsRecentHeadline} class="mb-4 text-lg" />
             <WorkshopsList workshops={recentWorkshops} />
           </section>
         )
-      }
+      } -->
+
+      <div class="flex w-full link-bar">
+        <Button
+          label="Erfahre mehr …"
+          href="/workshops/"
+          className="mx-auto"
+        />
+      </div>
     </Section>
     <!-- / WORKSHOPS -->
 
@@ -122,7 +131,7 @@ const recentWorkshops = workshops.filter(
       <RichTextContainer class="text-left" content={page.sessionsText} />
       <div class="flex w-full link-bar">
         <Button
-          label={page.sessionsLinkLabel ? page.sessionsLinkLabel : "Mehr …"}
+          label={page.sessionsLinkLabel ? page.sessionsLinkLabel : "Erfahre mehr …"}
           href={page.sessionsLinkURL}
           className="mx-auto"
         />
@@ -139,31 +148,27 @@ const recentWorkshops = workshops.filter(
           class="col-span-3 mb-2 text-left"
           content={page.supportIntroText}
         />
-        <div>
-          <a
-            class="block w-full py-3 mx-auto text-xl text-center text-red-400 transition-all hover:scale-110 font-secondary hover:text-red-600"
-            href={page.supportLink01URL}
+        <ul class="block">
+          <li
+            class="block w-full py-3 mx-auto text-xl text-center text-red-400 transition-all  font-secondary"
             set:html={page.supportLink01Label}
           />
           <div class="w-0 h-4 mx-auto my-0 border border-stone-400"></div>
           <a
-            class="block w-full py-3 mx-auto text-xl text-center text-red-400 transition-all hover:scale-110 font-secondary hover:text-red-600"
-            href={page.supportLink02URL}
+            class="block w-full py-3 mx-auto text-xl text-center text-red-400 transition-all  font-secondary"
             set:html={page.supportLink02Label}
           />
           <div class="w-0 h-4 mx-auto my-0 border border-stone-400"></div>
           <a
-            class="block w-full py-3 mx-auto text-xl text-center text-red-400 transition-all hover:scale-110 font-secondary hover:text-red-600"
-            href={page.supportLink03URL}
+            class="block w-full py-3 mx-auto text-xl text-center text-red-400 transition-all  font-secondary"
             set:html={page.supportLink03Label}
           />
           <div class="w-0 h-4 mx-auto my-0 border border-stone-400"></div>
           <a
-            class="block w-full py-3 mx-auto text-xl text-center text-red-400 transition-all hover:scale-110 font-secondary hover:text-red-600"
-            href={page.supportLink04URL}
+            class="block w-full py-3 mx-auto text-xl text-center text-red-400 transition-all  font-secondary"
             set:html={page.supportLink04Label}
           />
-        </div>
+        </ul>
         <RichTextContainer
           class="col-span-2 pt-4 text-left"
           content={page.supportText}
