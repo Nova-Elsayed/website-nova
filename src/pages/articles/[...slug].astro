@@ -19,9 +19,9 @@ const { title, slug, isFeatured, image, description, content, publishedAt } =
   <header class="w-screen px-4 py-16 mt-12 text-center">
     <p
       set:html={`— ${isFeatured ? "Lesenswerter " : ""}Artikel —`}
-      class="mb-8 tracking-wide text-md "
+      class="mb-8 tracking-wide text-md optical-md"
     />
-    <h1 set:html={title} class="mb-8 text-3xl font-bold" />
+    <h1 set:html={title} class="mb-8 text-3xl font-bold optical-lg" />
     {
       description && (
         <blockquote

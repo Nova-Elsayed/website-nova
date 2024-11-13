@@ -30,7 +30,7 @@ const { title, slug, image, description, content } = Astro.props;
 
 <Base title={title} meta_title={title}>
   <header class="w-screen px-4 py-16 mt-12 text-center">
-    <h1 set:html={title} class="mb-8 text-2xl" />
+    <h1 set:html={title} class="mb-8 text-2xl optical-lg" />
     {
       description && (
         <blockquote
