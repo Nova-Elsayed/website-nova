@@ -28,17 +28,5 @@
         "light": "#B4AFB6"
       }
     }
-  },
-  "fonts": {
-    "font_family": {
-      "primary": "Merriweather:wght@400;700",
-      "primary_type": "serif",
-      "secondary": "Bodoni+Moda:wght@400;700",
-      "secondary_type": "serif"
-    },
-    "font_size": {
-      "base": "16",
-      "scale": "1.2"
-    }
   }
 }

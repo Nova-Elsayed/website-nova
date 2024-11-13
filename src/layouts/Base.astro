@@ -9,21 +9,21 @@ import "@/styles/main.scss";
 import { AstroFont } from "astro-font";
 import { ViewTransitions } from "astro:transitions";
 
-// font families
-const pf = theme.fonts.font_family.primary;
-const sf = theme.fonts.font_family.secondary;
+// // font families
+// const pf = theme.fonts.font_family.primary;
+// const sf = theme.fonts.font_family.secondary;
 
-let fontPrimary, fontSecondary;
-if (theme.fonts.font_family.primary) {
-  fontPrimary = theme.fonts.font_family.primary
-    .replace(/\+/g, " ")
-    .replace(/:[ital,]*[ital@]*[wght@]*[0-9,;]+/gi, "");
-}
-if (theme.fonts.font_family.secondary) {
-  fontSecondary = theme.fonts.font_family.secondary
-    .replace(/\+/g, " ")
-    .replace(/:[ital,]*[ital@]*[wght@]*[0-9,;]+/gi, "");
-}
+// let fontPrimary, fontSecondary;
+// if (theme.fonts.font_family.primary) {
+//   fontPrimary = theme.fonts.font_family.primary
+//     .replace(/\+/g, " ")
+//     .replace(/:[ital,]*[ital@]*[wght@]*[0-9,;]+/gi, "");
+// }
+// if (theme.fonts.font_family.secondary) {
+//   fontSecondary = theme.fonts.font_family.secondary
+//     .replace(/\+/g, " ")
+//     .replace(/:[ital,]*[ital@]*[wght@]*[0-9,;]+/gi, "");
+// }
 
 // types for frontmatters
 export interface Props {
@@ -60,30 +60,6 @@ const { title, meta_title, description, image, noindex, canonical } =
     />
     <meta name="generator" content={Astro.generator} />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-
-    <!-- google font css -->
-    <AstroFont
-      config={[
-        {
-          src: [],
-          preload: false,
-          display: "swap",
-          name: fontPrimary!,
-          fallback: "serif",
-          cssVariable: "font-primary",
-          googleFontsURL: `https://fonts.googleapis.com/css2?family=${pf}&display=swap`,
-        },
-        {
-          src: [],
-          preload: false,
-          display: "swap",
-          name: fontSecondary!,
-          fallback: "serif",
-          cssVariable: "font-secondary",
-          googleFontsURL: `https://fonts.googleapis.com/css2?family=${sf}&display=swap`,
-        },
-      ]}
-    />
 
     <!-- responsive meta -->
     <meta
@@ -169,7 +145,7 @@ const { title, meta_title, description, image, noindex, canonical } =
     />
     <meta name="twitter:card" content="summary_large_image" />
   </head>
-  <body>
+  <body class="font-serif text-base optical-sm">
     <TwSizeIndicator />
     <Header />
     <main id="main-content">

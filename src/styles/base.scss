@@ -1,59 +1,28 @@
-html {
-  @apply text-base-sm md:text-base;
+@font-face {
+    font-family:"Bodoni Moda";
+    font-style: normal;
+    font-weight: 400 900;
+    font-display: swap;
+    src: url('/fonts/BodoniModa.ttf');
 }
-
-body {
-  @apply bg-body font-primary font-normal leading-relaxed text-text;
+@font-face {
+    font-family:"Bodoni Moda Italic";
+    font-style: italic;
+    font-weight: 400 900;
+    font-display: swap;
+    src: url('/fonts/BodoniModa-Italic.ttf');
 }
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  @apply font-secondary leading-tight text-dark;
+@font-face {
+    font-family:"Work Sans";
+    font-style: normal;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url('/fonts/WorkSans.ttf');
 }
-
-h1,
-.h1 {
-  @apply text-h1;
-}
-
-h2,
-.h2 {
-  @apply text-h2;
-}
-
-h3,
-.h3 {
-  @apply text-h3;
-}
-
-h4,
-.h4 {
-  @apply text-h4;
-}
-
-h5,
-.h5 {
-  @apply text-h5;
-}
-
-h6,
-.h6 {
-  @apply text-h6;
-}
-
-b,
-strong {
-  @apply font-semibold;
-}
-
-code {
-  @apply after:border-none;
-}
-
-blockquote > p {
-  @apply my-0 #{!important};
+@font-face {
+    font-family:"Work Sans Italic";
+    font-style: italic;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url('/fonts/WorkSans-Italic.ttf');
 }

@@ -127,7 +127,7 @@ const recentWorkshops = workshops.filter(
 
     <Section>
       <SectionHeader title={page.sessionsHeadline} />
-      <RichTextContainer class="text-left" content={page.sessionsText} />
+      <RichTextContainer class="text-left" content={page.sessionsIntroText} />
       <div class="flex w-full link-bar mt-8">
         <Button
           label={page.sessionsLinkLabel ? page.sessionsLinkLabel : "Erfahre mehr …"}
@@ -149,22 +149,22 @@ const recentWorkshops = workshops.filter(
         />
         <ul class="block">
           <li
-            class="block w-full py-3 mx-auto text-xl text-center text-red-400 transition-all  font-secondary"
+            class="block w-full py-3 mx-auto text-xl text-center text-red-400 transition-all"
             set:html={page.supportLink01Label}
           />
           <div class="w-0 h-4 mx-auto my-0 border border-stone-400"></div>
           <a
-            class="block w-full py-3 mx-auto text-xl text-center text-red-400 transition-all  font-secondary"
+            class="block w-full py-3 mx-auto text-xl text-center text-red-400 transition-all"
             set:html={page.supportLink02Label}
           />
           <div class="w-0 h-4 mx-auto my-0 border border-stone-400"></div>
           <a
-            class="block w-full py-3 mx-auto text-xl text-center text-red-400 transition-all  font-secondary"
+            class="block w-full py-3 mx-auto text-xl text-center text-red-400 transition-all"
             set:html={page.supportLink03Label}
           />
           <div class="w-0 h-4 mx-auto my-0 border border-stone-400"></div>
           <a
-            class="block w-full py-3 mx-auto text-xl text-center text-red-400 transition-all  font-secondary"
+            class="block w-full py-3 mx-auto text-xl text-center text-red-400 transition-all"
             set:html={page.supportLink04Label}
           />
         </ul>

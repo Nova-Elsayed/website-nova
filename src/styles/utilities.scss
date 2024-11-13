@@ -2,29 +2,27 @@
   text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
 }
 
-.bg-gradient {
-  @apply bg-gradient-to-b from-[rgba(249,249,249,1)] from-[0.53%] to-white to-[83.28%] dark:from-darkmode-theme-light dark:to-darkmode-body;
+.optical-sm {
+  font-variation-settings: "opsz" 7;
+};
+
+.optical-md {
+  font-variation-settings: "opsz" 24;
+};
+
+.optical-lg {
+  font-variation-settings: "opsz" 72;
+};
+
+.font-serif .italic {
+  @apply font-serif-italic;
 }
-
-.custom-shadow {
-  box-shadow:
-    2px 2px 8px rgba(239, 68, 68, 0.8),
-    // red-500
-    -2px 2px 8px rgba(254, 226, 226, 0.8),
-    // red-100
-    -2px -2px 8px rgba(45, 212, 191, 0.8),
-    // teal-400
-    2px -2px 8px rgba(204, 251, 241, 0.8); // teal-100
-
-  &:hover {
-    @apply transition-all;
-    box-shadow:
-      4px 4px 8px rgba(239, 68, 68, 0.8),
-      // red-500
-      -4px 4px 8px rgba(254, 226, 226, 0.8),
-      // red-100
-      -4px -4px 8px rgba(45, 212, 191, 0.8),
-      // teal-400
-      4px -4px 8px rgba(204, 251, 241, 0.8); // teal-100
-  }
+.font-sans .italic {
+  @apply font-sans-italic;
+}
+.prose italic,
+.prose .italic,
+.prose i,
+.prose em {
+  @apply font-serif-italic;
 }

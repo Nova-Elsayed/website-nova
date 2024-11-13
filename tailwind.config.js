@@ -1,7 +1,8 @@
 const theme = require("./src/config/theme.json");
+const defaultTheme = require('tailwindcss/defaultTheme')
 
-let font_base = Number(theme.fonts.font_size.base.replace("px", ""));
-let font_scale = Number(theme.fonts.font_size.scale);
+let font_base = 18;
+let font_scale = 1.2;
 let h6 = font_scale;
 let h5 = h6 * font_scale;
 let h4 = h5 * font_scale;
@@ -9,13 +10,6 @@ let h3 = h4 * font_scale;
 let h2 = h3 * font_scale;
 let h1 = h2 * font_scale;
 
-let fontPrimaryType, fontSecondaryType;
-if (theme.fonts.font_family.primary) {
-  fontPrimaryType = theme.fonts.font_family.primary_type;
-}
-if (theme.fonts.font_family.secondary) {
-  fontSecondaryType = theme.fonts.font_family.secondary_type;
-}
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -71,8 +65,22 @@ module.exports = {
         h6: h6 + "rem",
       },
       fontFamily: {
-        primary: ["var(--font-primary)", fontPrimaryType],
-        secondary: ["var(--font-secondary)", fontSecondaryType],
+        'serif': [
+          '"Bodoni Moda"',
+          {
+            fontOpticalSizing: "auto",
+          },
+          ...defaultTheme.fontFamily.serif,
+        ],
+        'serif-italic': [
+          '"Bodoni Moda Italic"',
+          {
+            fontOpticalSizing: "auto",
+          },
+          ...defaultTheme.fontFamily.serif,
+        ],
+        'sans': ['"Work Sans"', ...defaultTheme.fontFamily.sans],
+        'sans-italic': ['"Work Sans Italic"', ...defaultTheme.fontFamily.sans],
       },
     },
   },

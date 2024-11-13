@@ -1,5 +1,6 @@
 {
   "files.associations": {
     "*.mdx": "markdown"
-  }
+  },
+  "workbench.settings.openDefaultKeybindings": true
 }
