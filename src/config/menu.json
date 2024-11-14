@@ -9,25 +9,20 @@
       "url": "/about"
     },
     {
-      "name": "Artikel",
-      "url": "/articles"
-    },
-    {
       "name": "Workshops",
       "url": "/workshops"
+    },
+    {
+      "name": "1 : 1 Übungssessions",
+      "url": "/sessions"
     },
     {
       "name": "Support für Veranstaltungen",
       "url": "/veranstaltungssupport"
     },
-
     {
-      "name": "Typografie",
-      "url": "/typografie"
-    },
-    {
-      "name": "404 Page",
-      "url": "/404"
+      "name": "Artikel",
+      "url": "/articles"
     }
   ],
   "footer": [
