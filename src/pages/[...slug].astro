@@ -29,8 +29,17 @@ const { title, slug, image, description, content } = Astro.props;
 ---
 
 <Base title={title} meta_title={title}>
-  <header class="w-screen px-4 py-16 mt-12 text-center">
+  <header class="w-screen px-4 py-16 mt-12 text-center bg-stone-100">
     <h1 set:html={title} class="mb-8 text-2xl optical-lg" />
+    {
+      image?.fields.file.url && (
+        <img
+          class="rounded-full mx-auto mb-8 w-48 h-48 border-1 border-stone-100  object-cover outline outline-2 outline-stone-800 outline-offset-2"
+          src={image.fields.file.url}
+          alt=""
+        />
+      )
+    }
     {
       description && (
         <blockquote

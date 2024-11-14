@@ -2,7 +2,7 @@
 import { simpleGermanDate } from "@/lib/utils/dateParser";
 import RichTextContainer from "@/components/RichTextContainer.astro";
 
-const { title, slug, description, publishedAt } = Astro.props.data.props;
+const { title, description, slug, publishedAt } = Astro.props.data.props;
 
 const readableDate = simpleGermanDate(publishedAt);
 ---

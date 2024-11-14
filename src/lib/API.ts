@@ -16,11 +16,13 @@ export const getArticles = async (onlyFeatured?: boolean) => {
   });
 
   const articles = articlesEntries.items
-    .map((item) => ({
-      params: { slug: item.fields.slug },
+    .map((item) => (
+      console.log(item),
+      {
+      params: { slug: slugify(item.fields.title) },
       props: {
         title: item.fields.title,
-        slug: item.fields.slug,
+        slug: slugify(item.fields.title),
         isFeatured: item.fields.isFeatured,
         image: item.fields.image,
         description: item.fields.description,
@@ -35,11 +37,13 @@ export const getArticles = async (onlyFeatured?: boolean) => {
     });
 
   if (onlyFeatured) {
+   
     return articles.filter((item) => item.props.isFeatured);
   } else {
     return articles;
   }
 };
+
 
 export const getWorkshops = async () => {
   const entries = await contentfulClient.getEntries<Workshop>({
