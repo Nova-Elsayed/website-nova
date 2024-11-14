@@ -1,0 +1,24 @@
+.optical-sm {
+    font-variation-settings: "opsz" 7;
+  };
+  
+  .optical-md {
+    font-variation-settings: "opsz" 24;
+  };
+  
+  .optical-lg {
+    font-variation-settings: "opsz" 72;
+  };
+  
+  .font-serif .italic {
+    @apply font-serif-italic;
+  }
+  .font-sans .italic {
+    @apply font-sans-italic;
+  }
+  .prose italic,
+  .prose .italic,
+  .prose i,
+  .prose em {
+    @apply font-serif-italic;
+  }
