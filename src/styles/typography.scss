@@ -19,6 +19,12 @@
   .prose italic,
   .prose .italic,
   .prose i,
-  .prose em {
+  .prose em,
+  .prose blockquote {
     @apply font-serif-italic;
+  }
+
+  .prose blockquote p:after,
+  .prose blockquote p:before {
+    content: none;
   }

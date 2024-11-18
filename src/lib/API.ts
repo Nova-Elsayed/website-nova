@@ -17,7 +17,7 @@ export const getArticles = async (onlyFeatured?: boolean) => {
 
   const articles = articlesEntries.items
     .map((item) => (
-      console.log(item),
+      // console.log(item),
       {
       params: { slug: slugify(item.fields.title) },
       props: {
