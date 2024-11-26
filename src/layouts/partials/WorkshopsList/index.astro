@@ -6,6 +6,7 @@ const workshops = Astro.props.workshops;
 ---
 
 <ul class="flex flex-wrap w-full my-8 justify-evenly">
+  <!-- Old Workshop list for non TicketTailor Workshops 
   {
     workshops.map((workshop: Workshop) => {
       return (
@@ -38,4 +39,43 @@ const workshops = Astro.props.workshops;
       );
     })
   }
+    -->
+
+    {
+      workshops.map((workshop) => {
+        return (
+        <li class="w-1/3 p-4">
+          <a
+            class="block transition-all group hover:scale-110"
+            href={workshop.props.URL}
+          >
+            <h3
+              set:html={workshop.props.name}
+              class="text-xl text-red-500 group-transition-colors group-hover:text-red-300"
+            />
+            {/* {workshop.props.parentTitle && (
+              <p
+                class="mt-2"
+                set:html={workshop.props.parentTitle}
+              />
+            )}
+            {async () => {
+              const address = await locationToAddress(workshop.props.location);
+
+              return <p set:html={address.city || address.village} />;
+            }} */}
+
+            {workshop.props.readableDate && (
+              <p class="mt-4" set:html={workshop.props.readableDate} />
+            )}
+
+            <p class="mt-2 text-sm italic text-center transition-opacity opacity-0 text-stone-500 group-hover:opacity-100">
+              Erfahre mehr …
+            </p>
+            <p class="text-sm mt-2 text-center text-stone-500">— &#10086; —</p>
+          </a>
+        </li>
+      );
+      })
+    }
 </ul>

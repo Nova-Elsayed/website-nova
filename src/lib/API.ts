@@ -1,9 +1,11 @@
 import { contentfulClient } from "@/lib/contentful";
-import type { Page, Article, Workshop, LandingPage } from "@/lib/contentful";
-import { slugify } from "@/lib/utils/textConverter";
+import type { Page, Article, Workshop, LandingPage, TTWorkshop } from "@/lib/contentful";
+import { slugify, markdownify } from "@/lib/utils/textConverter";
 // import { locationToAddress } from "@/lib/utils/locationParser";
 import { simpleGermanDate } from "@/lib/utils/dateParser";
 import axios from "axios";
+
+
 
 export const getSinglePage = async (id: string) => {
   const page = await contentfulClient.getEntry<Page>(id);
@@ -79,16 +81,35 @@ export const getWorkshopsTicketTailor = async () => {
     "Content-Type": "application/json",
   };
 
-  try {
-    const response = await axios.get(`${baseURL}events`, {
+  const workshops = await axios.get(`${baseURL}events`, {
       headers: headers,
-    });
+    })
+    .then((response) => {
 
-    return response.data;
-  } catch (error) {
-    console.log(error);
-  }
-};
+      return response.data.data.map((item: TTWorkshop) => {
+        // console.log(item);
+        
+        return {
+          params: { slug: slugify(item.name) },
+          props: {
+            slug: slugify(item.name),
+            name: item.name,
+            description: item.description.replace(/<\/?span[^>]*>/g,""),
+            URL: item.url,
+            status: item.status,
+            readableDate: simpleGermanDate(item.start.iso),
+            start:item.start.iso,
+            end:item.end.iso,
+          },
+        };
+      })
+    }).catch (error => {
+      console.log(error);
+
+    })
+
+  return workshops;
+  };
 
 export const getLandingPage = async () => {
   const landingPageData = await contentfulClient.getEntry<LandingPage>(

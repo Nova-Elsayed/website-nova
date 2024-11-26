@@ -40,6 +40,19 @@ export interface Workshop {
   };
 }
 
+export interface TTWorkshop {
+  name: string;
+  description: string;
+  url: string;
+  status: string;
+  start: {iso: Date};
+  end: {iso: Date};
+  venue: {
+    name: string;
+    postal_code: string;
+  };
+};
+
 export interface LandingPage {
   contentTypeId: "index";
   entryId: "1aRfABlgG4hmSE78soNUP3";

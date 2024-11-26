@@ -18,8 +18,10 @@ const page = await getLandingPage();
 
 // console.log("page: ", page);
 
-const ticketTailor = await getWorkshopsTicketTailor();
-// console.log("ticketTailor: ", ticketTailor.data);
+const ticketTailorEvents = await getWorkshopsTicketTailor();
+const ticketTailor = ticketTailorEvents.filter((item) => {
+  return item.props.status === "published";
+});
 
 const workshops = await getWorkshops();
 
@@ -99,7 +101,15 @@ const recentWorkshops = workshops.filter(
     <Section>
       <SectionHeader title={page.workshopsHeadline} />
       <RichTextContainer class="text-left" content={page.workshopsText} />
-      {ticketTailor && <div class="w-8 h-8 bg-red-500" />}
+      {ticketTailor && ticketTailor.length > 0 && (
+        <section class="my-8">
+          <h2
+            set:html={page.workshopsUpcomingHeadline}
+            class="mb-4 text-lg"
+          />
+          <WorkshopsList workshops={ticketTailor} />
+        </section>
+      )}
 
       {
         upcomingWorkshops.length > 0 && (
@@ -113,13 +123,13 @@ const recentWorkshops = workshops.filter(
         )
       }
 
-      <div class="flex w-full link-bar mt-8">
+      <!-- <div class="flex w-full link-bar mt-8">
         <Button
           label="Erfahre mehr …"
           href="/workshops/"
           className="mx-auto"
         />
-      </div>
+      </div> -->
     </Section>
     <!-- / WORKSHOPS -->
 
