@@ -8,7 +8,13 @@ export interface Page {
   fields: {
     title: EntryFieldTypes.Text;
     slug: EntryFieldTypes.Text;
-    image?: EntryFieldTypes.Object;
+    image?: {
+       fields: { 
+        file: { 
+          url: EntryFieldTypes.Text
+        }
+      }
+    };
     description?: EntryFieldTypes.Text;
     content: EntryFieldTypes.RichText;
   };
@@ -19,7 +25,13 @@ export interface Article {
     title: EntryFieldTypes.Text;
     slug: EntryFieldTypes.Text;
     isFeatured: EntryFieldTypes.Boolean;
-    image?: EntryFieldTypes.Object;
+    image?: {
+       fields: { 
+        file: { 
+          url: EntryFieldTypes.Text
+        }
+      }
+    };
     description: EntryFieldTypes.Text;
     content: EntryFieldTypes.RichText;
     publishedAt: EntryFieldTypes.Date;
@@ -59,7 +71,13 @@ export interface LandingPage {
   fields: {
     title: EntryFieldTypes.Text;
     headerHeadline: EntryFieldTypes.Text;
-    headerImage: EntryFieldTypes.Object;
+    headerImage: {
+      fields: {
+        file: {
+          url: EntryFieldTypes.Text;
+        };
+      };
+    };
     headerSubHeadline: EntryFieldTypes.Text;
     headerTagline: EntryFieldTypes.Text;
     headerLink01Label: EntryFieldTypes.Text;

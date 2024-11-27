@@ -1,5 +1,5 @@
 ---
-import menu from "@/config/menu.json";
+import * as menu from "@/config/menu.json" assert { type: "json" };
 import Icon from "@/helpers/DynamicIcon";
 
 export interface NavigationLink {
@@ -60,29 +60,29 @@ const { pathname } = Astro.url;
   class NavSmall extends HTMLElement {
     connectedCallback() {
       let showMenu = false;
-      const menuButton: HTMLElement = document.getElementById("menu-btn");
-      const menu: HTMLElement = document.getElementById("nav-menu");
+      const menuButton: HTMLElement | null = document.getElementById("menu-btn");
+      const menu: HTMLElement | null = document.getElementById("nav-menu");
 
-      const btnLayer01: HTMLElement = document.querySelector(".btn-layer-01");
-      const btnLayer02: HTMLElement = document.querySelector(".btn-layer-02");
+      const btnLayer01: HTMLElement | null = document.querySelector(".btn-layer-01");
+      const btnLayer02: HTMLElement | null = document.querySelector(".btn-layer-02");
 
       const toggleMenu = () => {
         showMenu = !showMenu;
 
         if (showMenu) {
-          btnLayer01.classList.replace("block", "hidden");
-          btnLayer02.classList.replace("hidden", "block");
-          menu.classList.replace("opacity-0", "opacity-100");
-          menu.classList.replace("h-0", "h-screen");
+          btnLayer01?.classList.replace("block", "hidden");
+          btnLayer02?.classList.replace("hidden", "block");
+          menu?.classList.replace("opacity-0", "opacity-100");
+          menu?.classList.replace("h-0", "h-screen");
         } else {
-          btnLayer01.classList.replace("hidden", "block");
-          btnLayer02.classList.replace("block", "hidden");
-          menu.classList.replace("opacity-100", "opacity-0");
-          menu.classList.replace("h-screen", "h-0");
+          btnLayer01?.classList.replace("hidden", "block");
+          btnLayer02?.classList.replace("block", "hidden");
+          menu?.classList.replace("opacity-100", "opacity-0");
+          menu?.classList.replace("h-screen", "h-0");
         }
       };
 
-      menuButton.addEventListener("click", toggleMenu);
+      menuButton?.addEventListener("click", toggleMenu);
     }
   }
 

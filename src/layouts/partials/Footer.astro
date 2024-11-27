@@ -1,15 +1,15 @@
 ---
 import Logo from "@/components/Logo.astro";
 import Social from "@/components/Social.astro";
-import config from "@/config/config.json";
-import menu from "@/config/menu.json";
-import social from "@/config/social.json";
+import * as config from "@/config/config.json" assert { type: "json" };
+import * as menu from "@/config/menu.json" assert { type: "json" };
+import * as social from "@/config/social.json" assert { type: "json" };
 import { markdownify } from "@/lib/utils/textConverter";
 
 const { footer }: { footer: { name: string; url: string }[] } = menu;
 ---
 
-<footer class="bg-theme-light dark:bg-darkmode-theme-light">
+<footer class="bg-theme-light">
   <div class="container">
     <div class="row items-center py-10">
       <div class="mb-8 text-center lg:col-3 lg:mb-0 lg:text-left">
@@ -31,8 +31,8 @@ const { footer }: { footer: { name: string; url: string }[] } = menu;
       </div>
     </div>
   </div>
-  <div class="border-t border-border py-7 dark:border-darkmode-border">
-    <div class="container text-center text-light dark:text-darkmode-light">
+  <div class="border-t border-border py-7 ">
+    <div class="container text-center text-light">
       <p set:html={markdownify(config.params.copyright)} />
     </div>
   </div>
