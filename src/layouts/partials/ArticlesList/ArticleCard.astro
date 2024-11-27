@@ -20,7 +20,7 @@ const readableDate = simpleGermanDate(publishedAt);
     {
       description && (
         <div class="mx-auto prose rich-text-container">
-          <blockquote class="text-left" set:html={description} />
+          <p class="text-left" set:html={description} />
           <p class="text-sm italic text-center transition-opacity opacity-0 text-stone-500 group-hover:opacity-100">
             weiterlesen…
           </p>

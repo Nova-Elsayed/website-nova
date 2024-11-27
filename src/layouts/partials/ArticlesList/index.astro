@@ -9,7 +9,7 @@ const articles = await getArticles(onlyFeatured);
 ---
 
 <ul class="my-8 article-list">
-  {articles.map((item, index) => (
-    <ArticleCard key={index} data={item.props} />
+  {articles.map((item, index, array) => (
+    <ArticleCard key={index} data={item} />
   ))}
 </ul>
