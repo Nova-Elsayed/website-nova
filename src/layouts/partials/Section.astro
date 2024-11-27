@@ -1,3 +1,11 @@
-<section class="w-screen px-8 pt-8 pb-16 text-center section">
+---
+interface Props {
+  id?: string;
+} 
+
+const { id } = Astro.props
+---
+
+<section id={Astro.props.id} class="w-screen px-8 pt-8 pb-16 text-center section">
   <slot />
 </section>

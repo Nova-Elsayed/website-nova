@@ -98,7 +98,7 @@ const recentWorkshops = workshops.filter(
     <!-- / INTRO -->
     <!-- WORKSHOPS -->
 
-    <Section>
+    <Section id="workshops">
       <SectionHeader title={page.workshopsHeadline} />
       <RichTextContainer class="text-left" content={page.workshopsText} />
       {ticketTailor && ticketTailor.length > 0 && (
@@ -150,7 +150,7 @@ const recentWorkshops = workshops.filter(
     <!-- / SESSIONS -->
 
     <!-- SUPPORT -->
-    <Section>
+    <Section id="support">
       <SectionHeader title={page.supportHeadline} />
       <div class="grid grid-cols-3 gap-4 mx-auto mb-4 max-w-prose">
         <RichTextContainer

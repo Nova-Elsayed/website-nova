@@ -10,7 +10,7 @@
     },
     {
       "name": "Workshops",
-      "url": "/workshops"
+      "url": "/#workshops"
     },
     {
       "name": "1 : 1 Übungssessions",
@@ -18,7 +18,7 @@
     },
     {
       "name": "Support für Veranstaltungen",
-      "url": "/veranstaltungssupport"
+      "url": "/#support"
     },
     {
       "name": "Artikel",
@@ -27,12 +27,12 @@
   ],
   "footer": [
     {
-      "name": "Elements",
-      "url": "/elements"
+      "name": "Kontakt",
+      "url": "mailto:supa.nova@gmail.com"
     },
     {
-      "name": "Privacy Policy",
-      "url": "/privacy-policy"
+      "name": "Impressum",
+      "url": "/impressum"
     }
   ]
 }
