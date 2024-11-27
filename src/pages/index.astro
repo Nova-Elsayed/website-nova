@@ -16,8 +16,6 @@ export const prerender = true;
 
 const page = await getLandingPage();
 
-// console.log("page: ", page);
-
 const ticketTailorEvents = await getWorkshopsTicketTailor();
 const ticketTailor = ticketTailorEvents.filter((item) => {
   return item.props.status === "published";
