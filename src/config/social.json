@@ -1,6 +1,11 @@
 {
   "main": [
     {
+      "name": "Mail",
+      "icon": "IoMail",
+      "link": "mailto:supa.nova.berlin@gmail.com"
+    },
+    {
       "name": "Instagram",
       "icon": "IoLogoInstagram",
       "link": "https://instagram.com/"
