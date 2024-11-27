@@ -156,7 +156,7 @@ const recentWorkshops = workshops.filter(
           class="col-span-3 mb-2 text-left"
           content={page.supportIntroText}
         />
-        <ul class="block">
+        <ul class="block col-span-3 md:col-span-1">
           <li
             class="block w-full py-3 mx-auto text-xl text-center text-red-400 transition-all"
             set:html={page.supportLink01Label}
@@ -178,7 +178,7 @@ const recentWorkshops = workshops.filter(
           />
         </ul>
         <RichTextContainer
-          class="col-span-2 pt-4 text-left"
+          class="col-span-3 md:col-span-2 pt-4 text-left"
           content={page.supportText}
         />
       </div>
