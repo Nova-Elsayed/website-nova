@@ -8,12 +8,15 @@
     {
       "name": "Instagram",
       "icon": "IoLogoInstagram",
-      "link": "https://instagram.com/"
-    },
+      "link": "https://www.instagram.com/nova_el_sayed/"
+    }
+  ],
+  "parked": [
     {
       "name": "LinkedIn",
       "icon": "IoLogoLinkedin",
       "link": "https://www.linkedin.com/"
     }
+
   ]
 }
