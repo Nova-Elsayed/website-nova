@@ -16,6 +16,7 @@ export interface Page {
       }
     };
     description?: EntryFieldTypes.Text;
+    introText?: EntryFieldTypes.RichText;
     content: EntryFieldTypes.RichText;
   };
 }

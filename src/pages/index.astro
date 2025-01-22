@@ -4,6 +4,7 @@ import {
   getLandingPage,
   getWorkshops,
   getWorkshopsTicketTailor,
+  getSinglePage,
 } from "@/lib/API";
 import WorkshopsList from "@/partials/WorkshopsList/index.astro";
 import ArticlesList from "@/partials/ArticlesList/index.astro";
@@ -21,6 +22,8 @@ const ticketTailorEvents = await getWorkshopsTicketTailor();
 const ticketTailor = ticketTailorEvents.filter((item: { props: { status: string } }) => {
   return item.props.status === "published";
 });
+
+const workshopsPage = await getSinglePage("2BOI94KBfNnnUXkZCIq9rN");
 
 const workshops = await getWorkshops();
 
@@ -99,7 +102,10 @@ const recentWorkshops = workshops.filter(
 
     <Section id="workshops">
       <SectionHeader title={page.workshopsHeadline} />
-      <RichTextContainer class="text-left" content={page.workshopsText} />
+      <div class="sm:grid grid-cols-3 gap-4 mx-auto mb-4 max-w-prose">
+        {workshopsPage.image && <img class="col-span-1 h-auto w-full " src={workshopsPage.image.fields.file.url} alt="" />}
+        <RichTextContainer class="text-left col-span-2" content={workshopsPage.introText} />
+      </div>
       {ticketTailor && ticketTailor.length > 0 && (
         <section class="my-8">
           <h2
