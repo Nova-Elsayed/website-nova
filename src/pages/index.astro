@@ -23,6 +23,8 @@ const ticketTailor = ticketTailorEvents.filter((item: { props: { status: string 
   return item.props.status === "published";
 });
 
+const sessionsPage = await getSinglePage("4UgguPWhfkrumrdwMIeAsL");
+
 const workshopsPage = await getSinglePage("2BOI94KBfNnnUXkZCIq9rN");
 
 const workshops = await getWorkshops();
@@ -30,15 +32,17 @@ const workshops = await getWorkshops();
 workshops.sort((a, b) => {
   // Turn your strings into dates, and then subtract them
   // to get a value that is either negative, positive, or zero.
-  return Date.parse(b.props.dateStart) - Date.parse(a.props.dateStart);
+  return Date.parse(b.props.start) - Date.parse(a.props.start);
 });
 
-const upcomingWorkshops = workshops
-  .filter((item) => Date.parse(item.props.dateStart) >= Date.now())
-  .reverse();
+const upcomingWorkshops = ticketTailor.filter((item) => {
+    return Date.parse(item.props.start) >= Date.now();
+  });
+
+
 
 const recentWorkshops = workshops.filter(
-  (item) => Date.parse(item.props.dateStart) < Date.now(),
+ (item) => Date.parse(item.props.start) < Date.now(),
 );
 ---
 
@@ -106,17 +110,17 @@ const recentWorkshops = workshops.filter(
         {workshopsPage.image && <img class="col-span-1 h-auto w-full " src={workshopsPage.image.fields.file.url} alt="" />}
         <RichTextContainer class="text-left col-span-2" content={workshopsPage.introText} />
       </div>
-      {ticketTailor && ticketTailor.length > 0 && (
+      {upcomingWorkshops && upcomingWorkshops.length > 0 && (
         <section class="my-8">
           <h2
             set:html={page.workshopsUpcomingHeadline}
             class="mb-4 text-lg"
           />
-          <WorkshopsList workshops={ticketTailor} />
+          <WorkshopsList workshops={upcomingWorkshops} />
         </section>
       )}
 
-      {
+      <!-- {
         upcomingWorkshops.length > 0 && (
           <section class="my-8">
             <h2
@@ -126,15 +130,15 @@ const recentWorkshops = workshops.filter(
             <WorkshopsList workshops={upcomingWorkshops} />
           </section>
         )
-      }
+      } -->
 
-      <!-- <div class="flex w-full link-bar mt-8">
+       <div class="flex w-full link-bar mt-8">
         <Button
           label="Erfahre mehr …"
-          href="/workshops/"
+          href={workshopsPage.slug}
           className="mx-auto"
         />
-      </div> -->
+      </div>
     </Section>
     <!-- / WORKSHOPS -->
 
@@ -142,11 +146,11 @@ const recentWorkshops = workshops.filter(
 
     <Section>
       <SectionHeader title={page.sessionsHeadline} />
-      <RichTextContainer class="text-left" content={page.sessionsIntroText} />
+      <RichTextContainer class="text-left" content={sessionsPage.introText} />
       <div class="flex w-full link-bar mt-8">
         <Button
-          label={page.sessionsLinkLabel ? page.sessionsLinkLabel : "Erfahre mehr …"}
-          href={page.sessionsLinkURL}
+          label="Erfahre mehr …"
+          href={sessionsPage.slug}
           className="mx-auto"
         />
       </div>
