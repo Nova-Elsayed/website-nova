@@ -41,7 +41,7 @@ const upcomingWorkshops = ticketTailor.filter((item) => {
 
 
 
-const recentWorkshops = workshops.filter(
+const recentWorkshops = ticketTailor.reverse().filter(
  (item) => Date.parse(item.props.start) < Date.now(),
 );
 ---
@@ -112,33 +112,33 @@ const recentWorkshops = workshops.filter(
       </div>
       {upcomingWorkshops && upcomingWorkshops.length > 0 && (
         <section class="my-8">
-          <h2
+          <h3
             set:html={page.workshopsUpcomingHeadline}
-            class="mb-4 text-lg"
+            class="mb-4 text-2xl optical-md"
           />
           <WorkshopsList workshops={upcomingWorkshops} />
         </section>
       )}
 
-      <!-- {
-        upcomingWorkshops.length > 0 && (
+      {
+        recentWorkshops.length > 0 && (
           <section class="my-8">
-            <h2
-              set:html={page.workshopsUpcomingHeadline}
-              class="mb-4 text-lg"
+            <h3
+              set:html={page.workshopsRecentHeadline}
+              class="mb-4 text-2xl optical-md"
             />
-            <WorkshopsList workshops={upcomingWorkshops} />
+            <WorkshopsList workshops={recentWorkshops} />
           </section>
         )
-      } -->
+      }
 
-       <div class="flex w-full link-bar mt-8">
+       <!-- <div class="flex w-full link-bar mt-8">
         <Button
           label="Erfahre mehr …"
           href={workshopsPage.slug}
           className="mx-auto"
         />
-      </div>
+      </div> -->
     </Section>
     <!-- / WORKSHOPS -->
 
