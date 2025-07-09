@@ -61,16 +61,17 @@ const { pathname } = Astro.url;
       const navLarge: HTMLElement | null = document.getElementById("nav-large");
 
       window.addEventListener("scroll", () => {
-        if (lastScroll < window.scrollY || lastScroll === 0) {
+        if (lastScroll < window.scrollY && window.scrollY > 100 || lastScroll === 0) {
           navLarge?.classList.replace("opacity-100", "opacity-0");
           navLarge?.classList.replace("top-0", "-top-20");
         } else {
           navLarge?.classList.replace("-top-20", "top-0");
           navLarge?.classList.replace("opacity-0", "opacity-100");
         }
+        console.log(lastScroll, window.scrollY);
         lastScroll = window.scrollY;
 
-        lastScroll = lastScroll;
+        // lastScroll = lastScroll;
       });
     }
   }
