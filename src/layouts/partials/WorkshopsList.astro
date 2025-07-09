@@ -1,0 +1,84 @@
+---
+// import type { Workshop } from "@/lib/contentful";
+import { locationToAddress } from "@/lib/utils/locationParser";
+
+const workshops = Astro.props.workshops;
+
+// console.log(workshops);
+---
+
+<ul class="my-8">
+  <!-- Old Workshop list for non TicketTailor Workshops  -->
+  {
+    workshops.map((workshop) => {
+      return (
+        <li class="mt-16 mb-24">
+          <a
+            class="block transition-all group hover:scale-110"
+            href={`/workshops/${workshop.props.slug}/`}
+          >
+            <h3
+              set:html={workshop.props.headline}
+              class="mb-2 text-2xl text-stone-600 group-hover:text-red-400"
+            />
+            <div class="mx-auto prose rich-text-container">
+              <p class="text-left">
+                {workshop.props.readableDate && (
+                  <p
+                    class="mb-4 text-sm"
+                    set:html={workshop.props.readableDate}
+                  />
+                )}
+                {workshop.props.parentTitle && (
+                  <p class="mt-2" set:html={workshop.props.parentTitle} />
+                )}
+                {async () => {
+                  if (!workshop.props.location) {
+                    return;
+                  }
+                  const address = await locationToAddress(
+                    workshop.props.location
+                  );
+
+                  return <p set:html={address.city || address.village} />;
+                }}
+              </p>
+              <p class="text-sm italic text-center transition-opacity opacity-0 text-stone-500 group-hover:opacity-100">
+                weiterlesen…
+              </p>
+              <p class="text-sm text-center text-stone-500">— &#10086; —</p>
+            </div>
+          </a>
+        </li>
+      );
+    })
+  }
+
+  <!-- {
+      workshops.map((workshop, index) => {
+        // console.log(workshop);
+        return (
+        <li key={index} class="mt-16 mb-24">
+          <a
+            class="block transition-all group hover:scale-110"
+            href={workshop.props.URL}
+          >
+            <h4
+              set:html={workshop.props.name}
+              class="mb-2 text-2xl text-red-500 group-transition-colors group-hover:text-red-300"
+            />
+
+            {workshop.props.readableDate && (
+              <p class="mb-4 text-sm" set:html={workshop.props.readableDate} />
+            )}
+
+            <p class="mt-2 text-sm italic text-center transition-opacity opacity-0 text-stone-500 group-hover:opacity-100">
+              Erfahre mehr …
+            </p>
+            <p class="text-sm mt-2 text-center text-stone-500">— &#10086; —</p>
+          </a>
+        </li>
+      );
+      })
+    } -->
+</ul>

@@ -6,8 +6,8 @@ import {
   getWorkshopsTicketTailor,
   getSinglePage,
 } from "@/lib/API";
-import WorkshopsList from "@/partials/WorkshopsList/index.astro";
-import ArticlesList from "@/partials/ArticlesList/index.astro";
+import WorkshopsList from "@/partials/WorkshopsList.astro";
+import ArticlesList from "@/partials/ArticlesList.astro";
 import RichTextContainer from "@/components/RichTextContainer.astro";
 import SectionHeader from "@/partials/SectionHeader.astro";
 import Button from "@/components/Button.astro";
@@ -16,12 +16,6 @@ import Section from "@/partials/Section.astro";
 export const prerender = true;
 
 const page = await getLandingPage();
-
-const ticketTailorEvents = await getWorkshopsTicketTailor();
-
-const ticketTailor = ticketTailorEvents.filter((item: { props: { status: string } }) => {
-  return item.props.status === "published";
-});
 
 const sessionsPage = await getSinglePage("4UgguPWhfkrumrdwMIeAsL");
 
@@ -32,18 +26,14 @@ const workshops = await getWorkshops();
 workshops.sort((a, b) => {
   // Turn your strings into dates, and then subtract them
   // to get a value that is either negative, positive, or zero.
-  return Date.parse(b.props.start) - Date.parse(a.props.start);
+  return Date.parse(b.props.dateStart) - Date.parse(a.props.dateStart);
 });
 
-const upcomingWorkshops = ticketTailor.filter((item) => {
-    return Date.parse(item.props.start) >= Date.now();
-  });
+const upcomingWorkshops = workshops.filter((item) => {
+  const today = new Date();
 
-
-
-const recentWorkshops = ticketTailor.reverse().filter(
- (item) => Date.parse(item.props.start) < Date.now(),
-);
+  return new Date(item.props.dateStart) >= today;
+});
 ---
 
 <Base title={page.headerHeadline} meta_title={page.headerHeadline}>
@@ -59,7 +49,7 @@ const recentWorkshops = ticketTailor.reverse().filter(
           alt=""
         />
       )
-}
+    }
     <div
       class="z-10 max-w-md m-auto me-4 mb-16 -mt-24 md:absolute bottom-8 md:start-1/2 md:my-0"
     >
@@ -107,38 +97,39 @@ const recentWorkshops = ticketTailor.reverse().filter(
     <Section id="workshops">
       <SectionHeader title={page.workshopsHeadline} />
       <div class="sm:grid grid-cols-3 gap-4 mx-auto mb-4 max-w-prose">
-        {workshopsPage.image && <img class="col-span-1 h-auto w-full " src={workshopsPage.image.fields.file.url} alt="" />}
-        <RichTextContainer class="text-left col-span-2" content={workshopsPage.introText} />
+        {
+          workshopsPage.image && (
+            <img
+              class="col-span-1 h-auto w-full "
+              src={workshopsPage.image.fields.file.url}
+              alt=""
+            />
+          )
+        }
+        <RichTextContainer
+          class="text-left col-span-2"
+          content={workshopsPage.introText}
+        />
       </div>
-      {upcomingWorkshops && upcomingWorkshops.length > 0 && (
-        <section class="my-8">
-          <h3
-            set:html={page.workshopsUpcomingHeadline}
-            class="mb-4 text-2xl optical-md"
-          />
-          <WorkshopsList workshops={upcomingWorkshops} />
-        </section>
-      )}
-
       {
-        recentWorkshops.length > 0 && (
-          <section class="my-8">
+        upcomingWorkshops && upcomingWorkshops.length > 0 && (
+          <Section>
             <h3
-              set:html={page.workshopsRecentHeadline}
+              set:html="Meine nächsten Workshops"
               class="mb-4 text-2xl optical-md"
             />
-            <WorkshopsList workshops={recentWorkshops} />
-          </section>
+            <WorkshopsList workshops={upcomingWorkshops} />
+          </Section>
         )
       }
 
-       <!-- <div class="flex w-full link-bar mt-8">
+      <div class="flex w-full link-bar mt-8">
         <Button
           label="Erfahre mehr …"
           href={workshopsPage.slug}
           className="mx-auto"
         />
-      </div> -->
+      </div>
     </Section>
     <!-- / WORKSHOPS -->
 

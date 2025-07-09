@@ -4,8 +4,9 @@ import Section from "@/partials/Section.astro";
 
 import { getSinglePage, getWorkshops } from "@/lib/API";
 
-import WorkshopsList from "@/partials/WorkshopsList/index.astro";
+import WorkshopsList from "@/partials/WorkshopsList.astro";
 import RichTextContainer from "@/components/RichTextContainer.astro";
+import { networkInterfaces } from "os";
 
 export const prerender = true;
 
@@ -18,14 +19,23 @@ workshops.sort((a, b) => {
   // to get a value that is either negative, positive, or zero.
   return Date.parse(b.props.dateStart) - Date.parse(a.props.dateStart);
 });
+
+const recentWorkshops = workshops.filter((item) => {
+  const today = new Date();
+
+  return new Date(item.props.dateStart) < today;
+});
+
+const upcomingWorkshops = workshops.filter((item) => {
+  const today = new Date();
+
+  return new Date(item.props.dateStart) >= today;
+});
 ---
 
 <Base title={page.title} meta_title={page.title}>
   <header class="w-screen px-8 py-16 mt-12 text-center">
-    <p
-      set:html="— Workshops —"
-      class="mb-8 tracking-wide text-md optical-md"
-    />
+    <p set:html="— Workshops —" class="mb-8 tracking-wide text-md optical-md" />
     <h1 set:html={page.title} class="mb-8 text-2xl optical-lg" />
     {
       page.description && (
@@ -40,7 +50,23 @@ workshops.sort((a, b) => {
     <RichTextContainer class="" content={page.content} />
   </Section>
 
-  <Section>
-    <!-- <WorkshopsList workshops={workshops} /> -->
-  </Section>
+  {
+    upcomingWorkshops && upcomingWorkshops.length > 0 && (
+      <Section>
+        <h3
+          set:html="Meine nächsten Workshops"
+          class="mb-4 text-2xl optical-md"
+        />
+        <WorkshopsList workshops={upcomingWorkshops} />
+      </Section>
+    )
+  }
+  {
+    recentWorkshops && recentWorkshops.length > 0 && (
+      <Section>
+        <h3 set:html="Vergangene Workshops" class="mb-4 text-2xl optical-md" />
+        <WorkshopsList workshops={recentWorkshops} />
+      </Section>
+    )
+  }
 </Base>

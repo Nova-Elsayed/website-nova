@@ -68,10 +68,8 @@ const { pathname } = Astro.url;
           navLarge?.classList.replace("-top-20", "top-0");
           navLarge?.classList.replace("opacity-0", "opacity-100");
         }
-        console.log(lastScroll, window.scrollY);
         lastScroll = window.scrollY;
 
-        // lastScroll = lastScroll;
       });
     }
   }

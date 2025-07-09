@@ -9,11 +9,11 @@ export interface Page {
     title: EntryFieldTypes.Text;
     slug: EntryFieldTypes.Text;
     image?: {
-       fields: { 
-        file: { 
-          url: EntryFieldTypes.Text
-        }
-      }
+      fields: {
+        file: {
+          url: EntryFieldTypes.Text;
+        };
+      };
     };
     description?: EntryFieldTypes.Text;
     introText?: EntryFieldTypes.RichText;
@@ -27,11 +27,11 @@ export interface Article {
     slug: EntryFieldTypes.Text;
     isFeatured: EntryFieldTypes.Boolean;
     image?: {
-       fields: { 
-        file: { 
-          url: EntryFieldTypes.Text
-        }
-      }
+      fields: {
+        file: {
+          url: EntryFieldTypes.Text;
+        };
+      };
     };
     description: EntryFieldTypes.Text;
     content: EntryFieldTypes.RichText;
@@ -50,6 +50,13 @@ export interface Workshop {
     dateEnd?: EntryFieldTypes.Date;
     parentTitle?: EntryFieldTypes.Text;
     parentURL?: EntryFieldTypes.Text;
+    image?: {
+      fields: {
+        file: {
+          url: EntryFieldTypes.Text;
+        };
+      };
+    };
   };
 }
 
@@ -58,13 +65,13 @@ export interface TTWorkshop {
   description: string;
   url: string;
   status: string;
-  start: {iso: Date};
-  end: {iso: Date};
+  start: { iso: Date };
+  end: { iso: Date };
   venue: {
     name: string;
     postal_code: string;
   };
-};
+}
 
 export interface LandingPage {
   contentTypeId: "index";

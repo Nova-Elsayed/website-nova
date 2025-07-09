@@ -53,6 +53,8 @@ export const getWorkshops = async () => {
   });
 
   const workshops = entries.items.map((item) => {
+    const imageURL = item.fields.image?.fields?.file?.url || null;
+
     return {
       params: { slug: slugify(item.fields.title) },
       props: {
@@ -66,6 +68,8 @@ export const getWorkshops = async () => {
         readableDate: simpleGermanDate(item.fields.dateStart),
         parentTitle: item.fields.parentTitle,
         parentURL: item.fields.parentURL,
+        ticketLink: item.fields.ticketLink,
+        imageURL: imageURL,
       },
     };
   });

@@ -4,7 +4,7 @@ export const locationToAddress = async (location) => {
   const response = await fetch(reverseGeocodingUrl);
   const json = await response.json();
 
-  //   console.log(json);
+    // console.log(json);
 
   return json.address;
 };
