@@ -19,22 +19,16 @@ export async function getStaticPaths() {
   return pages;
 }
 
-const eventDate = (dateStart, dateEnd) => {
-  console.log(dateStart, dateEnd);
+const eventDate = (dateStart:string, dateEnd:string) => {
   const start = new Date(dateStart);
   const end = new Date(dateEnd);
 
-  console.log(start.getDay(), end.getDay());
-
   if (start.getDay() === end.getDay()) {
-  return `${readableDate}, ${start.getHours()}:${start.getMinutes().toString().padStart(2, "0")} — ${end.getHours()}:${end.getMinutes().toString().padStart(2, "0")} Uhr`
- 
-  }else {
-    
-    return `${simpleGermanDateWithTime(dateStart)} Uhr bis ${simpleGermanDateWithTime(dateEnd)} Uhr`
+    return `${readableDate}, ${start.getHours()}:${start.getMinutes().toString().padStart(2, "0")} — ${end.getHours()}:${end.getMinutes().toString().padStart(2, "0")} Uhr`;
+  } else {
+    return `${simpleGermanDateWithTime(dateStart)} Uhr bis ${simpleGermanDateWithTime(dateEnd)} Uhr`;
   }
-  
-}
+};
 
 const {
   slug,
@@ -71,9 +65,12 @@ const readableDate = simpleGermanDate(dateStart);
   </header>
   <Section>
     <RichTextContainer class="mb-16 text-left" content={description} />
-    <div class="mx-auto prose font-serif rich-text-container text-base text-left">
+    <div
+      class="mx-auto prose font-serif rich-text-container text-base text-left"
+    >
       <p>
-        <b>Wann:</b> <br/> 
+        <b>Wann:</b>
+        <br />
         {() => eventDate(dateStart, dateEnd)}
       </p>
 
