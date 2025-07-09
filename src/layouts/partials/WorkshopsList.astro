@@ -36,11 +36,9 @@ const workshops = Astro.props.workshops;
                   if (!workshop.props.location) {
                     return;
                   }
-                  const address = await locationToAddress(
-                    workshop.props.location
-                  );
+                  const address = await locationToAddress(workshop.props.location);
 
-                  return <p set:html={address.city || address.village} />;
+                  return (<p set:html={address.city || address.village} />);
                 }}
               </p>
               <p class="text-sm italic text-center transition-opacity opacity-0 text-stone-500 group-hover:opacity-100">
