@@ -32,7 +32,7 @@ const workshops = Astro.props.workshops;
                 {workshop.props.parentTitle && (
                   <p class="mt-2" set:html={workshop.props.parentTitle} />
                 )}
-                {async () => {
+                { async () => {
                   if (!workshop.props.location) {
                     return;
                   }
@@ -40,7 +40,7 @@ const workshops = Astro.props.workshops;
                     workshop.props.location
                   );
                   console.log(address);
-                  
+
                   return <p set:html={address.city || address.village} />;
                 }}
               </p>

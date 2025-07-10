@@ -5,7 +5,7 @@ export const locationToAddress = async (location) => {
   
   const response = await fetch(reverseGeocodingUrl);
   if (!response.ok) {
-    const txt = response.text();
+    const txt = await response.text();
     console.error(txt);
     throw new Error("location to address failed");
   } else {
