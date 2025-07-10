@@ -8,7 +8,13 @@ import axios from "axios";
 
 
 export const getSinglePage = async (id: string) => {
-  const page = await contentfulClient.getEntry<Page>(id);
+  let page;
+  try {   
+    page = await contentfulClient.getEntry<Page>(id);
+  } catch (e) {
+    console.error(e);
+    throw e;
+  }
   return page.fields;
 };
 
@@ -48,9 +54,19 @@ export const getArticles = async (onlyFeatured?: boolean) => {
 
 
 export const getWorkshops = async () => {
-  const entries = await contentfulClient.getEntries<Workshop>({
-    content_type: "workshop",
-  });
+
+  
+  let entries;
+
+  try {
+    entries = await contentfulClient.getEntries<Workshop>({
+      content_type: "workshop",
+    });
+
+  } catch (e) {
+    console.error(e);
+    throw e;
+  }
 
   const workshops = entries.items.map((item) => {
     const imageURL = item.fields.image?.fields?.file?.url || null;
