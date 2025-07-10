@@ -4,6 +4,7 @@ import { slugify, markdownify } from "@/lib/utils/textConverter";
 // import { locationToAddress } from "@/lib/utils/locationParser";
 import { simpleGermanDate } from "@/lib/utils/dateParser";
 import axios from "axios";
+import { get } from "http";
 
 
 
@@ -52,23 +53,19 @@ export const getArticles = async (onlyFeatured?: boolean) => {
   }
 };
 
-
 export const getWorkshops = async () => {
-
-  
   let entries;
 
   try {
     entries = await contentfulClient.getEntries<Workshop>({
       content_type: "workshop",
     });
-
   } catch (e) {
     console.error(e);
     throw e;
   }
 
-  const workshops = entries.items.map((item) => {
+  let workshops = entries.items.map((item) => {
     const imageURL = item.fields.image?.fields?.file?.url || null;
 
     return {
@@ -79,6 +76,8 @@ export const getWorkshops = async () => {
         headline: item.fields.headline,
         description: item.fields.description,
         location: item.fields.location,
+        place: item.fields.place,
+        street: item.fields.street,
         dateStart: item.fields.dateStart,
         dateEnd: item.fields.dateEnd,
         readableDate: simpleGermanDate(item.fields.dateStart),
@@ -86,50 +85,65 @@ export const getWorkshops = async () => {
         parentURL: item.fields.parentURL,
         ticketLink: item.fields.ticketLink,
         imageURL: imageURL,
+        address: null,
       },
     };
   });
 
+  // workshops = await Promise.all(
+  //   workshops.map(async (ws) => {
+  //     try {
+  //       ws.props.address = await getAddressFromLocation(ws.props.location);
+  //     } catch (e) {
+  //       console.error("Address fetch failed for", ws.props.slug);
+  //       ws.props.address = null;
+  //     }
+  //     // console.log(ws);
+  //     return ws;
+  //   })
+  // );
+  
   return workshops;
 };
 
-export const getWorkshopsTicketTailor = async () => {
-  const baseURL = "https://api.tickettailor.com/v1/";
-  const apiKey = btoa(import.meta.env.TICKETTAILOR_API_KEY);
-  const headers = {
-    Authorization: `Basic ${apiKey}`,
-    "Content-Type": "application/json",
-  };
 
-  const workshops = await axios.get(`${baseURL}events`, {
-      headers: headers,
-    })
-    .then((response) => {
+// export const getWorkshopsTicketTailor = async () => {
+//   const baseURL = "https://api.tickettailor.com/v1/";
+//   const apiKey = btoa(import.meta.env.TICKETTAILOR_API_KEY);
+//   const headers = {
+//     Authorization: `Basic ${apiKey}`,
+//     "Content-Type": "application/json",
+//   };
 
-      return response.data.data.map((item: TTWorkshop) => {
-        // console.log(item);
+  // const workshops = await axios.get(`${baseURL}events`, {
+  //     headers: headers,
+  //   })
+  //   .then((response) => {
+
+  //     return response.data.data.map((item: TTWorkshop) => {
+  //       // console.log(item);
         
-        return {
-          params: { slug: slugify(item.name) },
-          props: {
-            slug: slugify(item.name),
-            name: item.name,
-            description: item.description.replace(/<\/?span[^>]*>/g,""),
-            URL: item.url,
-            status: item.status,
-            readableDate: simpleGermanDate(item.start.iso),
-            start:item.start.iso,
-            end:item.end.iso,
-          },
-        };
-      })
-    }).catch (error => {
-      console.log(error);
+  //       return {
+  //         params: { slug: slugify(item.name) },
+  //         props: {
+  //           slug: slugify(item.name),
+  //           name: item.name,
+  //           description: item.description.replace(/<\/?span[^>]*>/g,""),
+  //           URL: item.url,
+  //           status: item.status,
+  //           readableDate: simpleGermanDate(item.start.iso),
+  //           start:item.start.iso,
+  //           end:item.end.iso,
+  //         },
+  //       };
+  //     })
+  //   }).catch (error => {
+  //     console.log(error);
 
-    })
+  //   })
 
-  return workshops;
-  };
+  // return workshops;
+  // };
 
 export const getLandingPage = async () => {
   const landingPageData = await contentfulClient.getEntry<LandingPage>(
@@ -137,3 +151,19 @@ export const getLandingPage = async () => {
   );
   return landingPageData.fields;
 };
+
+export const getAddressFromLocation = async (location:object) => {
+  const URL = `https://api.mapbox.com/search/geocode/v6/reverse?longitude=${location.lon}&latitude=${location.lat}&access_token=${import.meta.env.MAPBOX_ACCESS_TOKEN}`
+
+  console.log("address check")
+  const response = await fetch(URL);
+  if (!response.ok) {
+    const txt = await response.text();
+    console.error(txt);
+    throw new Error("location to address failed");
+  } else {
+    const json = await response.json();
+    console.log(json);
+    return json.address;
+  }
+}

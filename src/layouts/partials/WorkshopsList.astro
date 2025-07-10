@@ -8,7 +8,6 @@ const workshops = Astro.props.workshops;
 ---
 
 <ul class="my-8">
-  <!-- Old Workshop list for non TicketTailor Workshops  -->
   {
     workshops.map((workshop) => {
       return (
@@ -32,17 +31,9 @@ const workshops = Astro.props.workshops;
                 {workshop.props.parentTitle && (
                   <p class="mt-2" set:html={workshop.props.parentTitle} />
                 )}
-                { async () => {
-                  if (!workshop.props.location) {
-                    return;
-                  }
-                  const address = await locationToAddress(
-                    workshop.props.location
-                  );
-                  console.log(address);
-
-                  return <p set:html={address.city || address.village} />;
-                }}
+                {workshop.props.street && (
+                  <p class="mt-2" set:html={`${workshop.props.street}, ${workshop.props.place}`} />
+                )}
               </p>
               <p class="text-sm italic text-center transition-opacity opacity-0 text-stone-500 group-hover:opacity-100">
                 weiterlesen…
@@ -54,32 +45,4 @@ const workshops = Astro.props.workshops;
       );
     })
   }
-
-  <!-- {
-      workshops.map((workshop, index) => {
-        // console.log(workshop);
-        return (
-        <li key={index} class="mt-16 mb-24">
-          <a
-            class="block transition-all group hover:scale-110"
-            href={workshop.props.URL}
-          >
-            <h4
-              set:html={workshop.props.name}
-              class="mb-2 text-2xl text-red-500 group-transition-colors group-hover:text-red-300"
-            />
-
-            {workshop.props.readableDate && (
-              <p class="mb-4 text-sm" set:html={workshop.props.readableDate} />
-            )}
-
-            <p class="mt-2 text-sm italic text-center transition-opacity opacity-0 text-stone-500 group-hover:opacity-100">
-              Erfahre mehr …
-            </p>
-            <p class="text-sm mt-2 text-center text-stone-500">— &#10086; —</p>
-          </a>
-        </li>
-      );
-      })
-    } -->
 </ul>

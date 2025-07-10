@@ -46,6 +46,9 @@ export interface Workshop {
     headline: EntryFieldTypes.Text;
     description?: EntryFieldTypes.RichText;
     location?: EntryFieldTypes.Text;
+    ticketLink?: EntryFieldTypes.Text;
+    place?: EntryFieldTypes.Text;
+    street?: EntryFieldTypes.Text;
     dateStart: EntryFieldTypes.Date;
     dateEnd?: EntryFieldTypes.Date;
     parentTitle?: EntryFieldTypes.Text;
