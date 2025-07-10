@@ -1,7 +1,6 @@
 import { contentfulClient } from "@/lib/contentful";
 import type { Page, Article, Workshop, LandingPage, TTWorkshop } from "@/lib/contentful";
 import { slugify, markdownify } from "@/lib/utils/textConverter";
-// import { locationToAddress } from "@/lib/utils/locationParser";
 import { simpleGermanDate } from "@/lib/utils/dateParser";
 import axios from "axios";
 import { get } from "http";

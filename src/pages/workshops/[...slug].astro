@@ -2,7 +2,6 @@
 import type { Workshop } from "@/lib/contentful";
 import { contentfulClient } from "@/lib/contentful";
 import { slugify } from "@/lib/utils/textConverter";
-import { locationToAddress } from "@/lib/utils/locationParser";
 import { simpleGermanDate } from "@/lib/utils/dateParser";
 import Base from "@/layouts/Base.astro";
 import RichTextContainer from "@/components/RichTextContainer.astro";
@@ -19,7 +18,7 @@ export async function getStaticPaths() {
   return pages;
 }
 
-const eventDate = (dateStart:string, dateEnd:string) => {
+const eventDate = (dateStart: string, dateEnd: string) => {
   const start = new Date(dateStart);
   const end = new Date(dateEnd);
 
@@ -36,6 +35,8 @@ const {
   headline,
   description,
   location,
+  street,
+  place,
   dateStart,
   dateEnd,
   parentTitle,
@@ -74,23 +75,16 @@ const readableDate = simpleGermanDate(dateStart);
         {() => eventDate(dateStart, dateEnd)}
       </p>
 
-      {
-        async () => {
-          if (!location) {
-            return;
-          }
-          const address = await locationToAddress(location);
-
-          return (
-            <p>
-              <b>Wo:</b> <br />
-              <a href={parentURL}>{parentTitle}</a> <br />
-              {`${address.road} ${address.house_number}`} <br />
-              {`${address.postcode} ${address.city || address.village}`} <br />
-            </p>
-          );
-        }
-      }
+      <p>
+        <b>Wo:</b>
+        <br />
+        <a href={parentURL}>{parentTitle}</a>
+        <br />
+        {street}
+        <br />
+        {place}
+        <br />
+      </p>
     </div>
     {
       ticketLink && (
