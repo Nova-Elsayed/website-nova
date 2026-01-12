@@ -9,31 +9,29 @@ import { markdownify } from "@/lib/utils/textConverter";
 const { footer }: { footer: { name: string; url: string }[] } = menu;
 ---
 
-<footer class="bg-theme-light">
+<footer class="border-t border-border">
   <div class="container">
-    <div class="row items-center py-10">
-      <div class="mb-8 text-center lg:col-3 lg:mb-0 lg:text-left">
+    <div class="row items-center py-8">
+      <div class="mb-8 text-center md:col-3 md:mb-0 md:text-left">
         <Logo />
       </div>
-      <div class="mb-8 text-center lg:col-6 lg:mb-0">
+      <div class="mb-8 text-center md:col-6 md:mb-0">
         <ul>
           {
             footer.map((menu) => (
-              <li class="m-3 inline-block">
+              <li class="m-2 inline-block">
                 <a href={menu.url}>{menu.name}</a>
               </li>
             ))
           }
         </ul>
       </div>
-      <div class="mb-8 text-center lg:col-3 lg:mb-0 lg:mt-0 lg:text-right">
+      <div class="mb-8 text-center md:col-3 md:mb-0 md:mt-0 md:text-right">
         <Social source={social.main} className="social-icons" />
       </div>
     </div>
   </div>
-  <div class="border-t border-border py-7 ">
-    <div class="container text-center text-light">
-      <p set:html={markdownify(config.params.copyright)} />
-    </div>
+  <div class="container text-center text-light mb-8">
+    <p set:html={markdownify(config.params.copyright)} />
   </div>
 </footer>

@@ -2,7 +2,7 @@
 const { title, subtitle} = Astro.props;
 ---
 
-<header class="relative">
+<header class="relative mx-auto">
   <h2 class={`text-3xl optical-md ${subtitle ? "mb-4" : "mb-8"}`} set:html={title} />
   {subtitle && <h2 class="mb-8 text-2xl optical-md" set:html={subtitle} />}
   

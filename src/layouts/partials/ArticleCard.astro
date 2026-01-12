@@ -1,6 +1,10 @@
 ---
 import { simpleGermanDate } from "@/lib/utils/dateParser";
 import RichTextContainer from "@/components/RichTextContainer.astro";
+import PaperBackground from "./PaperBackground.astro";
+export interface Props {
+  data: any;
+}
 
 const { title, description, slug, publishedAt } = Astro.props.data.props;
 
@@ -9,24 +13,26 @@ const readableDate = simpleGermanDate(publishedAt);
 
 <li class="my-8">
   <a
-    class="block transition-all group hover:scale-110"
-    href={`/articles/${slug}/`}
+  class="block transition-all group hover:scale-110"
+  href={`/articles/${slug}/`}
   >
-    <h3
-      set:html={title}
-      class="mb-2 text-2xl text-stone-600 group-hover:text-red-400"
-    />
-    {readableDate && <p class="mb-4 text-sm" set:html={readableDate} />}
-    {
-      description && (
-        <div class="mx-auto prose rich-text-container">
-          <p class="my-0 text-left" set:html={description} />
-          <p class="my-0 text-sm italic text-center transition-opacity opacity-0 text-stone-500 group-hover:opacity-100">
-            weiterlesen…
-          </p>
-          <p class="my-0 text-sm text-center text-stone-500">— &#10086; —</p>
-        </div>
-      )
-    }
-  </a>
+  <PaperBackground>
+      <h3
+        set:html={title}
+        class="mb-2 text-2xl text-stone-600 group-hover:text-red-400"
+      />
+      {readableDate && <p class="mb-4 text-sm" set:html={readableDate} />}
+      {
+        description && (
+          <div class="mx-auto prose rich-text-container">
+            <p class="my-0 text-left" set:html={description} />
+            <p class="my-0 text-sm italic text-center transition-opacity opacity-0 text-stone-500 group-hover:opacity-100">
+              weiterlesen…
+            </p>
+            <p class="my-0 text-sm text-center text-stone-500">— &#10086; —</p>
+          </div>
+        )
+      }
+  </PaperBackground>
+    </a>
 </li>

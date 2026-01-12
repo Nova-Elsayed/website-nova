@@ -3,7 +3,7 @@ const { className, href, label } = Astro.props;
 ---
 
 <a
-  class={`block py-3 transition-all border rounded text-stone-600 border-stone-800 hover:scale-110 px-7 hover:border-0 hover:bg-red-400 hover:text-stone-50 ${className ? className : ""}`}
+  class={`block py-3 transition-all border rounded text-stone-600 border-stone-800 hover:scale-110 px-7 hover:border-red-400 hover:bg-red-400 hover:text-stone-50 ${className ? className : ""}`}
   href={href}
   set:html={label}
 />

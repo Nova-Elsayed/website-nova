@@ -12,6 +12,7 @@ import RichTextContainer from "@/components/RichTextContainer.astro";
 import SectionHeader from "@/partials/SectionHeader.astro";
 import Button from "@/components/Button.astro";
 import Section from "@/partials/Section.astro";
+import PaperBackground from "@/partials/PaperBackground.astro";
 
 export const prerender = true;
 
@@ -39,7 +40,7 @@ const upcomingWorkshops = workshops.filter((item) => {
 <Base title={page.headerHeadline} meta_title={page.headerHeadline}>
   <!-- HEADER -->
   <section
-    class="relative w-screen overflow-hidden md:overflow-visible md:h-screen bg-stone-100"
+    class="relative w-screen overflow-hidden md:overflow-visible md:h-screen z-20"
   >
     {
       page.headerImage?.fields.file.url && (
@@ -78,18 +79,21 @@ const upcomingWorkshops = workshops.filter((item) => {
     <!-- MAIN CONTENT -->
     <!-- INTRO -->
     <Section>
-      <SectionHeader
+      <PaperBackground>
+
+        <SectionHeader
         title={page.introHeadline}
         subtitle={page.introSubHeadline}
-      />
-      <RichTextContainer class="text-left" content={page.introText} />
-      <div class="flex w-full link-bar mt-8">
-        <Button
+        />
+        <RichTextContainer class="text-left" content={page.introText} />
+      </PaperBackground>
+        <div class="flex w-full link-bar mt-8">
+          <Button
           label={page.introLinkLabel ? page.introLinkLabel : "Erfahre mehr …"}
           href={page.introLinkURL}
           className="mx-auto"
-        />
-      </div>
+          />
+        </div>
     </Section>
     <!-- / INTRO -->
     <!-- WORKSHOPS -->
