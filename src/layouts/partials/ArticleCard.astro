@@ -7,7 +7,7 @@ const { title, description, slug, publishedAt } = Astro.props.data.props;
 const readableDate = simpleGermanDate(publishedAt);
 ---
 
-<li class="mt-16 mb-24">
+<li class="my-8">
   <a
     class="block transition-all group hover:scale-110"
     href={`/articles/${slug}/`}
@@ -20,11 +20,11 @@ const readableDate = simpleGermanDate(publishedAt);
     {
       description && (
         <div class="mx-auto prose rich-text-container">
-          <p class="text-left" set:html={description} />
-          <p class="text-sm italic text-center transition-opacity opacity-0 text-stone-500 group-hover:opacity-100">
+          <p class="my-0 text-left" set:html={description} />
+          <p class="my-0 text-sm italic text-center transition-opacity opacity-0 text-stone-500 group-hover:opacity-100">
             weiterlesen…
           </p>
-          <p class="text-sm text-center text-stone-500">— &#10086; —</p>
+          <p class="my-0 text-sm text-center text-stone-500">— &#10086; —</p>
         </div>
       )
     }

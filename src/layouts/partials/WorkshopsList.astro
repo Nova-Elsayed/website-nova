@@ -10,7 +10,7 @@ const workshops = Astro.props.workshops;
   {
     workshops.map((workshop) => {
       return (
-        <li class="mt-16 mb-24">
+        <li class="my-8">
           <a
             class="block transition-all group hover:scale-110"
             href={`/workshops/${workshop.props.slug}/`}
@@ -34,10 +34,10 @@ const workshops = Astro.props.workshops;
                   <p class="mt-2" set:html={`${workshop.props.street}, ${workshop.props.place}`} />
                 )}
               </p>
-              <p class="text-sm italic text-center transition-opacity opacity-0 text-stone-500 group-hover:opacity-100">
+              <p class="my-0 text-sm italic text-center transition-opacity opacity-0 text-stone-500 group-hover:opacity-100">
                 weiterlesen…
               </p>
-              <p class="text-sm text-center text-stone-500">— &#10086; —</p>
+              <p class="my-0 text-sm text-center text-stone-500">— &#10086; —</p>
             </div>
           </a>
         </li>

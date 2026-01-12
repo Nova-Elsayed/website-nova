@@ -96,7 +96,7 @@ const upcomingWorkshops = workshops.filter((item) => {
 
     <Section id="workshops">
       <SectionHeader title={page.workshopsHeadline} />
-      <div class="sm:grid grid-cols-3 gap-4 mx-auto mb-4 max-w-prose">
+      <div class="sm:grid grid-cols-3 gap-4 mx-auto mb-8 max-w-prose">
         {
           workshopsPage.image && (
             <img
@@ -113,13 +113,13 @@ const upcomingWorkshops = workshops.filter((item) => {
       </div>
       {
         upcomingWorkshops && upcomingWorkshops.length > 0 && (
-          <Section id="upcoming-workshops">
+          <div id="upcoming-workshops" class="mt-16">
             <h3
               set:html="Meine nächsten Workshops"
               class="mb-4 text-2xl optical-md"
             />
             <WorkshopsList workshops={upcomingWorkshops} />
-          </Section>
+          </div>
         )
       }
 
@@ -150,6 +150,7 @@ const upcomingWorkshops = workshops.filter((item) => {
     <!-- / SESSIONS -->
 
     <!-- SUPPORT -->
+<!-- 
     <Section id="support">
       <SectionHeader title={page.supportHeadline} />
       <div class="grid grid-cols-3 gap-4 mx-auto mb-4 max-w-prose">
@@ -184,6 +185,7 @@ const upcomingWorkshops = workshops.filter((item) => {
         />
       </div>
     </Section>
+     -->
     <!-- / SUPPORT -->
     <!-- ARTICLES -->
 
