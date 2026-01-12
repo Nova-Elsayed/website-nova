@@ -10,6 +10,7 @@ import Section from "@/partials/Section.astro";
 import Button from "@/components/Button.astro";
 import { date } from "astro/zod";
 import { simpleGermanDateWithTime } from "@/lib/utils/dateParser";
+import PaperBackground from "@/partials/PaperBackground.astro";
 
 export const prerender = true;
 
@@ -65,38 +66,40 @@ const readableDate = simpleGermanDate(dateStart);
     <p set:html={readableDate} class="text-md" />
   </header>
   <Section>
-    <RichTextContainer class="mb-16 text-left" content={description} />
-    <div
-      class="mx-auto prose font-serif rich-text-container text-base text-left"
-    >
-      <p>
-        <b>Wann:</b>
-        <br />
-        {() => eventDate(dateStart, dateEnd)}
-      </p>
+    <PaperBackground>
+      <RichTextContainer class="mb-16 text-left" content={description} />
+      <div
+        class="mx-auto prose font-serif rich-text-container text-base text-left"
+      >
+        <p>
+          <b>Wann:</b>
+          <br />
+          {() => eventDate(dateStart, dateEnd)}
+        </p>
 
-      <p>
-        <b>Wo:</b>
-        <br />
-        <a href={parentURL}>{parentTitle}</a>
-        <br />
-        {street}
-        <br />
-        {place}
-        <br />
-      </p>
-    </div>
-    {
-      ticketLink && (
-        <div class="flex w-full link-bar mt-8">
-          <Button
-            label="Zu den Tickets"
-            href={ticketLink}
-            className="mx-auto"
-            target="_blank"
-          />
-        </div>
-      )
-    }
+        <p>
+          <b>Wo:</b>
+          <br />
+          <a href={parentURL}>{parentTitle}</a>
+          <br />
+          {street}
+          <br />
+          {place}
+          <br />
+        </p>
+      </div>
+      {
+        ticketLink && (
+          <div class="flex w-full link-bar mt-8">
+            <Button
+              label="Zu den Tickets"
+              href={ticketLink}
+              className="mx-auto"
+              target="_blank"
+            />
+          </div>
+        )
+      }
+    </PaperBackground>
   </Section>
 </Base>
