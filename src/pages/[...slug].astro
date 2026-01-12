@@ -4,6 +4,7 @@ import { contentfulClient } from "@/lib/contentful";
 import Base from "@/layouts/Base.astro";
 import RichTextContainer from "@/components/RichTextContainer.astro";
 import Section from "@/partials/Section.astro";
+import PaperBackground from "@/partials/PaperBackground.astro";
 
 export const prerender = true;
 
@@ -50,6 +51,8 @@ const { title, slug, image, description, content } = Astro.props;
     }
   </header>
   <Section>
-    <RichTextContainer class="mb-16 text-left" content={content} />
+    <PaperBackground>
+      <RichTextContainer class="mb-16 text-left" content={content} />
+    </PaperBackground>
   </Section>
 </Base>

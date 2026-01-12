@@ -6,6 +6,6 @@ interface Props {
 const { id } = Astro.props
 ---
 
-<section id={Astro.props.id} class="w-screen px-8 pt-8 pb-16 text-center section">
+<section id={Astro.props.id} class="w-full sm:max-w-3xl mx-auto  px-8 pt-8 pb-16 text-center section">
   <slot />
 </section>
