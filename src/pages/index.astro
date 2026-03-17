@@ -52,19 +52,24 @@ const upcomingWorkshops = workshops.filter((item) => {
       )
     }
     <div
-      class="z-10 max-w-md m-auto me-4 mb-16 -mt-24 md:absolute bottom-8 md:start-1/2 md:my-0"
+      class="z-10 p-4 max-w-md mx-auto mb-16 -mt-44 sm:-mt-64 md:absolute bottom-8 md:start-1/2 md:my-0"
     >
       <div class="mb-6 text-container">
-        <h1
+        <!-- <h1
           class="mb-2 text-4xl font-bold text-right optical-md text-stone-600 md:text-left"
           set:html={page.headerHeadline}
-        />
+        /> -->
         <h1
-          class="text-3xl optical-md italic text-right text-red-400 md:text-left"
+          class="text-4xl font-bold  optical-md text-stone-600 md:text-left"
+          >
+          <img class="ms-auto md:ms-0 h-36 sm:h-52 md:h-68 -rotate-[18deg] " src="public/images/NovaElSayed-Script.png" alt={page.headerHeadline}>
+          </h1>
+        <h1
+          class="mt-8 text-3xl optical-md italic text-right text-red-400"
           set:html={page.headerSubHeadline}
         />
       </div>
-      <div class="flex justify-end md:justify-start">
+      <div class="flex justify-end md:justify-end">
         <Button
           className="me-4"
           label={page.headerLink01Label}
