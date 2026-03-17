@@ -1,13 +1,11 @@
 import mdx from "@astrojs/mdx";
 import react from "@astrojs/react";
-import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
 import AutoImport from "astro-auto-import";
 import { defineConfig, sharpImageService } from "astro/config";
 import remarkCollapse from "remark-collapse";
 import remarkToc from "remark-toc";
 import config from "./src/config/config.json";
-
 import netlify from "@astrojs/netlify";
 
 // https://astro.build/config
@@ -20,7 +18,6 @@ export default defineConfig({
   },
   integrations: [
     react(),
-    sitemap(),
     tailwind({
       config: {
         applyBaseStyles: false,
