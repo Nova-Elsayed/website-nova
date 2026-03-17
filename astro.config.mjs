@@ -7,7 +7,6 @@ import { defineConfig, sharpImageService } from "astro/config";
 import remarkCollapse from "remark-collapse";
 import remarkToc from "remark-toc";
 import config from "./src/config/config.json";
-
 import netlify from "@astrojs/netlify";
 
 // https://astro.build/config
@@ -20,7 +19,6 @@ export default defineConfig({
   },
   integrations: [
     react(),
-    sitemap(),
     tailwind({
       config: {
         applyBaseStyles: false,
@@ -38,6 +36,7 @@ export default defineConfig({
       ],
     }),
     mdx(),
+    sitemap(),
   ],
   markdown: {
     remarkPlugins: [
