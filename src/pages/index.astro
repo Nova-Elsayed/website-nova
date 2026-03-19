@@ -40,22 +40,22 @@ const upcomingWorkshops = workshops.filter((item) => {
 <Base title={page.headerHeadline} meta_title={page.headerHeadline}>
   <!-- HEADER -->
   <section
-    class="relative w-screen max-h-screen px-8 lg:px-16 overflow-hidden md:overflow-visible z-20"
+    class="relative w-screen min-h-screen px-8 lg:px-16 pt-8 md:pt-24  md:overflow-visible z-20"
   >
-    <div class="relative max-w-2xl mt-8 md:mt-20 mx-auto">
+    <div class="relative">
       {
         page.headerImage?.fields.file.url && (
           <img
-            class="h-auto w-md -mb-56 z-0"
+            class="h-auto w-96 md:w-1/2 -mb-24 md:-mb-36 lg:-mb-56 xl:-mb-72 2xl:-mb-96 z-0 mx-auto"
             src={page.headerImage.fields.file.url}
             alt=""
           />
         )
       }
-      <div class="relative w-sm">
-        <h1 class="text-2xl md:text-3xl optical-md text-stone-600 text-right">
+      <div class="relative w-80 mx-auto ">
+        <h1 class="text-2xl optical-md text-stone-600 text-right">
           <img
-            class="h-40 lg:h-56 ms-auto me-0"
+            class="h-36 lg:h-44 ms-auto me-0"
             src="/images/NovaElSayed-Script.png"
             alt={page.headerHeadline}
           />
