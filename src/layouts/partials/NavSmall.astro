@@ -1,5 +1,5 @@
 ---
-import * as menu from "@/config/menu.json" assert { type: "json" };
+import * as menu from "@/config/menu.json" with { type: "json" };
 import Icon from "@/helpers/DynamicIcon";
 
 export interface NavigationLink {
@@ -64,11 +64,14 @@ const { pathname } = Astro.url;
   class NavSmall extends HTMLElement {
     connectedCallback() {
       let showMenu = false;
-      const menuButton: HTMLElement | null = document.getElementById("menu-btn");
+      const menuButton: HTMLElement | null =
+        document.getElementById("menu-btn");
       const menu: HTMLElement | null = document.getElementById("nav-menu");
 
-      const btnLayer01: HTMLElement | null = document.querySelector(".btn-layer-01");
-      const btnLayer02: HTMLElement | null = document.querySelector(".btn-layer-02");
+      const btnLayer01: HTMLElement | null =
+        document.querySelector(".btn-layer-01");
+      const btnLayer02: HTMLElement | null =
+        document.querySelector(".btn-layer-02");
 
       const toggleMenu = () => {
         showMenu = !showMenu;

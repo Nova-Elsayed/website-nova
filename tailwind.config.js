@@ -66,21 +66,17 @@ module.exports = {
       },
       fontFamily: {
         'serif': [
-          '"Bodoni Moda"',
-          {
-            fontOpticalSizing: "auto",
-          },
+          `"${theme.fonts.font_family.primary}"`,
+          { fontOpticalSizing: "auto" },
           ...defaultTheme.fontFamily.serif,
         ],
         'serif-italic': [
-          '"Bodoni Moda Italic"',
-          {
-            fontOpticalSizing: "auto",
-          },
+          `"${theme.fonts.font_family.primary} Italic"`,
+          { fontOpticalSizing: "auto" },
           ...defaultTheme.fontFamily.serif,
         ],
-        'sans': ['"Work Sans"', ...defaultTheme.fontFamily.sans],
-        'sans-italic': ['"Work Sans Italic"', ...defaultTheme.fontFamily.sans],
+        'sans': [`"${theme.fonts.font_family.secondary}"`, ...defaultTheme.fontFamily.sans],
+        'sans-italic': [`"${theme.fonts.font_family.secondary} Italic"`, ...defaultTheme.fontFamily.sans],
       },
     },
   },
