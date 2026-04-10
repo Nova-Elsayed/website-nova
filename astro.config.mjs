@@ -1,5 +1,6 @@
 import mdx from "@astrojs/mdx";
 import react from "@astrojs/react";
+import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
 import AutoImport from "astro-auto-import";
 import { defineConfig, sharpImageService } from "astro/config";
@@ -17,6 +18,7 @@ export default defineConfig({
     service: sharpImageService(),
   },
   integrations: [
+    sitemap(),
     react(),
     tailwind({
       config: {

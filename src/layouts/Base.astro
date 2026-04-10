@@ -38,6 +38,17 @@ export interface Props {
 // distructure frontmatters
 const { title, meta_title, description, image, noindex, canonical } =
   Astro.props;
+
+const canonicalURL = canonical ?? new URL(Astro.url.pathname, config.site.base_url).href;
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Nova El Sayed",
+  url: config.site.base_url,
+  description: config.metadata.meta_description,
+  image: `${config.site.base_url}${config.site.logo}`,
+};
 ---
 
 <!doctype html>
@@ -73,7 +84,7 @@ const { title, meta_title, description, image, noindex, canonical } =
     </title>
 
     <!-- canonical url -->
-    {canonical && <link rel="canonical" href={canonical} item-prop="url" />}
+    <link rel="canonical" href={canonicalURL} itemprop="url" />
 
     <!-- noindex robots -->
     {noindex && <meta name="robots" content="noindex,nofollow" />}
@@ -144,8 +155,17 @@ const { title, meta_title, description, image, noindex, canonical } =
       }`}
     />
     <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- JSON-LD structured data -->
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>
   <body class="font-serif text-base optical-sm  bg-stone-100">
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-stone-900 focus:rounded"
+    >
+      Zum Hauptinhalt springen
+    </a>
     <TwSizeIndicator />
     <Header />
     <main id="main-content">

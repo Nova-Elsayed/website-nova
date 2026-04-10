@@ -4,38 +4,41 @@ import Base from "@/layouts/Base.astro";
 import Section from "@/partials/Section.astro";
 import ArticlesList from "@/partials/ArticlesList.astro";
 import RichTextContainer from "@/components/RichTextContainer.astro";
+import ContentError from "@/components/ContentError.astro";
 
 export const prerender = true;
 
-const page = await getSinglePage("5yi8iu0vA6h6axYuSJoXHg");
+let page, articles;
+let error = false;
 
-const articles = await getArticles();
-
-articles.sort((a, b) => {
-  // Turn your strings into dates, and then subtract them
-  // to get a value that is either negative, positive, or zero.
-  return Date.parse(b.publishedAt) - Date.parse(a.publishedAt);
-});
+try {
+  page = await getSinglePage("5yi8iu0vA6h6axYuSJoXHg");
+  articles = await getArticles();
+  articles.sort((a, b) => Date.parse(b.publishedAt) - Date.parse(a.publishedAt));
+} catch (e) {
+  error = true;
+}
 ---
 
-<Base title={page.title} meta_title={page.title}>
-  <header class="w-screen px-8 py-16 mt-12 text-center">
-    <p set:html="— Artikel —" class="mb-8 tracking-wide text-md optical-md" />
-    <h1 set:html={page.title} class="mb-8 optical-md text-2xl" />
-    {
-      page.description && (
-        <blockquote
-          class="mx-auto mb-8 text-lg italic leading-relaxed tracking-wide md:w-2/3"
-          set:html={page.description}
-        />
-      )
-    }
-  </header>
-  <Section>
-    <RichTextContainer class="" content={page.content} />
-  </Section>
-
-  <Section>
-    <ArticlesList articles={articles} />
-  </Section>
+<Base title={page?.title} meta_title={page?.title}>
+  {error ? <ContentError /> : <>
+    <header class="w-screen px-8 py-16 mt-12 text-center">
+      <p set:html="— Artikel —" class="mb-8 tracking-wide text-md optical-md" />
+      <h1 set:html={page.title} class="mb-8 optical-md text-2xl" />
+      {
+        page.description && (
+          <blockquote
+            class="mx-auto mb-8 text-lg italic leading-relaxed tracking-wide md:w-2/3"
+            set:html={page.description}
+          />
+        )
+      }
+    </header>
+    <Section>
+      <RichTextContainer class="" content={page.content} />
+    </Section>
+    <Section>
+      <ArticlesList articles={articles} />
+    </Section>
+  </>}
 </Base>
