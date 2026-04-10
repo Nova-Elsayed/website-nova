@@ -2,7 +2,6 @@ import { contentfulClient } from "@/lib/contentful";
 import type { Page, Article, Workshop, LandingPage } from "@/lib/contentful";
 import { slugify, markdownify } from "@/lib/utils/textConverter";
 import { simpleGermanDate } from "@/lib/utils/dateParser";
-import axios from "axios";
 
 
 
