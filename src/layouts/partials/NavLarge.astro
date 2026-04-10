@@ -1,6 +1,6 @@
 ---
 import Logo from "@/components/Logo.astro";
-import * as menu from "@/config/menu.json" assert { type: "json" };
+import * as menu from "@/config/menu.json" with { type: "json" };
 export interface NavigationLink {
   name: string;
   url: string;
@@ -61,7 +61,10 @@ const { pathname } = Astro.url;
       const navLarge: HTMLElement | null = document.getElementById("nav-large");
 
       window.addEventListener("scroll", () => {
-        if (lastScroll < window.scrollY && window.scrollY > 100 || lastScroll === 0) {
+        if (
+          (lastScroll < window.scrollY && window.scrollY > 100) ||
+          lastScroll === 0
+        ) {
           navLarge?.classList.replace("opacity-100", "opacity-0");
           navLarge?.classList.replace("top-0", "-top-20");
         } else {
@@ -69,7 +72,6 @@ const { pathname } = Astro.url;
           navLarge?.classList.replace("opacity-0", "opacity-100");
         }
         lastScroll = window.scrollY;
-
       });
     }
   }
