@@ -1,9 +1,7 @@
 import { contentfulClient } from "@/lib/contentful";
-import type { Page, Article, Workshop, LandingPage, TTWorkshop } from "@/lib/contentful";
+import type { Page, Article, Workshop, LandingPage } from "@/lib/contentful";
 import { slugify, markdownify } from "@/lib/utils/textConverter";
 import { simpleGermanDate } from "@/lib/utils/dateParser";
-import axios from "axios";
-import { get } from "http";
 
 
 
@@ -106,43 +104,6 @@ export const getWorkshops = async () => {
 };
 
 
-// export const getWorkshopsTicketTailor = async () => {
-//   const baseURL = "https://api.tickettailor.com/v1/";
-//   const apiKey = btoa(import.meta.env.TICKETTAILOR_API_KEY);
-//   const headers = {
-//     Authorization: `Basic ${apiKey}`,
-//     "Content-Type": "application/json",
-//   };
-
-  // const workshops = await axios.get(`${baseURL}events`, {
-  //     headers: headers,
-  //   })
-  //   .then((response) => {
-
-  //     return response.data.data.map((item: TTWorkshop) => {
-  //       // console.log(item);
-        
-  //       return {
-  //         params: { slug: slugify(item.name) },
-  //         props: {
-  //           slug: slugify(item.name),
-  //           name: item.name,
-  //           description: item.description.replace(/<\/?span[^>]*>/g,""),
-  //           URL: item.url,
-  //           status: item.status,
-  //           readableDate: simpleGermanDate(item.start.iso),
-  //           start:item.start.iso,
-  //           end:item.end.iso,
-  //         },
-  //       };
-  //     })
-  //   }).catch (error => {
-  //     console.log(error);
-
-  //   })
-
-  // return workshops;
-  // };
 
 export const getLandingPage = async () => {
   const landingPageData = await contentfulClient.getEntry<LandingPage>(
@@ -154,7 +115,6 @@ export const getLandingPage = async () => {
 export const getAddressFromLocation = async (location:object) => {
   const URL = `https://api.mapbox.com/search/geocode/v6/reverse?longitude=${location.lon}&latitude=${location.lat}&access_token=${import.meta.env.MAPBOX_ACCESS_TOKEN}`
 
-  console.log("address check")
   const response = await fetch(URL);
   if (!response.ok) {
     const txt = await response.text();
@@ -162,7 +122,6 @@ export const getAddressFromLocation = async (location:object) => {
     throw new Error("location to address failed");
   } else {
     const json = await response.json();
-    console.log(json);
     return json.address;
   }
 }

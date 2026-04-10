@@ -9,10 +9,8 @@
     "strictNullChecks": true,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
-    "jsx": "react",
     "isolatedModules": true,
     "incremental": true,
-    "allowSyntheticDefaultImports": false,
     "paths": {
       "@/components/*": ["./src/layouts/components/*"],
       "@/shortcodes/*": ["./src/layouts/shortcodes/*"],
