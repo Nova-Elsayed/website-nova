@@ -3,7 +3,6 @@ import Base from "@/layouts/Base.astro";
 import {
   getLandingPage,
   getWorkshops,
-  getWorkshopsTicketTailor,
   getSinglePage,
 } from "@/lib/API";
 import WorkshopsList from "@/partials/WorkshopsList.astro";
@@ -141,8 +140,8 @@ const upcomingWorkshops = workshops.filter((item) => {
       <RichTextContainer class="text-left" content={sessionsPage.introText} />
       <div class="flex w-full link-bar mt-8">
         <Button
-          label="Erfahre mehr …"
-          href={sessionsPage.slug}
+          label={page.sessionsLinkLabel ? page.sessionsLinkLabel : "Erfahre mehr …"}
+          href={page.sessionsLinkURL}
           className="mx-auto"
         />
       </div>
