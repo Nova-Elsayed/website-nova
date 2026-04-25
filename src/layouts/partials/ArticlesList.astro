@@ -1,15 +1,28 @@
 ---
-import type { Article } from "@/lib/contentful";
 import { getArticles } from "@/lib/API";
 import ArticleCard from "./ArticleCard.astro";
+import ContentError from "@/components/ContentError.astro";
 
 const onlyFeatured: boolean = Astro.props.onlyFeatured || false;
 
-const articles = await getArticles(onlyFeatured);
+let articles = [];
+let error = false;
+
+try {
+  articles = await getArticles(onlyFeatured);
+} catch (e) {
+  error = true;
+}
 ---
 
-<ul class="my-8 article-list">
-  {articles.map((item, index, array) => (
-    <ArticleCard key={index} data={item} />
-  ))}
-</ul>
+{error ? (
+  <ContentError />
+) : articles.length === 0 ? (
+  <p class="my-8 text-center italic text-stone-500">Keine Artikel vorhanden.</p>
+) : (
+  <ul class="my-8 article-list">
+    {articles.map((item, index) => (
+      <ArticleCard key={index} data={item} />
+    ))}
+  </ul>
+)}

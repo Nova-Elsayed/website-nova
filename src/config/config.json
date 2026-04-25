@@ -1,7 +1,7 @@
 {
   "site": {
     "title": "Nova El Sayed",
-    "base_url": "https://novaelsayed.netlify.app",
+    "base_url": "https://novaelsayed.com",
     "base_path": "/",
     "trailing_slash": false,
     "favicon": "/images/favicon.png",
@@ -18,15 +18,9 @@
   },
 
   "navigation_button": {
-    "enable": true,
+    "enable": false,
     "label": "Get Started",
-    "link": "https://github.com/zeon-studio/astroplate"
-  },
-
-  "disqus": {
-    "enable": true,
-    "shortname": "themefisher-template",
-    "settings": {}
+    "link": "#"
   },
 
   "metadata": {

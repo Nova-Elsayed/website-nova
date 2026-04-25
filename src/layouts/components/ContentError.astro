@@ -1,0 +1,10 @@
+---
+interface Props {
+  message?: string;
+}
+const { message = "Die Inhalte konnten nicht geladen werden. Bitte versuche es später erneut." } = Astro.props;
+---
+
+<div class="mx-auto my-16 max-w-prose px-8 text-center text-stone-500">
+  <p class="italic">{message}</p>
+</div>

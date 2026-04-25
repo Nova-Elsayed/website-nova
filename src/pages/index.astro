@@ -12,31 +12,34 @@ import SectionHeader from "@/partials/SectionHeader.astro";
 import Button from "@/components/Button.astro";
 import Section from "@/partials/Section.astro";
 import PaperBackground from "@/partials/PaperBackground.astro";
+import ContentError from "@/components/ContentError.astro";
 
 export const prerender = true;
 
-const page = await getLandingPage();
+let page, sessionsPage, workshopsPage, workshops, upcomingWorkshops;
+let error = false;
 
-const sessionsPage = await getSinglePage("4UgguPWhfkrumrdwMIeAsL");
+try {
+  page = await getLandingPage();
+  sessionsPage = await getSinglePage("4UgguPWhfkrumrdwMIeAsL");
+  workshopsPage = await getSinglePage("2BOI94KBfNnnUXkZCIq9rN");
+  workshops = await getWorkshops();
 
-const workshopsPage = await getSinglePage("2BOI94KBfNnnUXkZCIq9rN");
+  workshops.sort((a, b) =>
+    Date.parse(b.props.dateStart) - Date.parse(a.props.dateStart)
+  );
 
-const workshops = await getWorkshops();
-
-workshops.sort((a, b) => {
-  // Turn your strings into dates, and then subtract them
-  // to get a value that is either negative, positive, or zero.
-  return Date.parse(b.props.dateStart) - Date.parse(a.props.dateStart);
-});
-
-const upcomingWorkshops = workshops.filter((item) => {
   const today = new Date();
-
-  return new Date(item.props.dateStart) >= today;
-});
+  upcomingWorkshops = workshops.filter(
+    (item) => new Date(item.props.dateStart) >= today
+  );
+} catch (e) {
+  error = true;
+}
 ---
 
-<Base title={page.headerHeadline} meta_title={page.headerHeadline}>
+<Base title={page?.headerHeadline} meta_title={page?.headerHeadline}>
+  {error ? <ContentError message="Die Seite konnte nicht geladen werden. Bitte versuche es später erneut." /> : <>
   <!-- HEADER -->
   <section
     class="relative w-screen min-h-screen px-8 lg:px-16 pt-8 md:pt-24  md:overflow-visible z-20"
@@ -47,7 +50,8 @@ const upcomingWorkshops = workshops.filter((item) => {
           <img
             class="h-auto w-96 md:w-1/2 -mb-24 md:-mb-36 lg:-mb-56 xl:-mb-72 2xl:-mb-96 z-0 mx-auto"
             src={page.headerImage.fields.file.url}
-            alt=""
+            alt={page.headerImage.fields.description || ""}
+            loading="lazy"
           />
         )
       }
@@ -57,6 +61,7 @@ const upcomingWorkshops = workshops.filter((item) => {
             class="h-36 lg:h-44 ms-auto me-0"
             src="/images/NovaElSayed-Script.png"
             alt={page.headerHeadline}
+            fetchpriority="high"
           />
           <span class="italic text-red-400">{page.headerSubHeadline}</span>
         </h1>
@@ -72,7 +77,7 @@ const upcomingWorkshops = workshops.filter((item) => {
     </div>
   </section>
   <!-- /HEADER -->
-  <main>
+  <div>
     <!-- MAIN CONTENT -->
     <!-- INTRO -->
     <Section>
@@ -102,7 +107,8 @@ const upcomingWorkshops = workshops.filter((item) => {
             <img
               class="col-span-1 h-auto w-full "
               src={workshopsPage.image.fields.file.url}
-              alt=""
+              alt={workshopsPage.image.fields.description || "Workshop Bild"}
+              loading="lazy"
             />
           )
         }
@@ -126,7 +132,7 @@ const upcomingWorkshops = workshops.filter((item) => {
       <div class="flex w-full link-bar mt-8">
         <Button
           label="Erfahre mehr …"
-          href={workshopsPage.slug}
+          href={`/${workshopsPage.slug}`}
           className="mx-auto"
         />
       </div>
@@ -149,44 +155,6 @@ const upcomingWorkshops = workshops.filter((item) => {
 
     <!-- / SESSIONS -->
 
-    <!-- SUPPORT -->
-    <!-- 
-    <Section id="support">
-      <SectionHeader title={page.supportHeadline} />
-      <div class="grid grid-cols-3 gap-4 mx-auto mb-4 max-w-prose">
-        <RichTextContainer
-          class="col-span-3 mb-2 text-left"
-          content={page.supportIntroText}
-        />
-        <ul class="block col-span-3 md:col-span-1">
-          <li
-            class="block w-full py-3 mx-auto text-xl text-center text-red-400 transition-all"
-            set:html={page.supportLink01Label}
-          />
-          <div class="w-0 h-4 mx-auto my-0 border border-stone-400"></div>
-          <a
-            class="block w-full py-3 mx-auto text-xl text-center text-red-400 transition-all"
-            set:html={page.supportLink02Label}
-          />
-          <div class="w-0 h-4 mx-auto my-0 border border-stone-400"></div>
-          <a
-            class="block w-full py-3 mx-auto text-xl text-center text-red-400 transition-all"
-            set:html={page.supportLink03Label}
-          />
-          <div class="w-0 h-4 mx-auto my-0 border border-stone-400"></div>
-          <a
-            class="block w-full py-3 mx-auto text-xl text-center text-red-400 transition-all"
-            set:html={page.supportLink04Label}
-          />
-        </ul>
-        <RichTextContainer
-          class="col-span-3 md:col-span-2 pt-4 text-left"
-          content={page.supportText}
-        />
-      </div>
-    </Section>
-     -->
-    <!-- / SUPPORT -->
     <!-- ARTICLES -->
 
     <Section>
@@ -207,5 +175,6 @@ const upcomingWorkshops = workshops.filter((item) => {
       </div>
     </Section>
     <!-- / ARTICLES -->
-  </main>
+  </div>
+  </>}
 </Base>
