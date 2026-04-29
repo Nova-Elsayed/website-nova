@@ -1,6 +1,6 @@
 {
   "name": "astroplate",
-  "version": "3.4.4",
+  "version": "3.4.5",
   "description": "Astro and Tailwindcss boilerplate",
   "author": "zeon.studio",
   "license": "MIT",
@@ -23,7 +23,7 @@
     "@contentful/rich-text-html-renderer": "16.3.5",
     "ajv": "8.18.0",
     "astro": "5.18.1",
-    "astro-auto-import": "0.4.2",
+    "astro-auto-import": "0.5.1",
     "axios": "1.7.7",
     "contentful": "11.1.4",
     "date-fns": "3.3.1",
